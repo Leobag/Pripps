@@ -6,6 +6,5 @@ public class Main {
         System.out.println("jävla skitkod");
         System.out.println("Emel pushing p, Yoorkevich pushing p");
         System.out.println("Jag älskar Snuseborg");
-        System.out.println("Make Borås great again");
     }
 }

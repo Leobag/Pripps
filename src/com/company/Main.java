@@ -9,5 +9,6 @@ public class Main {
         System.out.println("Jag gillar inte Borås");
         System.out.println("Jag älskar Snuseborg");
         System.out.println("Ima off myself");
+        System.out.println("Ima pull off myself");
     }
 }

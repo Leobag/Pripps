@@ -4,9 +4,9 @@ import java.awt.*;
 import javax.swing.*;
 import java.util.*;
 
-public class prippsMap extends JPanel {
+public class PrippsMap extends JPanel {
 
-    public prippsMap(){
+    public PrippsMap(){
 
     }
 

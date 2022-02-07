@@ -7,9 +7,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class prippsController extends JFrame implements MouseListener, ActionListener {
+public class PrippsController extends JFrame implements MouseListener, ActionListener {
 
-    private prippsMap map;
+    private PrippsMap map;
     private JPanel mainPanel;
     private final JButton playButton = new JButton("Play");
     private final JButton optionsButton = new JButton("Options");
@@ -17,10 +17,10 @@ public class prippsController extends JFrame implements MouseListener, ActionLis
 
 
     public static void main(String[] args) {
-        prippsController f = new prippsController();
+        PrippsController f = new PrippsController();
     }
 
-    private prippsController(){
+    private PrippsController(){
         setLayout();
     }
 
@@ -86,7 +86,7 @@ public class prippsController extends JFrame implements MouseListener, ActionLis
         if(e.getActionCommand().equals("playButton")){
             Container contentPane = getContentPane();
             contentPane.removeAll();
-            map = new prippsMap();
+            map = new PrippsMap();
             contentPane.add(map);
             repaint();
             setVisible(true);

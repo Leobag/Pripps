@@ -84,7 +84,6 @@ public class prippsController extends JFrame implements MouseListener, ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getActionCommand().equals("playButton")){
-            System.out.println("okay");
             Container contentPane = getContentPane();
             contentPane.removeAll();
             map = new prippsMap();

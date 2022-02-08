@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+
+
+
 public class PrippsController extends JFrame implements MouseListener, ActionListener {
 
     private PrippsMap map;
@@ -16,6 +19,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private final JButton playButton = new JButton("Play");
     private final JButton optionsButton = new JButton("Options");
     private final JButton quitButton = new JButton("Quit");
+    private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
+
+    private String ap1 = "";
 
 
     public static void main(String[] args) {
@@ -30,15 +36,16 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         super.setLayout(new GridLayout(1, 3, 10, 10));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
         setSize(1180, 695);
         setLocation(50, 50);
+        header.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
 
 
         //super.setPreferredSize(new java.awt.Dimension(600, 600));
-        mainPanel = new JPanel(new GridLayout(3,1,10,10));
+        mainPanel = new JPanel(new GridLayout(4,1,10,10));
         add(mainPanel);
         mainPanel.addMouseListener(this);
+        mainPanel.add(header);
         mainPanel.add(playButton);
         mainPanel.add(optionsButton);
         mainPanel.add(quitButton);

@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.File;
+import java.net.URL;
 
 
 public class PrippsController extends JFrame implements MouseListener, ActionListener {
@@ -69,7 +70,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     }
 
     public void musicPlayer() {
-        File lol = new File("C:\\Users\\Sebastian Sela\\Music\\A HA - TAKE ON ME - SHITTYFLUTED.wav");
+        URL lol = getClass().getResource("menumusic.wav");
+
         try{
             Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(lol));

@@ -2,14 +2,16 @@ package com.company.controller;
 
 import com.company.model.PrippsMap;
 
+
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-
-
+import java.io.File;
 
 
 public class PrippsController extends JFrame implements MouseListener, ActionListener {
@@ -21,7 +23,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private final JButton quitButton = new JButton("Quit");
     private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
 
-    private String ap1 = "";
 
 
     public static void main(String[] args) {
@@ -55,14 +56,27 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         quitButton.setActionCommand("quitButton");
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
-
-
+        playButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+        optionsButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
+        quitButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
 
 
 
         setVisible(true);
+        musicPlayer();
 
 
+    }
+
+    public void musicPlayer() {
+        File lol = new File("C:\\Users\\Sebastian Sela\\Music\\A HA - TAKE ON ME - SHITTYFLUTED.wav");
+        try{
+            Clip clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(lol));
+            clip.start();
+        } catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     @Override

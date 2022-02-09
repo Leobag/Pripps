@@ -20,9 +20,9 @@ import java.net.URL;
 public class PrippsController extends JFrame implements MouseListener, ActionListener {
 
     private JPanel mainPanel;
-    private final JButton playButton = new JButton("Play");
-    private final JButton optionsButton = new JButton("Options");
-    private final JButton quitButton = new JButton("Quit");
+    private final JButton playButton = new JButton();
+    private final JButton optionsButton = new JButton();
+    private final JButton quitButton = new JButton();
     private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
 
     PrippsView view;
@@ -37,10 +37,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private PrippsController(){
         setLayout();
         model = new PrippsModel();
-
         view = new PrippsView(model);
-
-
     }
 
     private void setLayout(){
@@ -48,13 +45,14 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(1180, 695);
-        setLocation(50, 50);
+        setLocationRelativeTo(null);
         header.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
 
 
         //super.setPreferredSize(new java.awt.Dimension(600, 600));
         mainPanel = new JPanel(new GridLayout(4,1,10,10));
         add(mainPanel);
+        mainPanel.setBackground(Color.BLACK);
         mainPanel.addMouseListener(this);
         mainPanel.add(header);
         mainPanel.add(playButton);
@@ -70,7 +68,20 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         optionsButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
         quitButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
 
-
+        try{
+            playButton.setIcon(new ImageIcon(getClass().getResource("/Images/PlayButton.png")));
+            playButton.setContentAreaFilled(false);
+            playButton.setBorder(BorderFactory.createEmptyBorder());
+            optionsButton.setIcon(new ImageIcon(getClass().getResource("/Images/OptionsButton.png")));
+            optionsButton.setContentAreaFilled(false);
+            optionsButton.setBorder(BorderFactory.createEmptyBorder());
+            quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/QuitButton.png")));
+            quitButton.setContentAreaFilled(false);
+            quitButton.setBorder(BorderFactory.createEmptyBorder());
+        }
+        catch (Exception e){
+            System.out.println("Image not found");
+        }
 
         setVisible(true);
         musicPlayer();

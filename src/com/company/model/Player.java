@@ -1,5 +1,6 @@
 package com.company.model;
 
+
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.geom.Rectangle2D;
@@ -15,11 +16,9 @@ public class Player {
         this.position = new Point2D.Double(x, y);
     }
 
-    void drawPlayer(Graphics2D g){
-//        g.setColor(Color.BLUE);
-//        g.fillRect(getPosition().x, getPosition().y, size, size);
-        Rectangle2D player = new Rectangle2D.Double(getPosition().x, getPosition().y, size, size);
-        Graphics2D g2 = (Graphics2D) g;
+    void drawPlayer(Graphics g){
+        g.setColor(Color.BLUE);
+        g.fillRect((int)Math.round(getPosition().x), (int)Math.round(getPosition().y), size, size);
     }
 
     private void moveEast(){

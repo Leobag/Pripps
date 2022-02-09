@@ -1,4 +1,11 @@
 package com.company.view;
 
-public class PrippsView {
+import javax.swing.*;
+
+public class PrippsView extends JPanel {
+
+    public PrippsView(){
+
+    }
+
 }

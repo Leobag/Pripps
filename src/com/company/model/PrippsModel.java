@@ -1,31 +1,46 @@
 package com.company.model;
 
+import com.company.model.TileData.Tile;
 import com.company.model.TileData.TileManager;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class PrippsModel {
 
-    final private int tileSize = 48;
-    final private int maxScreenCol = 28;
-    final private int maxScreenRow = 16;
+    final private int tileSize = 32;
+    final private int maxScreenCol = 42;
+    final private int maxScreenRow = 24;
 
-    final private String[] mapNames = {"map01.txt"};
+    final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt"};
     private int mapCounter = 0;
 
-    int mapTileMatrix[][];
 
     final int screenHeight = tileSize*maxScreenCol;
     final int screenWidth = tileSize*maxScreenRow;
 
+    int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
+
     TileManager tile;
+
+
 
     public PrippsModel() {
 
     tile = new TileManager();
 
+    loadMap(getCurrentMap());
+
+    }
+
+    public BufferedImage getTileImage(int num){
+        return tile.tile[num].image;
+    }
+
+    public int[][] getMatrix(){
+        return this.mapTileMatrix;
     }
 
     public String getCurrentMap(){
@@ -34,6 +49,22 @@ public class PrippsModel {
 
     public void nextMap(){
         mapCounter++;
+    }
+
+    public int getMaxCol(){
+        return this.maxScreenCol;
+    }
+
+    public int getMaxRow(){
+        return this.maxScreenRow;
+    }
+
+    public int getTileSize(){
+        return this.tileSize;
+    }
+
+    public TileManager getTile(){
+        return this.tile;
     }
 
     public void loadMap(String mapName){
@@ -48,17 +79,17 @@ public class PrippsModel {
             String numbers[];
 
 
-            while(col < screenWidth && row < screenHeight){
+            while(col < maxScreenCol && row < maxScreenRow){
                 line = br.readLine();
 
-                while(col < screenWidth){
+                while(col < maxScreenCol){
                     numbers = line.split(" ");
                     num = Integer.parseInt(numbers[col]);
 
                     mapTileMatrix[col][row] = num;
                     col++;
                 }
-                if(col == screenWidth){
+                if(col == maxScreenCol){
                     col = 0;
                     row++;
                 }

@@ -1,5 +1,6 @@
 package com.company.model.TileData;
 
+import java.awt.image.BufferedImage;
 import java.io.*;
 
 import javax.imageio.ImageIO;
@@ -7,22 +8,24 @@ import javax.imageio.ImageIO;
 
 public class TileManager {
 
-    Tile[] tile;
+    public Tile[] tile;
 
     public TileManager(){
 
         tile = new Tile[10];
 
 
-        getTileImage();
+        setTileImage();
 
     }
 
-    public void getTileImage(){
 
-            setImage(tile, "/Images/GrassTile", 0);
-            setImage(tile, "/Images/DirtTile", 1);
-            setImage(tile,"/Images/WallTile",2);
+
+    public void setTileImage(){
+
+            setImage(tile, "/Images/GrassTile.png", 0);
+            setImage(tile, "/Images/DirtTile.png", 1);
+            setImage(tile, "/Images/WallTile.png",2);
     }
 
     private void setImage(Tile[] tile, String imgname, int TileNumber){

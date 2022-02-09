@@ -1,6 +1,8 @@
 package com.company.controller;
 
 import com.company.model.PrippsMap;
+import com.company.model.PrippsModel;
+import com.company.view.PrippsView;
 
 
 import javax.sound.sampled.AudioSystem;
@@ -17,12 +19,14 @@ import java.net.URL;
 
 public class PrippsController extends JFrame implements MouseListener, ActionListener {
 
-    private PrippsMap map;
     private JPanel mainPanel;
     private final JButton playButton = new JButton("Play");
     private final JButton optionsButton = new JButton("Options");
     private final JButton quitButton = new JButton("Quit");
     private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
+
+    PrippsView view;
+    PrippsModel model;
 
 
 
@@ -32,6 +36,11 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     private PrippsController(){
         setLayout();
+        model = new PrippsModel();
+
+        view = new PrippsView(model);
+
+
     }
 
     private void setLayout(){
@@ -70,7 +79,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     }
 
     public void musicPlayer() {
-        URL lol = getClass().getResource("menumusic.wav");
+        URL lol = getClass().getResource("/Music/menumusic.wav");
 
         try{
             Clip clip = AudioSystem.getClip();
@@ -111,8 +120,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         if(e.getActionCommand().equals("playButton")){
             Container contentPane = getContentPane();
             contentPane.removeAll();
-            map = new PrippsMap();
-            contentPane.add(map);
+            contentPane.add(view);
             repaint();
             setVisible(true);
         }

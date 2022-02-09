@@ -25,6 +25,9 @@ public class PrippsView extends JPanel {
 
       mapMatrix = model.getMatrix();
 
+      setPreferredSize(new Dimension(this.model.getScreenWidth(), this.model.getScreenHeight()));
+
+
 
     }
 

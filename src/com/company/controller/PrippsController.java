@@ -1,6 +1,6 @@
 package com.company.controller;
 
-import com.company.model.PrippsMap;
+import com.company.model.*;
 import com.company.model.PrippsModel;
 import com.company.view.PrippsView;
 
@@ -44,7 +44,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         super.setLayout(new GridLayout(1, 3, 10, 10));
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1180, 695);
+        setSize(900, 700); //1360, 807 fungerar bra efter mapen men den använder pack() istället
+        setResizable(false);
         setLocationRelativeTo(null);
         header.setFont(new Font("Comic Sans MS", Font.PLAIN, 28));
 
@@ -84,7 +85,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
 
         setVisible(true);
-        musicPlayer();
+        //musicPlayer();
 
 
     }
@@ -132,6 +133,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             Container contentPane = getContentPane();
             contentPane.removeAll();
             contentPane.add(view);
+            pack();
+            setLocationRelativeTo(null);
             repaint();
             setVisible(true);
         }

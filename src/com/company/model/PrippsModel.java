@@ -18,8 +18,8 @@ public class PrippsModel {
     private int mapCounter = 0;
 
 
-    final int screenHeight = tileSize*maxScreenCol;
-    final int screenWidth = tileSize*maxScreenRow;
+    final int screenWidth = tileSize*maxScreenCol;
+    final int screenHeight = tileSize*maxScreenRow;
 
     int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
 
@@ -31,7 +31,7 @@ public class PrippsModel {
 
     tile = new TileManager();
 
-    loadMap(getCurrentMap());
+    loadMap(mapNames[1]);
 
     }
 
@@ -61,6 +61,14 @@ public class PrippsModel {
 
     public int getTileSize(){
         return this.tileSize;
+    }
+
+    public int getScreenWidth() {
+        return screenWidth;
+    }
+
+    public int getScreenHeight() {
+        return screenHeight;
     }
 
     public TileManager getTile(){

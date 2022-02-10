@@ -27,6 +27,11 @@ public class Game {
         player.setPosition(x, y);
     }
 
+    /**
+     * updates player position
+     * @param deltaTime difference in time every game-loop, for smoother fps and as much fps as possible
+     * - Max Yoorkevich
+     */
     public void update(double deltaTime) {
         movePlayer(deltaTime);
     }

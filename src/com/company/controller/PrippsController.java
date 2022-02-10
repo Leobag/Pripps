@@ -184,7 +184,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * sets direction for player.
-     * the direction angle is calculated for degrees in Game (movePlayer)
+     * the direction angle is calculated for degrees in Game (movePlayer). New thread had to be made
+     * since main thread used all resources for loop, thus blocking draw functionality
      * - Max Yoorkevich
      */
     private void handleInput() {

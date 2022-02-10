@@ -3,14 +3,11 @@ package com.company.controller;
 import com.company.model.*;
 import com.company.model.PrippsModel;
 import com.company.view.PrippsView;
-
-
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-
 import java.net.URL;
 
 
@@ -70,9 +67,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         quitButton.setActionCommand("quitButton");
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
-        playButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
-        optionsButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
-        quitButton.setFont(new Font("Comic Sans MS", Font.PLAIN, 18));
 
         try {
             playButton.setIcon(new ImageIcon(getClass().getResource("/Images/PlayButton.png")));

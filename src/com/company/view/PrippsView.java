@@ -19,23 +19,21 @@ public class PrippsView extends JPanel {
     int[][] mapMatrix;
 
 
-
-    public PrippsView(PrippsModel model, Game game){
-      this.model = model;
-      this.game = game;
+    public PrippsView(PrippsModel model, Game game) {
+        this.model = model;
+        this.game = game;
         t = model.getTile();
-      mapName = model.getCurrentMap();
+        mapName = model.getCurrentMap();
 
-      mapMatrix = model.getMatrix();
+        mapMatrix = model.getMatrix();
 
-      setPreferredSize(new Dimension(this.model.getScreenWidth(), this.model.getScreenHeight()));
-
+        setPreferredSize(new Dimension(this.model.getScreenWidth(), this.model.getScreenHeight()));
 
 
     }
 
 
-    public void paintComponent(Graphics g){
+    public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2D = (Graphics2D) g;
@@ -45,21 +43,21 @@ public class PrippsView extends JPanel {
     }
 
     void drawPlayer(Graphics g) {
-        var x = (int)Math.round(game.getPlayer().getPosition().x * 32);
-        var y = (int)Math.round(game.getPlayer().getPosition().y * 32);
-        var tmpSize = (int)Math.round(game.getPlayer().getSize() * 32);
+        var x = (int) Math.round(game.getPlayer().getPosition().x * 32);
+        var y = (int) Math.round(game.getPlayer().getPosition().y * 32);
+        var tmpSize = (int) Math.round(game.getPlayer().getSize() * 32);
 
         g.setColor(Color.RED);
         g.fillRect(x, y, tmpSize, tmpSize);
     }
 
-    public void drawMap(Graphics2D g2D){
+    public void drawMap(Graphics2D g2D) {
         int col = 0;
         int row = 0;
         int x = 0;
         int y = 0;
 
-        while(col < model.getMaxCol() && row < model.getMaxRow()){
+        while (col < model.getMaxCol() && row < model.getMaxRow()) {
 
             int tileNum = mapMatrix[col][row];
 
@@ -67,7 +65,7 @@ public class PrippsView extends JPanel {
             col++;
             x += model.getTileSize();
 
-            if(col == model.getMaxCol()){
+            if (col == model.getMaxCol()) {
                 col = 0;
                 x = 0;
                 row++;

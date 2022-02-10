@@ -173,7 +173,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 while (true) {
                     var currentTimeMillis = System.currentTimeMillis();
                     handleInput();
-                    game.update((currentTimeMillis- previousTimeMillis) / 1000d);
+                    game.update((currentTimeMillis - previousTimeMillis) / 1000d);
                     repaint();
                     previousTimeMillis = currentTimeMillis;
                 }

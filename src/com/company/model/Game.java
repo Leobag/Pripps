@@ -14,6 +14,11 @@ public class Game {
         return this.player;
     }
 
+    /**
+     * Calculates and sets next position for player, returns if no inputDirection
+     * @param deltaTime currentTimeMillis - previousTimeMillis in game loop in controller
+     * - Max Yoorkevich
+     */
     public void movePlayer(double deltaTime) {
         if (player == null) return;
         if (inputDirection == null) return;

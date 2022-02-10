@@ -42,10 +42,15 @@ public class PrippsView extends JPanel {
         drawPlayer(g);
     }
 
+    /**
+     * draws player, is a square so far
+     * @param g
+     * - Max Yoorkevich
+     */
     void drawPlayer(Graphics g) {
-        var x = (int) Math.round(game.getPlayer().getPosition().x * 32);
-        var y = (int) Math.round(game.getPlayer().getPosition().y * 32);
-        var tmpSize = (int) Math.round(game.getPlayer().getSize() * 32);
+        var x = (int) Math.round(game.getPlayer().getPosition().x * model.getTileSize());
+        var y = (int) Math.round(game.getPlayer().getPosition().y * model.getTileSize());
+        var tmpSize = (int) Math.round(game.getPlayer().getSize() * model.getTileSize());
 
         g.setColor(Color.RED);
         g.fillRect(x, y, tmpSize, tmpSize);

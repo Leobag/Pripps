@@ -151,6 +151,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
     }
 
+    /**
+     * Game loop after playbutton is pressed. Loop reads inputs, updates player and repaints
+     *  - Max Yoorkevich
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("playButton")) {
@@ -181,6 +185,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     /**
      * sets direction for player.
      * the direction angle is calculated for degrees in Game (movePlayer)
+     * - Max Yoorkevich
      */
     private void handleInput() {
         var inputX = inputRight - inputLeft;

@@ -10,6 +10,9 @@ import java.io.InputStreamReader;
 
 public class PrippsModel {
 
+    /**
+     * flytta pixelvariabler till view
+     */
     final private int tileSize = 32;
     final private int maxScreenCol = 42;
     final private int maxScreenRow = 24;

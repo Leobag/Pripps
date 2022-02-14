@@ -83,7 +83,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
 
         setVisible(true);
-        //musicPlayer();
+        musicPlayer();
 
 
     }

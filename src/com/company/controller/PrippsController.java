@@ -5,7 +5,6 @@ import com.company.model.PrippsModel;
 import com.company.view.PrippsView;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -44,7 +43,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         setLayout();
         model = new PrippsModel();
         view = new PrippsView(model, game);
-        checker = new CollisionCheck(view);
+        checker = new CollisionCheck(model);
         player = model.getPlayer();
         game = new Game(player);
     }

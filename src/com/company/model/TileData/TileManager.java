@@ -25,6 +25,7 @@ public class TileManager {
         setImage(tile, "/Images/GrassTile.png", 0);
         setImage(tile, "/Images/DirtTile.png", 1);
         setImage(tile, "/Images/WallTile.png", 2);
+        tile[2].collision = true;
     }
 
     private void setImage(Tile[] tile, String imgname, int TileNumber) {

@@ -5,6 +5,7 @@ import com.company.model.PrippsModel;
 import com.company.view.PrippsView;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -18,7 +19,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private final JButton optionsButton = new JButton();
     private final JButton quitButton = new JButton();
     private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
-    private Clip clip;
 
     PrippsView view;
     PrippsModel model;
@@ -91,7 +91,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         URL lol = getClass().getResource("/Music/menumusic.wav");
 
         try {
-            clip = AudioSystem.getClip();
+            Clip clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(lol));
             clip.start();
 
@@ -173,9 +173,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                     var currentTimeMillis = System.currentTimeMillis();
                     handleInput();
                     if(gamePaused) {
-                        clip.stop();
                     } else {
-                        clip.start();
                         game.update((currentTimeMillis - previousTimeMillis) / 1000d);
                     }
                     repaint();

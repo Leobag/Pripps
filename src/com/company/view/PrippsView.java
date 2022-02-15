@@ -43,7 +43,7 @@ public class PrippsView extends JPanel {
     }
 
     /**
-     * draws player, is a square so far
+     * draws player
      * @param g
      * - Max Yoorkevich
      */

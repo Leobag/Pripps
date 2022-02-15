@@ -1,13 +1,19 @@
 package com.company.model;
 
+import java.util.List;
+
 public class Game {
 
     private Player player;
+    private Enemy enemy1;
     private Double inputDirection;
 
     public void spawnPlayer() {
         player = new Player();
         player.setPosition(9, 1);
+    }
+    public void spawnEnemies() {
+        List<Enemy> enemies;
     }
 
     public Player getPlayer() {
@@ -24,6 +30,8 @@ public class Game {
         if (inputDirection == null) return;
         var x = (player.getPosition().x + Math.cos(inputDirection) * player.speed * deltaTime);
         var y = (player.getPosition().y + Math.sin(inputDirection) * player.speed * deltaTime);
+        //player.getPosition(); TODO: räkna ut vinkel mellan punkter
+        // TODO: if-sats för att kolla collision
         player.setPosition(x, y);
     }
 
@@ -36,6 +44,10 @@ public class Game {
         movePlayer(deltaTime);
     }
 
+    /**
+     * set direction for player using radians (movement is inverted compared to the standard unit circle)
+     * @param inputDirection
+     */
     public void setInputDirection(Double inputDirection) {
         this.inputDirection = inputDirection;
     }

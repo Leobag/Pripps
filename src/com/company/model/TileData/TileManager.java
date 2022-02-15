@@ -19,7 +19,7 @@ public class TileManager {
 
     }
 
-
+    //TODO: kan sättas som enum i stället
     public void setTileImage() {
 
         setImage(tile, "/Images/GrassTile.png", 0);

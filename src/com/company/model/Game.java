@@ -50,5 +50,6 @@ public class Game {
      */
     public void setInputDirection(Double inputDirection) {
         this.inputDirection = inputDirection;
+        System.out.println(inputDirection);
     }
 }

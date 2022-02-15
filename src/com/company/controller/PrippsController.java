@@ -22,6 +22,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     PrippsView view;
     PrippsModel model;
     Game game;
+    CollisionCheck checker;
 
     private double inputUp;
     private double inputDown;
@@ -38,6 +39,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         model = new PrippsModel();
         game = new Game();
         view = new PrippsView(model, game);
+        checker = new CollisionCheck(view);
     }
 
     private void setLayout() {

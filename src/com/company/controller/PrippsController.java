@@ -18,6 +18,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private final JButton optionsButton = new JButton();
     private final JButton quitButton = new JButton();
     private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
+    private Clip clip;
 
     PrippsView view;
     PrippsModel model;
@@ -28,6 +29,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private double inputDown;
     private double inputLeft;
     private double inputRight;
+    private boolean gamePaused = false;
+
 
 
     public static void main(String[] args) {
@@ -70,19 +73,15 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
 
-        try {
-            playButton.setIcon(new ImageIcon(getClass().getResource("/Images/PlayButton.png")));
-            playButton.setContentAreaFilled(false);
-            playButton.setBorder(BorderFactory.createEmptyBorder());
-            optionsButton.setIcon(new ImageIcon(getClass().getResource("/Images/OptionsButton.png")));
-            optionsButton.setContentAreaFilled(false);
-            optionsButton.setBorder(BorderFactory.createEmptyBorder());
-            quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/QuitButton.png")));
-            quitButton.setContentAreaFilled(false);
-            quitButton.setBorder(BorderFactory.createEmptyBorder());
-        } catch (Exception e) {
-            System.out.println("Image not found");
-        }
+        playButton.setIcon(new ImageIcon(getClass().getResource("/Images/PlayButton.png")));
+        playButton.setContentAreaFilled(false);
+        playButton.setBorder(BorderFactory.createEmptyBorder());
+        optionsButton.setIcon(new ImageIcon(getClass().getResource("/Images/OptionsButton.png")));
+        optionsButton.setContentAreaFilled(false);
+        optionsButton.setBorder(BorderFactory.createEmptyBorder());
+        quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/QuitButton.png")));
+        quitButton.setContentAreaFilled(false);
+        quitButton.setBorder(BorderFactory.createEmptyBorder());
 
         setVisible(true);
         //musicPlayer();
@@ -94,12 +93,14 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         URL lol = getClass().getResource("/Music/menumusic.wav");
 
         try {
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(lol));
             clip.start();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
     @Override
@@ -127,7 +128,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     }
 
-
     @Override
     public void keyTyped(KeyEvent e) {
 
@@ -140,6 +140,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             case KeyEvent.VK_A -> inputLeft = 1;
             case KeyEvent.VK_S -> inputDown = 1;
             case KeyEvent.VK_D -> inputRight = 1;
+            case KeyEvent.VK_P -> gamePaused = !gamePaused;
         }
     }
 
@@ -173,7 +174,12 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 while (true) {
                     var currentTimeMillis = System.currentTimeMillis();
                     handleInput();
-                    game.update((currentTimeMillis - previousTimeMillis) / 1000d);
+                    if(gamePaused) {
+                        clip.stop();
+                    } else {
+                        clip.start();
+                        game.update((currentTimeMillis - previousTimeMillis) / 1000d);
+                    }
                     repaint();
                     previousTimeMillis = currentTimeMillis;
                 }

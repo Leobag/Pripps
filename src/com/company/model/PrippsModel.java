@@ -20,6 +20,8 @@ public class PrippsModel {
     final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt"};
     private int mapCounter = 0;
 
+    Player player;
+
 
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
@@ -31,10 +33,9 @@ public class PrippsModel {
 
     public PrippsModel() {
 
+        player = new Player();
         tile = new TileManager();
-
         loadMap(mapNames[1]);
-
     }
 
     public BufferedImage getTileImage(int num) {
@@ -110,6 +111,7 @@ public class PrippsModel {
             e.printStackTrace();
         }
     }
-
-
+    public Player getPlayer() {
+        return player;
+    }
 }

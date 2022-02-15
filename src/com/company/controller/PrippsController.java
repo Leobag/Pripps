@@ -30,8 +30,11 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private double inputLeft;
     private double inputRight;
     private boolean gamePaused = false;
+    private Clip clip;
+    private long previousTimeMillis;
+    private long currentTimeMillis;
 
-
+    private Player player;
 
     public static void main(String[] args) {
         PrippsController f = new PrippsController();
@@ -40,9 +43,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private PrippsController() {
         setLayout();
         model = new PrippsModel();
-        game = new Game();
         view = new PrippsView(model, game);
         checker = new CollisionCheck(view);
+        player = model.getPlayer();
+        game = new Game(player);
     }
 
     private void setLayout() {
@@ -84,16 +88,14 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         quitButton.setBorder(BorderFactory.createEmptyBorder());
 
         setVisible(true);
-        //musicPlayer();
-
-
+        musicPlayer();
     }
 
     public void musicPlayer() {
         URL lol = getClass().getResource("/Music/menumusic.wav");
 
         try {
-            Clip clip = AudioSystem.getClip();
+            clip = AudioSystem.getClip();
             clip.open(AudioSystem.getAudioInputStream(lol));
             clip.start();
 
@@ -140,7 +142,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             case KeyEvent.VK_A -> inputLeft = 1;
             case KeyEvent.VK_S -> inputDown = 1;
             case KeyEvent.VK_D -> inputRight = 1;
-            case KeyEvent.VK_P -> gamePaused = !gamePaused;
+            case KeyEvent.VK_ESCAPE -> gamePaused = !gamePaused;
         }
     }
 
@@ -156,26 +158,25 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * Game loop after playbutton is pressed. Loop reads inputs, updates player and repaints
-     *  - Max Yoorkevich
+     * - Max Yoorkevich
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("playButton")) {
+            clip.stop();
             Container contentPane = getContentPane();
             contentPane.removeAll();
             contentPane.add(view);
             pack();
             setLocationRelativeTo(null);
-            repaint();
             setVisible(true);
             game.spawnPlayer();
             new Thread(() -> {
-                var previousTimeMillis = System.currentTimeMillis();
+                previousTimeMillis = System.currentTimeMillis();
                 while (true) {
-                    var currentTimeMillis = System.currentTimeMillis();
+                    currentTimeMillis = System.currentTimeMillis();
                     handleInput();
-                    if(gamePaused) {
-                    } else {
+                    if (!gamePaused) {
                         game.update((currentTimeMillis - previousTimeMillis) / 1000d);
                     }
                     repaint();

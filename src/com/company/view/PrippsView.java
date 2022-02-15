@@ -48,9 +48,9 @@ public class PrippsView extends JPanel {
      * - Max Yoorkevich
      */
     void drawPlayer(Graphics g) {
-        var x = (int) Math.round(game.getPlayer().getPosition().x * model.getTileSize());
-        var y = (int) Math.round(game.getPlayer().getPosition().y * model.getTileSize());
-        var tmpSize = (int) Math.round(game.getPlayer().getSize() * model.getTileSize());
+        var x = (int) Math.round(model.getPlayer().getPosition().x * model.getTileSize());
+        var y = (int) Math.round(model.getPlayer().getPosition().y * model.getTileSize());
+        var tmpSize = (int) Math.round(model.getPlayer().getSize() * model.getTileSize());
 
         g.setColor(Color.RED);
         g.fillRect(x, y, tmpSize, tmpSize);
@@ -77,7 +77,5 @@ public class PrippsView extends JPanel {
                 y += model.getTileSize();
             }
         }
-
     }
-
 }

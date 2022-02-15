@@ -43,7 +43,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         setLayout();
         model = new PrippsModel();
         view = new PrippsView(model, game);
-        checker = new CollisionCheck(model);
+        //checker = new CollisionCheck(model);
         player = model.getPlayer();
         game = new Game(player);
     }

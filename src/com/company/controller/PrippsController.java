@@ -170,18 +170,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             setLocationRelativeTo(null);
             setVisible(true);
             game.spawnPlayer();
-            new Thread(() -> {
-                previousTimeMillis = System.currentTimeMillis();
-                while (true) {
-                    currentTimeMillis = System.currentTimeMillis();
-                    handleInput();
-                    if (!gamePaused) {
-                        game.update((currentTimeMillis - previousTimeMillis) / 1000d);
-                    }
-                    repaint();
-                    previousTimeMillis = currentTimeMillis;
-                }
-            }).start();
+
+            startGameLoop();
         }
         if (e.getActionCommand().equals("quitButton")) {
             System.exit(0);
@@ -202,5 +192,19 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         } else {
             game.setInputDirection(Math.atan2(inputY, inputX));
         }
+    }
+    private void startGameLoop(){
+        new Thread(() -> {
+            previousTimeMillis = System.currentTimeMillis();
+            while (true) {
+                currentTimeMillis = System.currentTimeMillis();
+                handleInput();
+                if (!gamePaused) {
+                    game.update((currentTimeMillis - previousTimeMillis) / 1000d);
+                }
+                repaint();
+                previousTimeMillis = currentTimeMillis;
+            }
+        }).start();
     }
 }

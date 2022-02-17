@@ -11,21 +11,19 @@ public class CollisionCheck {
         this.model = model;
     }
 
-    double topLeft = model.getPlayer().getPosition().x;
-    double topRight = model.getPlayer().getPosition().x + model.getTileSize() * model.getPlayer().size;
-    double botLeft = model.getPlayer().getPosition().y + model.getTileSize() * model.getPlayer().size;
-    double botRight = model.getPlayer().getPosition().x + model.getPlayer().getPosition().y + model.getTileSize() * model.getPlayer().size;
-
-    int tileLeftCol = (int)topLeft/model.getTileSize();
-    int tileRightCol = (int)topRight/model.getTileSize();
-    int tileTopRow = (int)botLeft/model.getTileSize();
-    int tileBotRow = (int)botRight/model.getTileSize();
-
-    int tileMap[][] = model.getMatrix();
-/*
     public boolean isCollison(){
-        if(tileMap[tileTopRow][tileLeftCol] ==)
-        return false;
+        int topLeft = (int)model.getPlayer().getPosition().x;
+        int topRight = (int)(model.getPlayer().getPosition().x + model.getPlayer().size);
+        double botLeft = model.getPlayer().getPosition().y + model.getTileSize() * model.getPlayer().size;
+        double botRight = model.getPlayer().getPosition().x + model.getPlayer().getPosition().y + model.getTileSize() * model.getPlayer().size;
+
+        System.out.println(topLeft);
+        System.out.println(topRight);
+        System.out.println(botLeft);
+        System.out.println(botRight);
+        int[][] tileMap = model.getMatrix();
+
+        return tileMap[topLeft][topRight] == 2;
     }
-    */
+
 }

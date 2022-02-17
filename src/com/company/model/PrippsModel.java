@@ -22,14 +22,12 @@ public class PrippsModel {
 
     Player player;
 
-
     final int screenWidth = tileSize * maxScreenCol;
     final int screenHeight = tileSize * maxScreenRow;
 
     int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
 
     TileManager tile;
-
 
     public PrippsModel() {
 

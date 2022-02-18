@@ -1,6 +1,5 @@
 package com.company.view;
 
-import com.company.model.Game;
 import com.company.model.PrippsModel;
 import com.company.model.TileData.TileManager;
 
@@ -10,7 +9,6 @@ import java.awt.*;
 public class PrippsView extends JPanel {
 
     PrippsModel model;
-    Game game;
 
     String mapName;
 
@@ -18,18 +16,19 @@ public class PrippsView extends JPanel {
 
     int[][] mapMatrix;
 
-
-    public PrippsView(PrippsModel model, Game game) {
+    final private int tileSize = 32;
+    
+    public PrippsView(PrippsModel model) {
         this.model = model;
-        this.game = game;
         t = model.getTile();
         mapName = model.getCurrentMap();
 
         mapMatrix = model.getMatrix();
-
-        setPreferredSize(new Dimension(this.model.getScreenWidth(), this.model.getScreenHeight()));
-
-
+        
+        final int screenWidth = tileSize * model.getMaxCol();
+        final int screenHeight = tileSize * model.getMaxRow();
+        
+        setPreferredSize(new Dimension(screenWidth, screenHeight));
     }
 
 
@@ -48,12 +47,12 @@ public class PrippsView extends JPanel {
      * - Max Yoorkevich
      */
     void drawPlayer(Graphics g) {
-        var x = (int) Math.round(model.getPlayer().getPosition().x * model.getTileSize());
-        var y = (int) Math.round(model.getPlayer().getPosition().y * model.getTileSize());
-        var tmpSize = (int) Math.round(model.getPlayer().getSize() * model.getTileSize());
+        var x = (int) Math.round(model.getPlayer().getPosition().x * tileSize);
+        var y = (int) Math.round(model.getPlayer().getPosition().y * tileSize);
+        var size = (int) Math.round(model.getPlayer().getSize() * tileSize);
 
         g.setColor(Color.RED);
-        g.fillRect(x, y, tmpSize, tmpSize);
+        g.fillRect(x - size/2, y - size/2, size, size);
     }
 
     public void drawMap(Graphics2D g2D) {
@@ -66,15 +65,15 @@ public class PrippsView extends JPanel {
 
             int tileNum = mapMatrix[col][row];
 
-            g2D.drawImage(model.getTileImage(tileNum), x, y, model.getTileSize(), model.getTileSize(), null);
+            g2D.drawImage(model.getTileImage(tileNum), x, y, tileSize, tileSize, null);
             col++;
-            x += model.getTileSize();
+            x += tileSize;
 
             if (col == model.getMaxCol()) {
                 col = 0;
                 x = 0;
                 row++;
-                y += model.getTileSize();
+                y += tileSize;
             }
         }
     }

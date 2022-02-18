@@ -7,13 +7,17 @@ public class Game {
     private Player player;
     private Enemy enemy1;
     private Double inputDirection;
+    int[][] mapTileMatrix;
+    CollisionCheck collisionCheck;
 
-    public Game(Player player){
-        this.player = player;
+    public Game(int[][] mapTileMatrix){
+        this.mapTileMatrix = mapTileMatrix;
     }
 
     public void spawnPlayer() {
+        player = new Player();
         player.setPosition(9, 1);
+        collisionCheck = new CollisionCheck(this);
     }
 
     public void spawnEnemies() {
@@ -59,5 +63,9 @@ public class Game {
      */
     public void setInputDirection(Double inputDirection) {
         this.inputDirection = inputDirection;
+    }
+
+    public int[][] getMapTileMatrix() {
+        return mapTileMatrix;
     }
 }

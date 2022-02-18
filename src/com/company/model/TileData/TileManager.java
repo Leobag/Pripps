@@ -13,10 +13,7 @@ public class TileManager {
     public TileManager() {
 
         tile = new Tile[10];
-
-
         setTileImage();
-
     }
 
     //TODO: kan sättas som enum i stället
@@ -37,6 +34,4 @@ public class TileManager {
             e.printStackTrace();
         }
     }
-
-
 }

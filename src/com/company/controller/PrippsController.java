@@ -21,8 +21,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     PrippsView view;
     PrippsModel model;
-    Game game;
-    CollisionCheck checker;
 
     private double inputUp;
     private double inputDown;
@@ -33,7 +31,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private long previousTimeMillis;
     private long currentTimeMillis;
 
-    private Player player;
 
     public static void main(String[] args) {
         PrippsController f = new PrippsController();
@@ -42,10 +39,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private PrippsController() {
         setLayout();
         model = new PrippsModel();
-        view = new PrippsView(model, game);
-        //checker = new CollisionCheck(model);
-        player = model.getPlayer();
-        game = new Game(player);
+        view = new PrippsView(model);
     }
 
     private void setLayout() {
@@ -169,7 +163,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             pack();
             setLocationRelativeTo(null);
             setVisible(true);
-            game.spawnPlayer();
+            model.startGame();
 
             startGameLoop();
         }
@@ -188,9 +182,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         var inputX = inputRight - inputLeft;
         var inputY = inputDown - inputUp;
         if (inputX == 0 && inputY == 0) {
-            game.setInputDirection(null);
+            model.setInputDirection(null);
         } else {
-            game.setInputDirection(Math.atan2(inputY, inputX));
+            model.setInputDirection(Math.atan2(inputY, inputX));
         }
     }
     private void startGameLoop(){
@@ -200,7 +194,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 currentTimeMillis = System.currentTimeMillis();
                 handleInput();
                 if (!gamePaused) {
-                    game.update((currentTimeMillis - previousTimeMillis) / 1000d);
+                    model.update((currentTimeMillis - previousTimeMillis) / 1000d);
                 }
                 repaint();
                 previousTimeMillis = currentTimeMillis;

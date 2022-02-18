@@ -1,6 +1,5 @@
 package com.company.model;
 
-import com.company.model.TileData.Tile;
 import com.company.model.TileData.TileManager;
 
 import java.awt.image.BufferedImage;
@@ -10,20 +9,13 @@ import java.io.InputStreamReader;
 
 public class PrippsModel {
 
-    /**
-     * flytta pixelvariabler till view
-     */
-    final private int tileSize = 32;
     final private int maxScreenCol = 42;
     final private int maxScreenRow = 24;
 
     final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt"};
     private int mapCounter = 0;
 
-    Player player;
-
-    final int screenWidth = tileSize * maxScreenCol;
-    final int screenHeight = tileSize * maxScreenRow;
+    Game game;
 
     int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
 
@@ -31,7 +23,7 @@ public class PrippsModel {
 
     public PrippsModel() {
 
-        player = new Player();
+        game = new Game(mapTileMatrix);
         tile = new TileManager();
         loadMap(mapNames[1]);
     }
@@ -58,18 +50,6 @@ public class PrippsModel {
 
     public int getMaxRow() {
         return this.maxScreenRow;
-    }
-
-    public int getTileSize() {
-        return this.tileSize;
-    }
-
-    public int getScreenWidth() {
-        return screenWidth;
-    }
-
-    public int getScreenHeight() {
-        return screenHeight;
     }
 
     public TileManager getTile() {
@@ -109,7 +89,18 @@ public class PrippsModel {
             e.printStackTrace();
         }
     }
+    public void startGame(){
+        game.spawnPlayer();
+    }
     public Player getPlayer() {
-        return player;
+        return game.getPlayer();
+    }
+
+    public void setInputDirection(Double inputDirection) {
+        game.setInputDirection(inputDirection);
+    }
+
+    public void update(double deltaTime) {
+        game.update(deltaTime);
     }
 }

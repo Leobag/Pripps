@@ -131,6 +131,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
+
             case KeyEvent.VK_W -> inputUp = 1;
             case KeyEvent.VK_A -> inputLeft = 1;
             case KeyEvent.VK_S -> inputDown = 1;

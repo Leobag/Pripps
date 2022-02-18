@@ -16,15 +16,13 @@ public class PrippsModel {
     private int mapCounter = 0;
 
     Game game;
-
     int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
 
     TileManager tile;
 
     public PrippsModel() {
-
-        game = new Game(mapTileMatrix);
         tile = new TileManager();
+        game = new Game(mapTileMatrix, tile);
         loadMap(mapNames[1]);
     }
 

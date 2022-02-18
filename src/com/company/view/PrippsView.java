@@ -52,7 +52,7 @@ public class PrippsView extends JPanel {
         var size = (int) Math.round(model.getPlayer().getSize() * tileSize);
 
         g.setColor(Color.RED);
-        g.fillRect(x - size/2, y - size/2, size, size);
+        g.fillRect(x, y, size, size);
     }
 
     public void drawMap(Graphics2D g2D) {

@@ -1,5 +1,6 @@
 package com.company.model;
 
+import com.company.model.TileData.TileManager;
 import java.util.List;
 
 public class Game {
@@ -9,14 +10,16 @@ public class Game {
     private Double inputDirection;
     int[][] mapTileMatrix;
     CollisionCheck collisionCheck;
+    TileManager tile;
 
-    public Game(int[][] mapTileMatrix){
+    public Game(int[][] mapTileMatrix, TileManager tile){
         this.mapTileMatrix = mapTileMatrix;
+        this.tile = tile;
     }
 
     public void spawnPlayer() {
         player = new Player();
-        player.setPosition(9, 1);
+        player.setPosition(9, 2);
         collisionCheck = new CollisionCheck(this);
     }
 
@@ -39,10 +42,13 @@ public class Game {
         if (inputDirection == null) return;
         var x = (player.getPosition().x + Math.cos(inputDirection) * player.speed * deltaTime);
         var y = (player.getPosition().y + Math.sin(inputDirection) * player.speed * deltaTime);
-        //player.getPosition(); //TODO: räkna ut vinkel mellan punkter
-        // TODO: if-sats för att kolla collision
-        //if (player.getPosition().x == )
-        player.setPosition(x, y);
+
+        player.setCollisionOn(false);
+        collisionCheck.isCollison(player);
+
+        if(!player.isCollisionOn()) {
+            player.setPosition(x, y);
+        }
     }
 
     /**
@@ -63,9 +69,36 @@ public class Game {
      */
     public void setInputDirection(Double inputDirection) {
         this.inputDirection = inputDirection;
+        setStringDirection(this.inputDirection);
+    }
+
+    public void setStringDirection(Double inputDirection){
+        if(!(inputDirection == null)){
+            if (this.inputDirection == -1.5707963267948966) {
+                player.setDirection("north");
+            } else if (this.inputDirection == 1.5707963267948966) {
+                player.setDirection("south");
+            } else if (this.inputDirection == 3.141592653589793) {
+                player.setDirection("west");
+            } else if (this.inputDirection == 0.0) {
+                player.setDirection("east");
+            } else if (this.inputDirection == 0.7853981633974483) {
+                player.setDirection("southEast");
+            } else if (this.inputDirection == -0.7853981633974483) {
+                player.setDirection("northEast");
+            } else if (this.inputDirection == 2.356194490192345) {
+                player.setDirection("southWest");
+            } else if (this.inputDirection == -2.356194490192345) {
+                player.setDirection("northWest");
+            }
+        }
     }
 
     public int[][] getMapTileMatrix() {
         return mapTileMatrix;
+    }
+
+    public TileManager getTile() {
+        return tile;
     }
 }

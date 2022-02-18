@@ -5,7 +5,15 @@ import java.awt.image.BufferedImage;
 public class Tile {
 
     public BufferedImage image;
-    boolean collision = false;
+    private boolean collision = false;
+
+    public boolean getCollision(){
+        return collision;
+    }
+
+    public void setCollision(boolean collision){
+        this.collision = collision;
+    }
 
 
 }

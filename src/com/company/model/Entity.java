@@ -6,6 +6,9 @@ public class Entity {
     public Point2D.Double position;
     public double size;
     public double speed;
+    public boolean collisionOn = false;
+
+    String direction = "down";
 
     public double getSize() {
         return size;
@@ -17,5 +20,25 @@ public class Entity {
 
     public void setPosition(double x, double y) {
         this.position = new Point2D.Double(x, y);
+    }
+
+    public void setDirection(String direction) {
+        this.direction = direction;
+    }
+
+    public String getDirection() {
+        return direction;
+    }
+
+    public double getSpeed() {
+        return speed;
+    }
+
+    public boolean isCollisionOn() {
+        return collisionOn;
+    }
+
+    public void setCollisionOn(boolean collisionOn) {
+        this.collisionOn = collisionOn;
     }
 }

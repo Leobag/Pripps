@@ -23,7 +23,7 @@ public class PrippsModel {
     public PrippsModel() {
         tile = new TileManager();
         game = new Game(mapTileMatrix, tile);
-        loadMap(mapNames[1]);
+        loadMap(mapNames[0]);
     }
 
     public BufferedImage getTileImage(int num) {

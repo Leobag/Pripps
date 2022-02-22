@@ -19,7 +19,7 @@ public class Game {
 
     public void spawnPlayer() {
         player = new Player();
-        player.setPosition(9, 2);
+        player.setPosition(0, 11);
         collisionCheck = new CollisionCheck(this);
     }
 

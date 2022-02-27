@@ -1,6 +1,5 @@
 package com.company.model.TileData;
 
-import java.awt.image.BufferedImage;
 import java.io.*;
 
 import javax.imageio.ImageIO;
@@ -19,19 +18,24 @@ public class TileManager {
     //TODO: kan sättas som enum i stället
     public void setTileImage() {
 
-        setImage(tile, "/Images/GrassTile.png", 0);
-        setImage(tile, "/Images/DirtTile.png", 1);
-        setImage(tile, "/Images/WallTile.png", 2);
+        setImage(tile, "/Images/Tiles/GrassTile.png", 0);
+        setImage(tile, "/Images/Tiles/DirtTile.png",  1);
+        setImage(tile, "/Images/Tiles/WallTile.png",  2);
         tile[2].setCollision(true);
     }
+
+
 
     private void setImage(Tile[] tile, String imgname, int TileNumber) {
 
         try {
             tile[TileNumber] = new Tile();
             tile[TileNumber].image = ImageIO.read(getClass().getResourceAsStream(imgname));
+            if(TileNumber == 2){
+                tile[TileNumber].setCollision(true);
+            }
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println(e.getMessage());
         }
     }
 }

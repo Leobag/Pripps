@@ -31,6 +31,7 @@ public class Game {
         return this.player;
     }
 
+
     /**
      * Calculates and sets next position for player, returns if no inputDirection
      *
@@ -45,6 +46,7 @@ public class Game {
 
         player.setCollisionOn(false);
         collisionCheck.isCollison(player);
+        player.setMovementImages();
 
         if(!player.isCollisionOn()) {
             player.setPosition(x, y);

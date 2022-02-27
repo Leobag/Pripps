@@ -1,6 +1,5 @@
 package com.company.controller;
 
-import com.company.model.*;
 import com.company.model.PrippsModel;
 import com.company.view.PrippsView;
 import javax.sound.sampled.AudioSystem;
@@ -70,13 +69,13 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
 
-        playButton.setIcon(new ImageIcon(getClass().getResource("/Images/PlayButton.png")));
+        playButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/PlayButton.png")));
         playButton.setContentAreaFilled(false);
         playButton.setBorder(BorderFactory.createEmptyBorder());
-        optionsButton.setIcon(new ImageIcon(getClass().getResource("/Images/OptionsButton.png")));
+        optionsButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/OptionsButton.png")));
         optionsButton.setContentAreaFilled(false);
         optionsButton.setBorder(BorderFactory.createEmptyBorder());
-        quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/QuitButton.png")));
+        quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/QuitButton.png")));
         quitButton.setContentAreaFilled(false);
         quitButton.setBorder(BorderFactory.createEmptyBorder());
 

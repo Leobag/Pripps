@@ -101,4 +101,8 @@ public class PrippsModel {
     public void update(double deltaTime) {
         game.update(deltaTime);
     }
+
+    public BufferedImage getPlayerImage(){
+        return game.getPlayer().getUnitImage();
+    }
 }

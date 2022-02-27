@@ -1,12 +1,17 @@
 package com.company.model;
 
 import java.awt.geom.Point2D;
+import java.awt.image.BufferedImage;
+
 
 public class Entity {
     public Point2D.Double position;
     public double size;
     public double speed;
     public boolean collisionOn = false;
+    private int unitCounter, unitNum;
+    public BufferedImage unitImage;
+
 
     String direction = "down";
 
@@ -40,5 +45,9 @@ public class Entity {
 
     public void setCollisionOn(boolean collisionOn) {
         this.collisionOn = collisionOn;
+    }
+
+    public BufferedImage getUnitImage(){
+        return this.unitImage;
     }
 }

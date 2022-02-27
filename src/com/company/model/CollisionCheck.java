@@ -24,8 +24,6 @@ public class CollisionCheck {
         int[][] tileMap = game.getMapTileMatrix();
 
         int tileNum1, tileNum2, tileNum3, tileNum4;
-        System.out.println(game.getPlayer().getPosition().x);
-        System.out.println(game.getPlayer().getPosition().y);
         switch (entity.getDirection()) {
             case "north" -> {
                 topY = (int) ((doubleTopY * 32 - 0.5) / 32);

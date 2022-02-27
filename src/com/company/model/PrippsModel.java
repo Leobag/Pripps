@@ -12,7 +12,7 @@ public class PrippsModel {
     final private int maxScreenCol = 42;
     final private int maxScreenRow = 24;
 
-    final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt"};
+    final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt", "/Maps/map03.txt"};
     private int mapCounter = 0;
 
     Game game;

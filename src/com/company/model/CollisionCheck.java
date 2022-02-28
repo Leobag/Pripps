@@ -21,7 +21,7 @@ public class CollisionCheck {
         int botY = (int) doubleBotY;
 
 
-        int[][] tileMap = game.getMapTileMatrix();
+        int[][] tileMap = game.map.getMapMatrix();
 
         int tileNum1, tileNum2, tileNum3, tileNum4;
         switch (entity.getDirection()) {
@@ -30,7 +30,7 @@ public class CollisionCheck {
                 tileNum1 = tileMap[leftSideX][topY];
                 tileNum2 = tileMap[rightSideX][topY];
 
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
@@ -41,8 +41,11 @@ public class CollisionCheck {
                 botY = (int) ((doubleBotY * 32 + 0.5) / 32);
                 tileNum1 = tileMap[leftSideX][botY];
                 tileNum2 = tileMap[rightSideX][botY];
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
             case "west" -> {
@@ -50,7 +53,7 @@ public class CollisionCheck {
                 tileNum1 = tileMap[leftSideX][botY];
                 tileNum2 = tileMap[leftSideX][topY];
 
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
@@ -61,7 +64,7 @@ public class CollisionCheck {
                 rightSideX = (int) ((doubleRightSideX * 32 + 0.5) / 32);
                 tileNum1 = tileMap[rightSideX][botY];
                 tileNum2 = tileMap[rightSideX][topY];
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
@@ -77,8 +80,8 @@ public class CollisionCheck {
                 topY = (int) doubleTopY;
                 tileNum3 = tileMap[rightSideX][botY];
                 tileNum4 = tileMap[rightSideX][topY];
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
-                        game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
+                        game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
@@ -93,8 +96,8 @@ public class CollisionCheck {
                 botY = (int) doubleBotY;
                 tileNum3 = tileMap[rightSideX][botY];
                 tileNum4 = tileMap[rightSideX][topY];
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
-                        game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
+                        game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
@@ -109,8 +112,8 @@ public class CollisionCheck {
                 topY = (int) doubleTopY;
                 tileNum3 = tileMap[leftSideX][botY];
                 tileNum4 = tileMap[leftSideX][topY];
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
-                        game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
+                        game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
@@ -125,8 +128,8 @@ public class CollisionCheck {
                 botY = (int) doubleBotY;
                 tileNum3 = tileMap[leftSideX][botY];
                 tileNum4 = tileMap[leftSideX][topY];
-                if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
-                        game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
+                if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
+                        game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();

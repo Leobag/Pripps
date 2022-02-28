@@ -72,4 +72,8 @@ public class PrippsModel {
     public BufferedImage getPlayerImage(){
         return game.getPlayer().getUnitImage();
     }
+
+    public Fog getFog() {
+        return fog;
+    }
 }

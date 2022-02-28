@@ -6,15 +6,14 @@ import java.util.List;
 public class Game {
 
     private Player player;
-    int[][] mapTileMatrix;
     CollisionCheck collisionCheck;
-    TileManager tile;
     EnemyManager enemyManager = new EnemyManager();
     Enemy[] enemies;
+    MapManager map;
 
-    public Game(int[][] mapTileMatrix, TileManager tile){
-        this.mapTileMatrix = mapTileMatrix;
-        this.tile = tile;
+    public Game(MapManager map){
+        this.map = map;
+
     }
 
     public void spawnPlayer() {
@@ -90,14 +89,6 @@ public class Game {
 
     }
 
-
-    public int[][] getMapTileMatrix() {
-        return mapTileMatrix;
-    }
-
-    public TileManager getTile() {
-        return tile;
-    }
     public Player getPlayer() {
         return this.player;
     }

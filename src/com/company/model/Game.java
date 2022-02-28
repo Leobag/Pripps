@@ -19,6 +19,7 @@ public class Game {
     public void spawnPlayer() {
         player = new Player();
         player.setPosition(2, 11);
+        player.updateHitBox((2 * 32),(11 * 32), player.hitBoxSize);
         collisionCheck = new CollisionCheck(this);
     }
 

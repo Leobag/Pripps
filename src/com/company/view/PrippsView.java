@@ -40,6 +40,7 @@ public class PrippsView extends JPanel {
         drawMap(g2D);
         drawPlayer(g);
         drawEnemies(g);
+        drawFog(g);
     }
 
     /**
@@ -64,8 +65,46 @@ public class PrippsView extends JPanel {
             g.setColor(Color.BLACK);
             g.fillRect(x,y,size,size);
         }
+    }
+
+    void drawFog(Graphics g) {
+
+        if(model.getPlayer() == null) return;
+
+        g.fillRect(model.getFog().getFogSquares()[0].x, model.getFog().getFogSquares()[0].y,
+                model.getFog().getFogSquares()[0].width, model.getFog().getFogSquares()[0].height);
+
+        g.fillRect(model.getFog().getFogSquares()[1].x, model.getFog().getFogSquares()[1].y,
+                model.getFog().getFogSquares()[1].width, model.getFog().getFogSquares()[1].height);
+
+        g.fillRect(model.getFog().getFogSquares()[2].x, model.getFog().getFogSquares()[2].y,
+                model.getFog().getFogSquares()[2].width, model.getFog().getFogSquares()[2].height);
+
+        g.fillRect(model.getFog().getFogSquares()[3].x, model.getFog().getFogSquares()[3].y,
+                model.getFog().getFogSquares()[3].width, model.getFog().getFogSquares()[3].height);
 
 
+
+        switch (model.getPlayer().getDirection()){
+            case "up" : {
+                g.fillArc(model.getFog().getFogSquares()[4].x - 32 * 5 - 8, model.getFog().getFogSquares()[4].y - 32 * 4 - 16,
+                        model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 135, 270);
+            } break;
+            case "down" : {
+                g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 5 - 8, model.getFog().getFogSquares()[4].y  - 32 * 6,
+                        model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 225, -270);
+
+            } break;
+            case "right" : {
+                g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 6, model.getFog().getFogSquares()[4].y  - 32 * 5 - 8,
+                        model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 45, 270);
+
+            } break;
+            case "left" : {
+                g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 4 - 16 , model.getFog().getFogSquares()[4].y  - 32 * 5 - 8,
+                        model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 135, -270);
+            } break;
+        }
     }
 
     public void drawMap(Graphics2D g2D) {

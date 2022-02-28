@@ -18,8 +18,6 @@ public class PrippsModel {
         map = new MapManager();
         game = new Game(map);
         map.loadCurrentMap();
-        fog = new Fog(game.getPlayer(), map);
-
     }
 
     public BufferedImage getTileImage(int num) {
@@ -52,6 +50,7 @@ public class PrippsModel {
     public void startGame(){
         game.spawnPlayer();
         game.spawnEnemies(map.getMapCounter());
+        fog = new Fog(game.getPlayer(), map);
     }
     public Player getPlayer() {
         return game.getPlayer();

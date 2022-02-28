@@ -32,6 +32,9 @@ public class CollisionCheck {
 
                 if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
             case "south" -> {
@@ -49,6 +52,9 @@ public class CollisionCheck {
 
                 if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
             case "east" -> {
@@ -57,6 +63,9 @@ public class CollisionCheck {
                 tileNum2 = tileMap[rightSideX][topY];
                 if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
 
@@ -71,6 +80,9 @@ public class CollisionCheck {
                 if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
                         game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
             case "southEast" -> {
@@ -84,6 +96,9 @@ public class CollisionCheck {
                 if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
                         game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
             case "northWest" -> {
@@ -97,6 +112,9 @@ public class CollisionCheck {
                 if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
                         game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
             case "southWest" -> {
@@ -110,6 +128,9 @@ public class CollisionCheck {
                 if (game.getTile().tile[tileNum1].getCollision() || game.getTile().tile[tileNum2].getCollision() ||
                         game.getTile().tile[tileNum3].getCollision() || game.getTile().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
+                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                    game.map.nextMap();
+
                 }
             }
         }

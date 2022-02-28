@@ -48,12 +48,10 @@ public class PrippsView extends JPanel {
      * - Max Yoorkevich
      */
     void drawPlayer(Graphics g) {
-        var x = (int) Math.round(model.getPlayer().getPosition().x * tileSize);
-        var y = (int) Math.round(model.getPlayer().getPosition().y * tileSize);
+        var x = (int) (model.getPlayer().getPosition().x * tileSize);
+        var y = (int) (model.getPlayer().getPosition().y * tileSize);
         var size = (int) Math.round(model.getPlayer().getSize() * tileSize);
 
-        //g.setColor(Color.RED);
-        //g.fillRect(x, y, size, size);
         g.drawImage(model.getPlayerImage(), x,y, size, size, null);
     }
 

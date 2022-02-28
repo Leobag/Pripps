@@ -36,9 +36,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     }
 
     private PrippsController() {
-        setLayout();
         model = new PrippsModel();
         view = new PrippsView(model);
+        setLayout();
     }
 
     private void setLayout() {

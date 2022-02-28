@@ -11,7 +11,7 @@ public class EnemyManager {
                 for(int i = 0; i < 5; i++){
                     enemyArray[i] = new Enemy();
                 }
-                enemyArray[0].setPosition(3,11);
+                enemyArray[0].setPosition(1,2);
                 enemyArray[1].setPosition(6,11);
                 enemyArray[2].setPosition(18,11);
                 enemyArray[3].setPosition(3,15);

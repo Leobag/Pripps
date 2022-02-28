@@ -6,11 +6,11 @@ import java.util.List;
 public class Game {
 
     private Player player;
-    private Enemy enemy1;
-    private Double inputDirection;
     int[][] mapTileMatrix;
     CollisionCheck collisionCheck;
     TileManager tile;
+    EnemyManager enemyManager = new EnemyManager();
+    Enemy[] enemies;
 
     public Game(int[][] mapTileMatrix, TileManager tile){
         this.mapTileMatrix = mapTileMatrix;
@@ -19,18 +19,14 @@ public class Game {
 
     public void spawnPlayer() {
         player = new Player();
-        player.setPosition(0, 11);
+        player.setPosition(2, 11);
         collisionCheck = new CollisionCheck(this);
     }
 
-    public void spawnEnemies() {
-        List<Enemy> enemies;
+    public void spawnEnemies(int mapCounter) {
+        enemyManager.createEnemies(mapCounter);
+        enemies = enemyManager.getEnemyArray();
     }
-
-    public Player getPlayer() {
-        return this.player;
-    }
-
 
     /**
      * Calculates and sets next position for player, returns if no inputDirection
@@ -39,18 +35,35 @@ public class Game {
      *                  - Max Yoorkevich
      */
     public void movePlayer(double deltaTime) {
-        if (player == null) return;
-        if (inputDirection == null) return;
-        var x = (player.getPosition().x + Math.cos(inputDirection) * player.speed * deltaTime);
-        var y = (player.getPosition().y + Math.sin(inputDirection) * player.speed * deltaTime);
+        if(player == null) return;
+        if(player.getInputDirection() == null) return;
+
+        double x = player.setPlayerX(deltaTime);
+        double y = player.setPlayerY(deltaTime);
 
         player.setCollisionOn(false);
         collisionCheck.isCollison(player);
+        player.updateHitBox((int) (x * 32), (int) (y * 32), player.hitBoxSize);
         player.setMovementImages();
 
         if(!player.isCollisionOn()) {
-            player.setPosition(x, y);
+            if(!enemyCollision()) {
+                player.setPosition(x, y);
+            }
         }
+    }
+
+    public void moveEnemies(double deltaTime){
+        enemyManager.updateEnemyHitboxes();
+    }
+
+    private boolean enemyCollision(){
+        for (Enemy enemy : enemies) {
+            if (player.getHitBox().intersects(enemy.getHitBox())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -60,8 +73,10 @@ public class Game {
      *                  - Max Yoorkevich
      */
     public void update(double deltaTime) {
+        moveEnemies(deltaTime);
         movePlayer(deltaTime);
     }
+
 
     /**
      * set direction for player using radians (movement is inverted compared to the standard unit circle)
@@ -70,31 +85,11 @@ public class Game {
      * - Max Yoorkevich
      */
     public void setInputDirection(Double inputDirection) {
-        this.inputDirection = inputDirection;
-        setStringDirection(this.inputDirection);
+            player.setInputDirection(inputDirection);
+            player.setStringDirection(inputDirection);
+
     }
 
-    public void setStringDirection(Double inputDirection){
-        if(!(inputDirection == null)){
-            if (this.inputDirection == -1.5707963267948966) {
-                player.setDirection("north");
-            } else if (this.inputDirection == 1.5707963267948966) {
-                player.setDirection("south");
-            } else if (this.inputDirection == 3.141592653589793) {
-                player.setDirection("west");
-            } else if (this.inputDirection == 0.0) {
-                player.setDirection("east");
-            } else if (this.inputDirection == 0.7853981633974483) {
-                player.setDirection("southEast");
-            } else if (this.inputDirection == -0.7853981633974483) {
-                player.setDirection("northEast");
-            } else if (this.inputDirection == 2.356194490192345) {
-                player.setDirection("southWest");
-            } else if (this.inputDirection == -2.356194490192345) {
-                player.setDirection("northWest");
-            }
-        }
-    }
 
     public int[][] getMapTileMatrix() {
         return mapTileMatrix;
@@ -103,4 +98,9 @@ public class Game {
     public TileManager getTile() {
         return tile;
     }
+    public Player getPlayer() {
+        return this.player;
+    }
+
+
 }

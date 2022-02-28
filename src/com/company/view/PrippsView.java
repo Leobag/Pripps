@@ -39,6 +39,7 @@ public class PrippsView extends JPanel {
 
         drawMap(g2D);
         drawPlayer(g);
+        drawEnemies(g);
     }
 
     /**
@@ -54,6 +55,19 @@ public class PrippsView extends JPanel {
         //g.setColor(Color.RED);
         //g.fillRect(x, y, size, size);
         g.drawImage(model.getPlayerImage(), x,y, size, size, null);
+    }
+
+    void drawEnemies(Graphics g) {
+
+        for(int i = 0; i < model.getEnemyArr().length; i++){
+            var x = (int) Math.round(model.getEnemyArr()[i].getPosition().x * tileSize);
+            var y = (int) Math.round(model.getEnemyArr()[i].getPosition().y * tileSize);
+            var size = (int) Math.round(model.getEnemyArr()[i].getSize() * tileSize);
+            g.setColor(Color.BLACK);
+            g.fillRect(x,y,size,size);
+        }
+
+
     }
 
     public void drawMap(Graphics2D g2D) {

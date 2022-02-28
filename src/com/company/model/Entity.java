@@ -1,5 +1,6 @@
 package com.company.model;
 
+import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 
@@ -11,7 +12,8 @@ public class Entity {
     public boolean collisionOn = false;
     private int unitCounter, unitNum;
     public BufferedImage unitImage;
-
+    public CollisionCheck collisionCheck;
+    private Rectangle hitBox = new Rectangle();
 
     String direction = "down";
 
@@ -50,4 +52,17 @@ public class Entity {
     public BufferedImage getUnitImage(){
         return this.unitImage;
     }
+
+    public void updateHitBox(int x, int y, int size){
+        this.hitBox.x = x;
+        this.hitBox.y = y;
+        this.hitBox.width = size;
+        this.hitBox.height = size;
+    }
+
+    public Rectangle getHitBox(){
+        return hitBox;
+    }
+
+
 }

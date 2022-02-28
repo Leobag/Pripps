@@ -23,7 +23,7 @@ public class PrippsModel {
     public PrippsModel() {
         tile = new TileManager();
         game = new Game(mapTileMatrix, tile);
-        loadMap(mapNames[0]);
+        loadMap(mapNames[1]);
     }
 
     public BufferedImage getTileImage(int num) {
@@ -89,9 +89,14 @@ public class PrippsModel {
     }
     public void startGame(){
         game.spawnPlayer();
+        game.spawnEnemies(mapCounter);
     }
     public Player getPlayer() {
         return game.getPlayer();
+    }
+
+    public Enemy[] getEnemyArr(){
+        return game.enemyManager.getEnemyArray();
     }
 
     public void setInputDirection(Double inputDirection) {

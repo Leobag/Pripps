@@ -10,10 +10,10 @@ public class CollisionCheck {
     }
     public void isCollison(Entity entity) {
 
-        double doubleLeftSideX = game.getPlayer().getPosition().x;
-        double doubleRightSideX = (game.getPlayer().getPosition().x + game.getPlayer().size);
-        double doubleTopY = game.getPlayer().getPosition().y;
-        double doubleBotY = (game.getPlayer().getPosition().y + game.getPlayer().size);
+        double doubleLeftSideX = entity.getPosition().x;
+        double doubleRightSideX = (entity.getPosition().x + game.getPlayer().size);
+        double doubleTopY = entity.getPosition().y;
+        double doubleBotY = (entity.getPosition().y + game.getPlayer().size);
 
         int leftSideX = (int) doubleLeftSideX;
         int rightSideX = (int) doubleRightSideX;
@@ -44,8 +44,9 @@ public class CollisionCheck {
                 botY = (int) ((doubleBotY * 32 + 0.5) / 32);
                 tileNum1 = tileMap[leftSideX][botY];
                 tileNum2 = tileMap[rightSideX][botY];
+
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
-                    entity.collisionOn = true;
+                    entity.setCollisionOn(true);
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());

@@ -38,7 +38,7 @@ public class Player extends Entity {
                     }
 
                     this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/PlayerImages/" + tempDir + Integer.toString(unitNum) + ".png"));
-                    System.out.println("img set");
+
                 } catch(IOException e){
                     System.out.println(e.getMessage());
                 }

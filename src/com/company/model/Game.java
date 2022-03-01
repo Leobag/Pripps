@@ -5,6 +5,7 @@ import com.company.model.TileData.TileManager;
 import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 public class Game {
 
@@ -69,7 +70,26 @@ public class Game {
 
     public void moveEnemies(double deltaTime){
         enemyManager.updateEnemyHitboxes();
+        Random rand = new Random();
 
+        for(int i = 0; i < enemies.length; i++){
+
+        //sätt inputvalue till Math.sin utifrån movementalgoritm
+        //   var y =  (enemies[i].getPosition().y +
+        //           Math.sin(0.0) * enemies[i].getSpeed() * deltaTime);
+        //   var x = (enemyManager.getEnemyArray()[i].getPosition().x +
+        //           Math.cos(0.0) * enemies[i].getSpeed() * deltaTime);
+
+
+           enemies[i].collisionOn = false;
+           collisionCheck.isCollison(enemies[i]);
+           enemies[i].setDirection("east"); // sätt direction här eller någon annan stans
+           enemyManager.setPutinMovmentIMG(); //sätter bild ifall man ändrar riktning
+
+           if(!enemies[i].collisionOn) {
+               //enemies[i].setPosition(x, y);
+           }
+        }
     }
 
     private boolean enemyCollision(){

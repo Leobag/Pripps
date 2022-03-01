@@ -10,12 +10,10 @@ public class Entity {
     public double size;
     public double speed;
     public boolean collisionOn = false;
-    private int unitCounter, unitNum;
     public BufferedImage unitImage;
-    public CollisionCheck collisionCheck;
     private Rectangle hitBox = new Rectangle();
 
-    String direction = "down";
+    String direction;
 
     public double getSize() {
         return size;
@@ -63,6 +61,5 @@ public class Entity {
     public Rectangle getHitBox(){
         return hitBox;
     }
-
 
 }

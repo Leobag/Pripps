@@ -15,7 +15,7 @@ public class MapManager {
     int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
 
     TileManager tile;
-    final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt"};
+    final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt", "/Maps/map03.txt"};
     private int mapCounter = 0;
     private int[] startingPositions = new int[2];
 

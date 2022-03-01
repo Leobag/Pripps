@@ -1,6 +1,9 @@
 package com.company.model;
 
 import com.company.model.TileData.TileManager;
+
+import javax.imageio.ImageIO;
+import java.io.IOException;
 import java.util.List;
 
 public class Game {
@@ -8,8 +11,11 @@ public class Game {
     private Player player;
     CollisionCheck collisionCheck;
     EnemyManager enemyManager = new EnemyManager();
+    WinManager winManager = new WinManager();
     Enemy[] enemies;
     MapManager map;
+
+    private boolean win = false;
 
     public Game(MapManager map){
         this.map = map;
@@ -18,14 +24,21 @@ public class Game {
 
     public void spawnPlayer() {
         player = new Player();
-        player.setPosition(2, 11);
+        player.setPosition(1, 11);
         player.updateHitBox((2 * 32),(11 * 32), player.hitBoxSize);
         collisionCheck = new CollisionCheck(this);
+        player.setMovementImages();
     }
 
-    public void spawnEnemies(int mapCounter) {
+    public void spawnEnemies(int mapCounter){
         enemyManager.createEnemies(mapCounter);
         enemies = enemyManager.getEnemyArray();
+
+
+    }
+
+    public void setWinCondition(int mapCounter){
+        winManager.winCondition(mapCounter);
     }
 
     /**
@@ -37,6 +50,7 @@ public class Game {
     public void movePlayer(double deltaTime) {
         if(player == null) return;
         if(player.getInputDirection() == null) return;
+        if(player.getHitBox().intersects(winManager.getPrippsPack().getHitBox())) win = true;
 
         double x = player.setPlayerX(deltaTime);
         double y = player.setPlayerY(deltaTime);
@@ -55,6 +69,7 @@ public class Game {
 
     public void moveEnemies(double deltaTime){
         enemyManager.updateEnemyHitboxes();
+
     }
 
     private boolean enemyCollision(){
@@ -73,10 +88,10 @@ public class Game {
      *                  - Max Yoorkevich
      */
     public void update(double deltaTime) {
-        moveEnemies(deltaTime);
         movePlayer(deltaTime);
-    }
+        moveEnemies(deltaTime);
 
+    }
 
     /**
      * set direction for player using radians (movement is inverted compared to the standard unit circle)
@@ -92,6 +107,14 @@ public class Game {
 
     public Player getPlayer() {
         return this.player;
+    }
+
+    public boolean getWin(){
+        return win;
+    }
+
+    public Entity getPrippsPack(){
+        return winManager.getPrippsPack();
     }
 
 

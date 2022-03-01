@@ -9,13 +9,11 @@ import java.awt.*;
 public class PrippsView extends JPanel {
 
     PrippsModel model;
-
     String mapName;
-
     TileManager t;
+    WinView winView = new WinView();
 
     int[][] mapMatrix;
-
     final private int tileSize = 32;
     
     public PrippsView(PrippsModel model) {
@@ -40,7 +38,9 @@ public class PrippsView extends JPanel {
         drawMap(g2D);
         drawPlayer(g);
         drawEnemies(g);
+        drawPripps(g);
         drawFog(g);
+
     }
 
     /**
@@ -53,7 +53,7 @@ public class PrippsView extends JPanel {
         var y = (int) (model.getPlayer().getPosition().y * tileSize);
         var size = (int) Math.round(model.getPlayer().getSize() * tileSize);
 
-        g.drawImage(model.getPlayerImage(), x,y, size, size, null);
+        g.drawImage(model.getPlayerImage(), x - 5,y - 5, size + 10, size + 10, null);
     }
 
     void drawEnemies(Graphics g) {
@@ -62,8 +62,8 @@ public class PrippsView extends JPanel {
             var x = (int) Math.round(model.getEnemyArr()[i].getPosition().x * tileSize);
             var y = (int) Math.round(model.getEnemyArr()[i].getPosition().y * tileSize);
             var size = (int) Math.round(model.getEnemyArr()[i].getSize() * tileSize);
-            g.setColor(Color.BLACK);
-            g.fillRect(x,y,size,size);
+
+            g.drawImage(model.getEnemyArr()[i].getUnitImage(), x - 5,y - 5, size + 10, size + 10, null);
         }
     }
 
@@ -86,24 +86,39 @@ public class PrippsView extends JPanel {
 
 
         switch (model.getPlayer().getDirection()){
-            case "up" : {
+            case "north" : {
                 g.fillArc(model.getFog().getFogSquares()[4].x - 32 * 5 - 8, model.getFog().getFogSquares()[4].y - 32 * 4 - 16,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 135, 270);
             } break;
-            case "down" : {
+            case "south" : {
                 g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 5 - 8, model.getFog().getFogSquares()[4].y  - 32 * 6,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 225, -270);
 
             } break;
-            case "right" : {
+            case "east" :
+            case "southEast" :
+            case "northEast" : {
                 g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 6, model.getFog().getFogSquares()[4].y  - 32 * 5 - 8,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 45, 270);
 
             } break;
-            case "left" : {
+            case "west" :
+            case "northWest" :
+            case "southWest" : {
                 g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 4 - 16 , model.getFog().getFogSquares()[4].y  - 32 * 5 - 8,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 135, -270);
             } break;
+        }
+
+    }
+
+    void drawPripps(Graphics g) {
+        if(model.getMap().getMapCounter() == 2) {
+            var x = (int) (model.getPrippsPack().getPosition().x * tileSize);
+            var y = (int) (model.getPrippsPack().getPosition().y * tileSize);
+            var size = (int) Math.round(model.getPrippsPack().getSize() * tileSize);
+
+            g.drawImage(model.getPrippsPack().unitImage, x - 15, y - 15, size + 64, size + 64, null);
         }
     }
 
@@ -128,5 +143,9 @@ public class PrippsView extends JPanel {
                 y += tileSize;
             }
         }
+    }
+
+    public WinView getWinView(){
+        return this.winView;
     }
 }

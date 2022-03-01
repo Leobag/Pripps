@@ -12,6 +12,7 @@ public class PrippsModel {
     Game game;
     MapManager map;
     Fog fog;
+    String SubmittedName;
 
 
     public PrippsModel() {
@@ -50,6 +51,7 @@ public class PrippsModel {
     public void startGame(){
         game.spawnPlayer();
         game.spawnEnemies(map.getMapCounter());
+        game.setWinCondition(map.getMapCounter());
         fog = new Fog(game.getPlayer(), map);
     }
     public Player getPlayer() {
@@ -74,5 +76,25 @@ public class PrippsModel {
 
     public Fog getFog() {
         return fog;
+    }
+
+    public boolean winCondition(){
+        return game.getWin();
+    }
+
+    public Entity getPrippsPack(){
+        return game.getPrippsPack();
+    }
+
+    public MapManager getMap(){
+        return this.map;
+    }
+
+    public void setSubmittedName(String submittedName) {
+        SubmittedName = submittedName;
+    }
+
+    public String getSubmittedName() {
+        return SubmittedName;
     }
 }

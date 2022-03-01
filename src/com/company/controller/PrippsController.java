@@ -169,7 +169,19 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
         if (e.getActionCommand().equals("quitButton")) {
             System.exit(0);
+        } if(e.getActionCommand().equals("submit")){
+            model.setSubmittedName(view.getWinView().getSubmittedName().getText());
         }
+    }
+
+    private void openWinPanel(JPanel panel){
+        Container contentPane = getContentPane();
+        contentPane.removeAll();
+        contentPane.add(panel);
+        view.getWinView().getSubmit().addActionListener(this);
+        pack();
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     /**
@@ -198,6 +210,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 }
                 repaint();
                 previousTimeMillis = currentTimeMillis;
+                if(model.winCondition()){
+                    openWinPanel(view.getWinView());
+                    break;
+                }
             }
         }).start();
     }

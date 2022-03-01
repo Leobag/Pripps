@@ -24,6 +24,7 @@ public class CollisionCheck {
         int[][] tileMap = game.map.getMapMatrix();
 
         int tileNum1, tileNum2, tileNum3, tileNum4;
+        
         switch (entity.getDirection()) {
             case "north" -> {
                 topY = (int) ((doubleTopY * 32 - 0.5) / 32);
@@ -34,6 +35,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }
@@ -45,6 +48,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }
@@ -57,6 +62,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }
@@ -68,6 +75,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }
@@ -85,6 +94,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }
@@ -101,6 +112,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }
@@ -117,6 +130,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }
@@ -133,6 +148,8 @@ public class CollisionCheck {
                     entity.collisionOn = true;
                 }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
                     game.map.nextMap();
+                    game.spawnEnemies(game.map.getMapCounter());
+                    game.setWinCondition(game.map.getMapCounter());
 
                 }
             }

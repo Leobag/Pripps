@@ -22,7 +22,7 @@ public class TileManager {
         setImage(tile, "/Images/Tiles/DirtTile.png",  1);
         setImage(tile, "/Images/Tiles/WallTile.png",  2);
         setImage(tile, "/Images/Tiles/StairTile.png", 3);
-        tile[2].setCollision(true);
+        tile[2].setCollision(false);
         tile[3].setNextMapBool(true);
     }
 

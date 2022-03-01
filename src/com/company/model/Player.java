@@ -9,14 +9,15 @@ public class Player extends Entity {
 
     private int unitCounter, unitNum;
     private Double inputDirection;
-    private String stringDir = "south";
     public final int hitBoxSize = 16;
+
 
     public Player(){
         this.speed = 4;
-        this.size = 0.8;
+        this.size = 0.5;
         this.unitCounter = 0;
         this.unitNum = 1;
+        this.setDirection("south");
     }
 
     public void setMovementImages(){
@@ -36,8 +37,8 @@ public class Player extends Entity {
                         tempDir = "west";
                     }
 
-                    this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/" + tempDir + Integer.toString(unitNum) + ".png"));
-
+                    this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/PlayerImages/" + tempDir + Integer.toString(unitNum) + ".png"));
+                    System.out.println("img set");
                 } catch(IOException e){
                     System.out.println(e.getMessage());
                 }

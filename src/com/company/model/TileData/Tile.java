@@ -1,5 +1,6 @@
 package com.company.model.TileData;
 
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 

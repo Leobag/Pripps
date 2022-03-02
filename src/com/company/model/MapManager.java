@@ -2,6 +2,7 @@ package com.company.model;
 
 import com.company.model.TileData.TileManager;
 
+import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -111,5 +112,8 @@ public class MapManager {
         }
     }
 
+    public void resetMap(){
+        mapCounter = 0;
+    }
 
 }

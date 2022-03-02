@@ -31,9 +31,11 @@ public class CollisionCheck {
                 tileNum1 = tileMap[leftSideX][topY];
                 tileNum2 = tileMap[rightSideX][topY];
 
+
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
-                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() ||
+                        game.map.getTiles().tile[tileNum2].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
@@ -47,7 +49,8 @@ public class CollisionCheck {
 
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.setCollisionOn(true);
-                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() ||
+                        game.map.getTiles().tile[tileNum2].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
@@ -61,7 +64,8 @@ public class CollisionCheck {
 
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
-                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() ||
+                        game.map.getTiles().tile[tileNum2].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
@@ -74,7 +78,8 @@ public class CollisionCheck {
                 tileNum2 = tileMap[rightSideX][topY];
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
                     entity.collisionOn = true;
-                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() ||
+                        game.map.getTiles().tile[tileNum2].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
@@ -93,7 +98,8 @@ public class CollisionCheck {
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
                         game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
-                }else if(game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()
+                        || game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum4].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
@@ -111,7 +117,8 @@ public class CollisionCheck {
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
                         game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
-                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()
+                        || game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum4].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
@@ -129,7 +136,8 @@ public class CollisionCheck {
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
                         game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
-                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()
+                        || game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum4].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
@@ -147,7 +155,8 @@ public class CollisionCheck {
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision() ||
                         game.map.getTiles().tile[tileNum3].getCollision() || game.map.getTiles().tile[tileNum4].getCollision()) {
                     entity.collisionOn = true;
-                }else if(game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()){
+                }else if((entity instanceof Player) && (game.map.getTiles().tile[tileNum1].getNextMapBool() || game.map.getTiles().tile[tileNum2].getNextMapBool()
+                        || game.map.getTiles().tile[tileNum3].getNextMapBool() || game.map.getTiles().tile[tileNum4].getNextMapBool())){
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());

@@ -49,10 +49,13 @@ public class PrippsModel {
 
 
     public void startGame(){
-        game.spawnPlayer();
+        map.loadCurrentMap();
+
         game.spawnEnemies(map.getMapCounter());
         game.setWinCondition(map.getMapCounter());
+        game.spawnPlayer();
         fog = new Fog(game.getPlayer(), map);
+
     }
     public Player getPlayer() {
         return game.getPlayer();
@@ -96,5 +99,12 @@ public class PrippsModel {
 
     public String getSubmittedName() {
         return SubmittedName;
+    }
+
+    public void resetGame(){
+        map.resetMap();
+        game.deletePlayer();
+        game.deleteEnemies();
+        game.resetWin();
     }
 }

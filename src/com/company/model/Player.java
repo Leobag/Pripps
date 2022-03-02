@@ -10,6 +10,7 @@ public class Player extends Entity {
     private int unitCounter, unitNum;
     private Double inputDirection;
     public final int hitBoxSize = 16;
+    private boolean dead = false;
 
 
     public Player(){
@@ -22,29 +23,37 @@ public class Player extends Entity {
 
     public void setMovementImages(){
 
-        String tempDir = this.direction;
-            if(this.unitCounter > 30){
+        if(dead){
+            try {
+                this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/PlayerImages/realExplosion.png"));
+            }catch (IOException e){
+                System.out.println("cant find explosionIMG");
+            }
+        }else {
+            String tempDir = this.direction;
+            if (this.unitCounter > 30) {
 
-                if(this.unitNum == 1){
+                if (this.unitNum == 1) {
                     this.unitNum = 2;
-                } else if(this.unitNum == 2){
+                } else if (this.unitNum == 2) {
                     this.unitNum = 1;
                 }
-                try{
-                    if(tempDir == "northEast" || tempDir == "southEast"){
+                try {
+                    if (tempDir == "northEast" || tempDir == "southEast") {
                         tempDir = "east";
-                    } else if(tempDir == "northWest" || tempDir == "southWest"){
+                    } else if (tempDir == "northWest" || tempDir == "southWest") {
                         tempDir = "west";
                     }
 
                     this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/PlayerImages/" + tempDir + Integer.toString(unitNum) + ".png"));
 
-                } catch(IOException e){
+                } catch (IOException e) {
                     System.out.println(e.getMessage());
                 }
 
             }
             this.unitCounter++;
+        }
     }
 
     public double setPlayerX(Double deltaTime){
@@ -83,5 +92,13 @@ public class Player extends Entity {
     }
     public Double getInputDirection(){
         return this.inputDirection;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
+    }
+
+    public boolean getDead(){
+        return this.dead;
     }
 }

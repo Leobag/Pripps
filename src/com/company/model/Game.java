@@ -20,14 +20,15 @@ public class Game {
 
     public Game(MapManager map){
         this.map = map;
+        collisionCheck = new CollisionCheck(this);
 
     }
 
     public void spawnPlayer() {
+
         player = new Player();
         player.setPosition(1, 11);
         player.updateHitBox((2 * 32),(11 * 32), player.hitBoxSize);
-        collisionCheck = new CollisionCheck(this);
         player.setMovementImages();
     }
 
@@ -72,6 +73,7 @@ public class Game {
         enemyManager.updateEnemyHitboxes();
         Random rand = new Random();
 
+
         for(int i = 0; i < enemies.length; i++){
 
         //sätt inputvalue till Math.sin utifrån movementalgoritm
@@ -83,7 +85,7 @@ public class Game {
 
            enemies[i].collisionOn = false;
            collisionCheck.isCollison(enemies[i]);
-           enemies[i].setDirection("east"); // sätt direction här eller någon annan stans
+           enemies[i].setDirection("south"); // sätt direction här eller någon annan stans
            enemyManager.setPutinMovmentIMG(); //sätter bild ifall man ändrar riktning
 
            if(!enemies[i].collisionOn) {
@@ -95,6 +97,7 @@ public class Game {
     private boolean enemyCollision(){
         for (Enemy enemy : enemies) {
             if (player.getHitBox().intersects(enemy.getHitBox())) {
+                player.setDead(true);
                 return true;
             }
         }
@@ -127,6 +130,20 @@ public class Game {
 
     public Player getPlayer() {
         return this.player;
+    }
+
+    public void deletePlayer(){
+        this.player = null;
+    }
+
+    public void resetWin(){
+        win = false;
+    }
+
+    public void deleteEnemies(){
+        for (Enemy enemy : enemies){
+            enemy = null;
+        }
     }
 
     public boolean getWin(){

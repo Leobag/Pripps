@@ -30,6 +30,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private long previousTimeMillis;
     private long currentTimeMillis;
 
+    public boolean inputLock;
+
 
     public static void main(String[] args) {
         PrippsController f = new PrippsController();
@@ -129,6 +131,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     @Override
     public void keyPressed(KeyEvent e) {
+
         switch (e.getKeyCode()) {
 
             case KeyEvent.VK_W -> inputUp = 1;
@@ -171,17 +174,39 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             System.exit(0);
         } if(e.getActionCommand().equals("submit")){
             model.setSubmittedName(view.getWinView().getSubmittedName().getText());
+            openStartPanel();
+
         }
     }
 
+    private void openStartPanel(){
+        model.resetGame();
+        getContentPane().removeAll();
+        setSize(900, 700); //1360, 807 fungerar bra efter mapen men den använder pack() istället
+        getContentPane().add(mainPanel);
+        setLocationRelativeTo(null);
+
+    }
+
     private void openWinPanel(JPanel panel){
-        Container contentPane = getContentPane();
-        contentPane.removeAll();
-        contentPane.add(panel);
+        getContentPane().removeAll();
+        getContentPane().add(panel);
         view.getWinView().getSubmit().addActionListener(this);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void displayExplosion(){
+        model.getPlayer().setMovementImages();
+        repaint();
+        try {
+            Thread.sleep(1000);
+        }catch(InterruptedException e){
+            System.out.println("i cant sleep");
+        }
+
+
     }
 
     /**
@@ -204,6 +229,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             previousTimeMillis = System.currentTimeMillis();
             while (true) {
                 currentTimeMillis = System.currentTimeMillis();
+
                 handleInput();
                 if (!gamePaused) {
                     model.update((currentTimeMillis - previousTimeMillis) / 1000d);
@@ -213,7 +239,12 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 if(model.winCondition()){
                     openWinPanel(view.getWinView());
                     break;
+                }else if(model.getPlayer().getDead()){
+                    displayExplosion();
+                    openStartPanel();
+                    break;
                 }
+
             }
         }).start();
     }

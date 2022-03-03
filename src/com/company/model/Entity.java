@@ -24,6 +24,7 @@ public class Entity implements Serializable{
         return position;
     }
 
+
     public void setPosition(double x, double y) {
         this.position = new Position(x, y);
     }
@@ -62,5 +63,6 @@ public class Entity implements Serializable{
     public Rectangle getHitBox(){
         return hitBox;
     }
+
 
 }

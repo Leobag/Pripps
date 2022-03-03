@@ -1,5 +1,8 @@
 package com.company.model;
 
+import javax.imageio.ImageIO;
+import java.util.Random;
+
 public class EnemyManager {
     Enemy[] enemyArray;
 
@@ -65,5 +68,8 @@ public class EnemyManager {
         for (int i = 0; i < enemyArray.length; i++) {
             enemyArray[i].setEnemyImages("putinFaces");
         }
+    }
+    public double randomDirection(){
+        return ((Math.random() * (Math.PI - -Math.PI) - Math.PI));
     }
 }

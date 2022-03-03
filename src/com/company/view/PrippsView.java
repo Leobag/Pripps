@@ -38,7 +38,7 @@ public class PrippsView extends JPanel {
         if(model.getPlayer() == null){
             return;
         }
-        drawMap(g);
+        drawMap(g2D);
         drawPlayer(g);
         drawEnemies(g);
         drawPripps(g);

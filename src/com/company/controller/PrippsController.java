@@ -80,6 +80,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/QuitButton.png")));
         quitButton.setContentAreaFilled(false);
         quitButton.setBorder(BorderFactory.createEmptyBorder());
+        view.getWinView().getSubmit().addActionListener(this);
 
         setVisible(true);
         musicPlayer();
@@ -134,12 +135,12 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
         switch (e.getKeyCode()) {
 
-            case KeyEvent.VK_W -> inputUp = 1;
-            case KeyEvent.VK_A -> inputLeft = 1;
-            case KeyEvent.VK_S -> inputDown = 1;
-            case KeyEvent.VK_D -> inputRight = 1;
-            case KeyEvent.VK_ESCAPE -> gamePaused = !gamePaused;
-        }
+                case KeyEvent.VK_W -> inputUp = 1;
+                case KeyEvent.VK_A -> inputLeft = 1;
+                case KeyEvent.VK_S -> inputDown = 1;
+                case KeyEvent.VK_D -> inputRight = 1;
+                case KeyEvent.VK_ESCAPE -> gamePaused = !gamePaused;
+            }
     }
 
     @Override
@@ -169,11 +170,13 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             model.startGame();
 
             startGameLoop();
+
         }
         if (e.getActionCommand().equals("quitButton")) {
             System.exit(0);
         } if(e.getActionCommand().equals("submit")){
             model.setSubmittedName(view.getWinView().getSubmittedName().getText());
+            System.out.println("lul");
             openStartPanel();
 
         }
@@ -191,7 +194,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private void openWinPanel(JPanel panel){
         getContentPane().removeAll();
         getContentPane().add(panel);
-        view.getWinView().getSubmit().addActionListener(this);
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
@@ -223,29 +225,33 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         } else {
             model.setInputDirection(Math.atan2(inputY, inputX));
         }
+
     }
     private void startGameLoop(){
         new Thread(() -> {
             previousTimeMillis = System.currentTimeMillis();
+
             while (true) {
-                currentTimeMillis = System.currentTimeMillis();
 
-                handleInput();
-                if (!gamePaused) {
-                    model.update((currentTimeMillis - previousTimeMillis) / 1000d);
-                }
-                repaint();
-                previousTimeMillis = currentTimeMillis;
-                if(model.winCondition()){
-                    openWinPanel(view.getWinView());
-                    break;
-                }else if(model.getPlayer().getDead()){
-                    displayExplosion();
-                    openStartPanel();
-                    break;
-                }
+                    currentTimeMillis = System.currentTimeMillis();
 
-            }
+                    handleInput();
+                    if (!gamePaused) {
+                        model.update((currentTimeMillis - previousTimeMillis) / 1000d);
+                    }
+                    repaint();
+                    previousTimeMillis = currentTimeMillis;
+
+                    if (model.winCondition()) {
+                        openWinPanel(view.getWinView());
+                        break;
+                    } else if (model.getPlayer().getDead()) {
+                        displayExplosion();
+                        openStartPanel();
+                        break;
+                    }
+                }
         }).start();
     }
+
 }

@@ -50,12 +50,10 @@ public class PrippsModel {
 
     public void startGame(){
         map.loadCurrentMap();
-
         game.spawnEnemies(map.getMapCounter());
         game.setWinCondition(map.getMapCounter());
         game.spawnPlayer();
         fog = new Fog(game.getPlayer(), map);
-
     }
     public Player getPlayer() {
         return game.getPlayer();

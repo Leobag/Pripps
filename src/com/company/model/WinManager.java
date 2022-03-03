@@ -21,7 +21,8 @@ public class WinManager {
         }
 
         switch (mapCounter){
-            case 0, 1 -> {}
+            case 0, 1 -> prippsPack.updateHitBox(0,0,0);
+
             case 2 -> prippsPack.updateHitBox(3 * 32, 7 * 32, 32);
 
         }

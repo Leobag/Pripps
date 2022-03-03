@@ -54,7 +54,6 @@ public class CollisionCheck {
                     game.map.nextMap();
                     game.spawnEnemies(game.map.getMapCounter());
                     game.setWinCondition(game.map.getMapCounter());
-
                 }
             }
             case "west" -> {

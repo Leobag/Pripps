@@ -33,6 +33,8 @@ public class Fog {
                 32 * 6 + 32 * 5);
 
         return fogSqueares;
+
+
     }
 
 }

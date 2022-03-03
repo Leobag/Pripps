@@ -27,6 +27,7 @@ public class PrippsView extends JPanel {
         final int screenHeight = tileSize * model.getMaxRow();
         
         setPreferredSize(new Dimension(screenWidth, screenHeight));
+        setBackground(Color.BLACK);
     }
 
 
@@ -35,11 +36,14 @@ public class PrippsView extends JPanel {
 
         Graphics2D g2D = (Graphics2D) g;
 
-        drawMap(g2D);
+        if(model.getPlayer() == null){
+            return;
+        }
+        drawMap(g);
         drawPlayer(g);
         drawEnemies(g);
         drawPripps(g);
-        //drawFog(g);
+        drawFog(g);
 
     }
 
@@ -63,7 +67,7 @@ public class PrippsView extends JPanel {
             var y = (int) Math.round(model.getEnemyArr()[i].getPosition().y * tileSize);
             var size = (int) Math.round(model.getEnemyArr()[i].getSize() * tileSize);
 
-            g.drawImage(model.getEnemyArr()[i].getUnitImage(), x - 5,y - 5, size + 10, size + 10, null);
+           g.drawImage(model.getEnemyArr()[i].getUnitImage(), x - 10,y - 5, size + 20, size + 10, null);
         }
     }
 
@@ -109,7 +113,6 @@ public class PrippsView extends JPanel {
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 135, -270);
             } break;
         }
-
     }
 
     void drawPripps(Graphics g) {
@@ -122,7 +125,7 @@ public class PrippsView extends JPanel {
         }
     }
 
-    public void drawMap(Graphics2D g2D) {
+    public void drawMap(Graphics g2D) {
         int col = 0;
         int row = 0;
         int x = 0;

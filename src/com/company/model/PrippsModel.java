@@ -1,7 +1,7 @@
 package com.company.model;
 
 import com.company.model.TileData.TileManager;
-import com.company.model.MapManager;
+import com.company.model.server.Client;
 
 import java.awt.image.BufferedImage;
 
@@ -13,6 +13,7 @@ public class PrippsModel {
     MapManager map;
     Fog fog;
     String SubmittedName;
+    Client client = new Client();
 
 
     public PrippsModel() {
@@ -33,8 +34,6 @@ public class PrippsModel {
         return map.getCurrentMap();
     }
 
-
-
     public int getMaxCol() {
         return map.getMaxCol();
     }
@@ -48,18 +47,23 @@ public class PrippsModel {
     }
 
 
-    public void startGame(){
+    public void startGame() {
         map.loadCurrentMap();
         game.spawnEnemies(map.getMapCounter());
         game.setWinCondition(map.getMapCounter());
         game.spawnPlayer();
         fog = new Fog(game.getPlayer(), map);
     }
+
     public Player getPlayer() {
         return game.getPlayer();
     }
 
-    public Enemy[] getEnemyArr(){
+    public void enterHighScore(String name, int score) {
+        client.updateServerScore(name, score);
+    }
+
+    public Enemy[] getEnemyArr() {
         return game.enemyManager.getEnemyArray();
     }
 
@@ -71,7 +75,7 @@ public class PrippsModel {
         game.update(deltaTime);
     }
 
-    public BufferedImage getPlayerImage(){
+    public BufferedImage getPlayerImage() {
         return game.getPlayer().getUnitImage();
     }
 
@@ -79,27 +83,27 @@ public class PrippsModel {
         return fog;
     }
 
-    public boolean winCondition(){
+    public boolean winCondition() {
         return game.getWin();
     }
 
-    public Entity getPrippsPack(){
+    public Entity getPrippsPack() {
         return game.getPrippsPack();
     }
 
-    public MapManager getMap(){
+    public MapManager getMap() {
         return this.map;
-    }
-
-    public void setSubmittedName(String submittedName) {
-        SubmittedName = submittedName;
     }
 
     public String getSubmittedName() {
         return SubmittedName;
     }
 
-    public void resetGame(){
+    public void setSubmittedName(String submittedName) {
+        SubmittedName = submittedName;
+    }
+
+    public void resetGame() {
         map.resetMap();
         game.deletePlayer();
         game.deleteEnemies();

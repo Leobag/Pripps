@@ -2,18 +2,19 @@ package com.company.model;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class Player extends Entity {
 
 
+    public final int hitBoxSize = 16;
     private int unitCounter, unitNum;
     private Double inputDirection;
-    public final int hitBoxSize = 16;
     private boolean dead = false;
 
 
-    public Player(){
+    public Player() {
         this.speed = 4;
         this.size = 0.5;
         this.unitCounter = 0;
@@ -21,15 +22,15 @@ public class Player extends Entity {
         this.setDirection("south");
     }
 
-    public void setMovementImages(){
+    public void setMovementImages() {
 
-        if(dead){
+        if (dead) {
             try {
-                this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/PlayerImages/realExplosion.png"));
-            }catch (IOException e){
+                this.unitImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Entities/PlayerImages/realExplosion.png")));
+            } catch (IOException e) {
                 System.out.println("cant find explosionIMG");
             }
-        }else {
+        } else {
             String tempDir = this.direction;
             if (this.unitCounter > 30) {
 
@@ -39,13 +40,13 @@ public class Player extends Entity {
                     this.unitNum = 1;
                 }
                 try {
-                    if (tempDir == "northEast" || tempDir == "southEast") {
+                    if (tempDir.equals("northEast") || tempDir.equals("southEast")) {
                         tempDir = "east";
-                    } else if (tempDir == "northWest" || tempDir == "southWest") {
+                    } else if (tempDir.equals("northWest") || tempDir.equals("southWest")) {
                         tempDir = "west";
                     }
 
-                    this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/PlayerImages/" + tempDir + Integer.toString(unitNum) + ".png"));
+                    this.unitImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Entities/PlayerImages/" + tempDir + unitNum + ".png")));
 
                 } catch (IOException e) {
                     System.out.println(e.getMessage());
@@ -56,16 +57,16 @@ public class Player extends Entity {
         }
     }
 
-    public double setPlayerX(Double deltaTime){
-        return (getPosition().x + Math.cos(getInputDirection()) * speed * deltaTime);
+    public double setPlayerX(Double deltaTime) {
+        return (getPosition().getX() + Math.cos(getInputDirection()) * speed * deltaTime);
     }
 
-    public double setPlayerY(Double deltaTime){
-        return (getPosition().y + Math.sin(getInputDirection()) * speed * deltaTime);
+    public double setPlayerY(Double deltaTime) {
+        return (getPosition().getY() + Math.sin(getInputDirection()) * speed * deltaTime);
     }
 
-    public void setStringDirection(Double inputDirection){
-        if(!(inputDirection == null)) {
+    public void setStringDirection(Double inputDirection) {
+        if (!(inputDirection == null)) {
             if (this.inputDirection == -1.5707963267948966) {
                 this.setDirection("north");
             } else if (this.inputDirection == 1.5707963267948966) {
@@ -86,19 +87,19 @@ public class Player extends Entity {
         }
     }
 
+    public Double getInputDirection() {
+        return this.inputDirection;
+    }
 
     public void setInputDirection(Double inputDirection) {
         this.inputDirection = inputDirection;
     }
-    public Double getInputDirection(){
-        return this.inputDirection;
+
+    public boolean getDead() {
+        return this.dead;
     }
 
     public void setDead(boolean dead) {
         this.dead = dead;
-    }
-
-    public boolean getDead(){
-        return this.dead;
     }
 }

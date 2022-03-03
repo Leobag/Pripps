@@ -13,6 +13,7 @@ public class PrippsView extends JPanel {
     TileManager t;
     WinView winView = new WinView();
 
+
     int[][] mapMatrix;
     final private int tileSize = 32;
     
@@ -148,4 +149,5 @@ public class PrippsView extends JPanel {
     public WinView getWinView(){
         return this.winView;
     }
+
 }

@@ -1,6 +1,7 @@
 package com.company.controller;
 
 import com.company.model.PrippsModel;
+import com.company.view.OptionsView;
 import com.company.view.PrippsView;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -20,6 +21,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     PrippsView view;
     PrippsModel model;
+
 
     private double inputUp;
     private double inputDown;
@@ -171,6 +173,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             System.exit(0);
         } if(e.getActionCommand().equals("submit")){
             model.setSubmittedName(view.getWinView().getSubmittedName().getText());
+        }
+        if(e.getActionCommand().equals("optionsButton")){
+            new OptionsView(clip);
         }
     }
 

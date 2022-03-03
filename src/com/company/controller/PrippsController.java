@@ -1,12 +1,15 @@
 package com.company.controller;
 
 import com.company.model.PrippsModel;
+import com.company.model.server.Client;
+import com.company.model.server.Server;
 import com.company.view.PrippsView;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.net.URL;
 
 
@@ -40,6 +43,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private PrippsController() {
         model = new PrippsModel();
         view = new PrippsView(model);
+        Server s = new Server();
         setLayout();
     }
 
@@ -80,6 +84,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/QuitButton.png")));
         quitButton.setContentAreaFilled(false);
         quitButton.setBorder(BorderFactory.createEmptyBorder());
+
+        view.getWinView().getSubmit().addActionListener(this);
 
         setVisible(true);
         musicPlayer();
@@ -173,7 +179,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         if (e.getActionCommand().equals("quitButton")) {
             System.exit(0);
         } if(e.getActionCommand().equals("submit")){
-            model.setSubmittedName(view.getWinView().getSubmittedName().getText());
+
+            model.enterHighScore( view.getWinView().getSubmittedName().getText(), 1);
             openStartPanel();
 
         }
@@ -191,7 +198,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private void openWinPanel(JPanel panel){
         getContentPane().removeAll();
         getContentPane().add(panel);
-        view.getWinView().getSubmit().addActionListener(this);
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);

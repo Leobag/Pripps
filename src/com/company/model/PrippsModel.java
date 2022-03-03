@@ -1,9 +1,11 @@
 package com.company.model;
 
 import com.company.model.TileData.TileManager;
-import com.company.model.MapManager;
+import com.company.model.server.Client;
+import com.company.model.server.Server;
 
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 
 public class PrippsModel {
@@ -13,6 +15,7 @@ public class PrippsModel {
     MapManager map;
     Fog fog;
     String SubmittedName;
+    Client client = new Client();
 
 
     public PrippsModel() {
@@ -59,6 +62,10 @@ public class PrippsModel {
     }
     public Player getPlayer() {
         return game.getPlayer();
+    }
+
+    public void enterHighScore(String name, int score) {
+        client.updateServerScore(name, score);
     }
 
     public Enemy[] getEnemyArr(){

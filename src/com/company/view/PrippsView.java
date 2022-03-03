@@ -39,7 +39,7 @@ public class PrippsView extends JPanel {
         drawPlayer(g);
         drawEnemies(g);
         drawPripps(g);
-        //drawFog(g);
+        drawFog(g);
 
     }
 

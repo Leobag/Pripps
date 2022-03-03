@@ -89,6 +89,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         musicPlayer();
     }
 
+    /** A method for playing the game menu music, using URL and Clip.
+     *
+     * @author Sebastian Sela
+     */
     public void musicPlayer() {
         URL lol = getClass().getResource("/Music/menumusic.wav");
 

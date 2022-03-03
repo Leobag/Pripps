@@ -5,16 +5,21 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
-/**
+/** A class that creates a frame when "OPTIONS" is pressed on the starting menu.
+ *
+ * @author Sebastian Sela
  *
  */
-
 public class OptionsView extends JFrame {
 
     JPanel optionsPanel;
     private boolean isMuted = false;
 
 
+    /** Class constructor
+     *
+     * @param clip Taking in clip with a sound file for the game menu.
+     */
     public OptionsView(Clip clip) {
         super.setLayout(new GridLayout(1, 3, 30, 10));
 

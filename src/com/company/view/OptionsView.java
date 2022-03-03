@@ -3,8 +3,6 @@ package com.company.view;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseListener;
 import java.awt.event.WindowEvent;
 
 /**
@@ -42,7 +40,7 @@ public class OptionsView extends JFrame {
             }
         });
         muteButton.setActionCommand("muteButton");
-        returnButton.addActionListener((event)->dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
+        returnButton.addActionListener((event) -> dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
 
         returnButton.setActionCommand("optionsButton");
         muteButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/mute.png")));

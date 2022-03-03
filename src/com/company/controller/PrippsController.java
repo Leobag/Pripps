@@ -3,12 +3,15 @@ package com.company.controller;
 import com.company.model.PrippsModel;
 import com.company.view.OptionsView;
 import com.company.view.PrippsView;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
 import java.net.URL;
+import java.util.Objects;
 
 
 public class PrippsController extends JFrame implements MouseListener, ActionListener, KeyListener {
@@ -21,6 +24,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     PrippsView view;
     PrippsModel model;
+    SaveData saveData;
 
 
     private double inputUp;
@@ -71,13 +75,13 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
 
-        playButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/PlayButton.png")));
+        playButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/PlayButton.png"))));
         playButton.setContentAreaFilled(false);
         playButton.setBorder(BorderFactory.createEmptyBorder());
-        optionsButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/OptionsButton.png")));
+        optionsButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/OptionsButton.png"))));
         optionsButton.setContentAreaFilled(false);
         optionsButton.setBorder(BorderFactory.createEmptyBorder());
-        quitButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/QuitButton.png")));
+        quitButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/QuitButton.png"))));
         quitButton.setContentAreaFilled(false);
         quitButton.setBorder(BorderFactory.createEmptyBorder());
 
@@ -131,6 +135,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     @Override
     public void keyPressed(KeyEvent e) {
+
         switch (e.getKeyCode()) {
 
             case KeyEvent.VK_W -> inputUp = 1;
@@ -138,6 +143,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             case KeyEvent.VK_S -> inputDown = 1;
             case KeyEvent.VK_D -> inputRight = 1;
             case KeyEvent.VK_ESCAPE -> gamePaused = !gamePaused;
+            case KeyEvent.VK_K -> saveGame();
+            case KeyEvent.VK_L -> loadGame();
         }
     }
 
@@ -171,15 +178,26 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
         if (e.getActionCommand().equals("quitButton")) {
             System.exit(0);
-        } if(e.getActionCommand().equals("submit")){
-            model.setSubmittedName(view.getWinView().getSubmittedName().getText());
         }
-        if(e.getActionCommand().equals("optionsButton")){
+        if (e.getActionCommand().equals("submit")) {
+            model.setSubmittedName(view.getWinView().getSubmittedName().getText());
+            openStartPanel();
+        }
+        if (e.getActionCommand().equals("optionsButton")) {
             new OptionsView(clip);
         }
     }
 
-    private void openWinPanel(JPanel panel){
+    private void openStartPanel() {
+        model.resetGame();
+        getContentPane().removeAll();
+        setSize(900, 700); //1360, 807 fungerar bra efter mapen men den använder pack() istället
+        getContentPane().add(mainPanel);
+        setLocationRelativeTo(null);
+
+    }
+
+    private void openWinPanel(JPanel panel) {
         Container contentPane = getContentPane();
         contentPane.removeAll();
         contentPane.add(panel);
@@ -187,6 +205,18 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
+
+    private void displayExplosion() {
+        model.getPlayer().setMovementImages();
+        repaint();
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            System.out.println("i cant sleep");
+        }
+
+
     }
 
     /**
@@ -204,21 +234,50 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             model.setInputDirection(Math.atan2(inputY, inputX));
         }
     }
-    private void startGameLoop(){
+
+    private void saveGame(){
+        saveData = new SaveData(model.getPlayer().getPosition(), model.getMap().getMapCounter());
+        try {
+            ResourceManager.save(saveData, "data.txt");
+            System.out.println("Game successfully saved");
+        } catch (IOException | NullPointerException saveException) {
+            System.out.println("Couldn't save: " + saveException.getMessage());
+        }
+    }
+
+    private void loadGame(){
+        try {
+            saveData = (SaveData) ResourceManager.load("data.txt");
+            model.getPlayer().setPosition(saveData.getPosition().getX(), saveData.getPosition().getY());
+            model.getMap().setMapCounter(saveData.getMapCounter());
+            model.getMap().loadMap(model.getCurrentMap());
+            System.out.println("Game successfully loaded");
+        } catch (IOException | ClassNotFoundException | NullPointerException loadException) {
+            System.out.println("Couldn't load: " + loadException.getMessage());
+        }
+    }
+
+    private void startGameLoop() {
         new Thread(() -> {
             previousTimeMillis = System.currentTimeMillis();
             while (true) {
                 currentTimeMillis = System.currentTimeMillis();
+
                 handleInput();
                 if (!gamePaused) {
                     model.update((currentTimeMillis - previousTimeMillis) / 1000d);
                 }
                 repaint();
                 previousTimeMillis = currentTimeMillis;
-                if(model.winCondition()){
+                if (model.winCondition()) {
                     openWinPanel(view.getWinView());
                     break;
+                } else if (model.getPlayer().getDead()) {
+                    displayExplosion();
+                    openStartPanel();
+                    break;
                 }
+
             }
         }).start();
     }

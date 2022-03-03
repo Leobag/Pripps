@@ -2,7 +2,6 @@ package com.company.model;
 
 import com.company.model.TileData.TileManager;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -12,15 +11,13 @@ public class MapManager {
 
     final private int maxScreenCol = 42;
     final private int maxScreenRow = 24;
-
-    int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
-
-    TileManager tile;
     final private String[] mapNames = {"/Maps/map01.txt", "/Maps/map02.txt", "/Maps/map03.txt"};
+    int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
+    TileManager tile;
     private int mapCounter = 0;
     private int[] startingPositions = new int[2];
 
-    public MapManager(){
+    public MapManager() {
         tile = new TileManager();
 
         loadMap(mapNames[this.mapCounter]);
@@ -31,16 +28,16 @@ public class MapManager {
         return this.mapNames[mapCounter];
     }
 
-    public void loadCurrentMap(){
+    public void loadCurrentMap() {
         loadMap(mapNames[mapCounter]);
     }
 
-    public void setStartingPositions(int x, int y){
+    public void setStartingPositions(int x, int y) {
         this.startingPositions[0] = x;
         this.startingPositions[1] = y;
     }
 
-    public int[] getStartingPositions(){
+    public int[] getStartingPositions() {
         return this.startingPositions;
     }
 
@@ -59,22 +56,25 @@ public class MapManager {
 
     }
 
-    public int getMapCounter(){
+    public int getMapCounter() {
         return this.mapCounter;
     }
 
-    public void nextMap(){
+    public void setMapCounter(int mapCounter) {
+        this.mapCounter = mapCounter;
+    }
+
+    public void nextMap() {
         this.incrementMap();
         this.loadMap(this.mapNames[this.getMapCounter()]);
 
     }
 
-    public TileManager getTiles(){
+    public TileManager getTiles() {
         return this.tile;
     }
 
-
-    public int [][] getMapMatrix(){
+    public int[][] getMapMatrix() {
         return this.mapTileMatrix;
     }
 
@@ -112,7 +112,7 @@ public class MapManager {
         }
     }
 
-    public void resetMap(){
+    public void resetMap() {
         mapCounter = 0;
     }
 

@@ -8,25 +8,23 @@ import java.awt.*;
 
 public class PrippsView extends JPanel {
 
+    final private int tileSize = 32;
     PrippsModel model;
     String mapName;
     TileManager t;
     WinView winView = new WinView();
-
-
     int[][] mapMatrix;
-    final private int tileSize = 32;
-    
+
     public PrippsView(PrippsModel model) {
         this.model = model;
         t = model.getTile();
         mapName = model.getCurrentMap();
 
         mapMatrix = model.getMatrix();
-        
+
         final int screenWidth = tileSize * model.getMaxCol();
         final int screenHeight = tileSize * model.getMaxRow();
-        
+
         setPreferredSize(new Dimension(screenWidth, screenHeight));
     }
 
@@ -46,31 +44,31 @@ public class PrippsView extends JPanel {
 
     /**
      * draws player
-     * @param g
-     * - Max Yoorkevich
+     *
+     * @param g - Max Yoorkevich
      */
     void drawPlayer(Graphics g) {
-        var x = (int) (model.getPlayer().getPosition().x * tileSize);
-        var y = (int) (model.getPlayer().getPosition().y * tileSize);
+        var x = (int) (model.getPlayer().getPosition().getX() * tileSize);
+        var y = (int) (model.getPlayer().getPosition().getY() * tileSize);
         var size = (int) Math.round(model.getPlayer().getSize() * tileSize);
 
-        g.drawImage(model.getPlayerImage(), x - 5,y - 5, size + 10, size + 10, null);
+        g.drawImage(model.getPlayerImage(), x - 5, y - 5, size + 10, size + 10, null);
     }
 
     void drawEnemies(Graphics g) {
 
-        for(int i = 0; i < model.getEnemyArr().length; i++){
-            var x = (int) Math.round(model.getEnemyArr()[i].getPosition().x * tileSize);
-            var y = (int) Math.round(model.getEnemyArr()[i].getPosition().y * tileSize);
+        for (int i = 0; i < model.getEnemyArr().length; i++) {
+            var x = (int) Math.round(model.getEnemyArr()[i].getPosition().getX() * tileSize);
+            var y = (int) Math.round(model.getEnemyArr()[i].getPosition().getY() * tileSize);
             var size = (int) Math.round(model.getEnemyArr()[i].getSize() * tileSize);
 
-            g.drawImage(model.getEnemyArr()[i].getUnitImage(), x - 5,y - 5, size + 10, size + 10, null);
+            g.drawImage(model.getEnemyArr()[i].getUnitImage(), x - 5, y - 5, size + 10, size + 10, null);
         }
     }
 
     void drawFog(Graphics g) {
 
-        if(model.getPlayer() == null) return;
+        if (model.getPlayer() == null) return;
 
         g.fillRect(model.getFog().getFogSquares()[0].x, model.getFog().getFogSquares()[0].y,
                 model.getFog().getFogSquares()[0].width, model.getFog().getFogSquares()[0].height);
@@ -85,38 +83,41 @@ public class PrippsView extends JPanel {
                 model.getFog().getFogSquares()[3].width, model.getFog().getFogSquares()[3].height);
 
 
-
-        switch (model.getPlayer().getDirection()){
-            case "north" : {
+        switch (model.getPlayer().getDirection()) {
+            case "north": {
                 g.fillArc(model.getFog().getFogSquares()[4].x - 32 * 5 - 8, model.getFog().getFogSquares()[4].y - 32 * 4 - 16,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 135, 270);
-            } break;
-            case "south" : {
-                g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 5 - 8, model.getFog().getFogSquares()[4].y  - 32 * 6,
+            }
+            break;
+            case "south": {
+                g.fillArc(model.getFog().getFogSquares()[4].x - 32 * 5 - 8, model.getFog().getFogSquares()[4].y - 32 * 6,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 225, -270);
 
-            } break;
-            case "east" :
-            case "southEast" :
-            case "northEast" : {
-                g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 6, model.getFog().getFogSquares()[4].y  - 32 * 5 - 8,
+            }
+            break;
+            case "east":
+            case "southEast":
+            case "northEast": {
+                g.fillArc(model.getFog().getFogSquares()[4].x - 32 * 6, model.getFog().getFogSquares()[4].y - 32 * 5 - 8,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 45, 270);
 
-            } break;
-            case "west" :
-            case "northWest" :
-            case "southWest" : {
-                g.fillArc(model.getFog().getFogSquares()[4].x  - 32 * 4 - 16 , model.getFog().getFogSquares()[4].y  - 32 * 5 - 8,
+            }
+            break;
+            case "west":
+            case "northWest":
+            case "southWest": {
+                g.fillArc(model.getFog().getFogSquares()[4].x - 32 * 4 - 16, model.getFog().getFogSquares()[4].y - 32 * 5 - 8,
                         model.getFog().getFogSquares()[4].width, model.getFog().getFogSquares()[4].height, 135, -270);
-            } break;
+            }
+            break;
         }
 
     }
 
     void drawPripps(Graphics g) {
-        if(model.getMap().getMapCounter() == 2) {
-            var x = (int) (model.getPrippsPack().getPosition().x * tileSize);
-            var y = (int) (model.getPrippsPack().getPosition().y * tileSize);
+        if (model.getMap().getMapCounter() == 2) {
+            var x = (int) (model.getPrippsPack().getPosition().getX() * tileSize);
+            var y = (int) (model.getPrippsPack().getPosition().getY() * tileSize);
             var size = (int) Math.round(model.getPrippsPack().getSize() * tileSize);
 
             g.drawImage(model.getPrippsPack().unitImage, x - 15, y - 15, size + 64, size + 64, null);
@@ -146,7 +147,7 @@ public class PrippsView extends JPanel {
         }
     }
 
-    public WinView getWinView(){
+    public WinView getWinView() {
         return this.winView;
     }
 

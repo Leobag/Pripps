@@ -4,7 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 
 
-
 public class WinView extends JPanel {
 
     JButton submit;
@@ -12,7 +11,7 @@ public class WinView extends JPanel {
 
     public WinView() {
 
-        setSize(900,700);
+        setSize(900, 700);
         setLayout(new GridLayout(3, 1, 10, 10));
         JLabel winMessage = new JLabel("Congratz to your pripps, you won the game");
         JLabel namePlease = new JLabel("Please enter your name to add your time");
@@ -32,7 +31,7 @@ public class WinView extends JPanel {
         return submit;
     }
 
-    public JTextField getSubmittedName(){
+    public JTextField getSubmittedName() {
         return name;
     }
 }

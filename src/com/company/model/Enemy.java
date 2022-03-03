@@ -1,9 +1,8 @@
 package com.company.model;
 
-import com.company.model.Entity;
-
 import javax.imageio.ImageIO;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Enemy extends Entity {
 
@@ -11,7 +10,7 @@ public class Enemy extends Entity {
     public int unitCounter, unitNum;
     public String oldDir;
 
-    public Enemy(){
+    public Enemy() {
         this.unitCounter = 0;
         this.unitNum = 1;
         this.speed = 2;
@@ -25,12 +24,12 @@ public class Enemy extends Entity {
             oldDir = tempDir;
 
             try {
-                if (tempDir == "northEast" || tempDir == "southEast") {
+                if (tempDir.equals("northEast") || tempDir.equals("southEast")) {
                     tempDir = "east";
-                } else if (tempDir == "northWest" || tempDir == "southWest") {
+                } else if (tempDir.equals("northWest") || tempDir.equals("southWest")) {
                     tempDir = "west";
                 }
-                this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/" + directory + "/" + tempDir + Integer.toString(unitNum) + ".png"));
+                this.unitImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Entities/" + directory + "/" + tempDir + unitNum + ".png")));
 
             } catch (IOException e) {
                 System.out.println(e.getMessage());

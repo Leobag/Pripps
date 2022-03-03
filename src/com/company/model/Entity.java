@@ -3,10 +3,11 @@ package com.company.model;
 import java.awt.*;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.Serializable;
 
 
-public class Entity {
-    public Point2D.Double position;
+public class Entity implements Serializable{
+    public Position position;
     public double size;
     public double speed;
     public boolean collisionOn = false;
@@ -19,12 +20,12 @@ public class Entity {
         return size;
     }
 
-    public Point2D.Double getPosition() {
+    public Position getPosition() {
         return position;
     }
 
     public void setPosition(double x, double y) {
-        this.position = new Point2D.Double(x, y);
+        this.position = new Position(x, y);
     }
 
     public void setDirection(String direction) {

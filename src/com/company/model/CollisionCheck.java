@@ -8,6 +8,20 @@ public class CollisionCheck {
         this.game = game;
     }
 
+    /**
+     * Takes the player position and sets each end of its hitbox as a variable.
+     *
+     * Places the variables inside the tile map and checks + 0.5 pixels ahead.
+     * Discovers all the aspects of the tile 0.5 pixels ahead, mainly collision
+     * in respective direction.
+     *
+     * The function is also used to detect if the player has entered a tile with next map condition.
+     * If this is true, the new map is loaded, the new enemies are spawned and the winCondition is
+     * placed out if it is the final map.
+     *
+     * @param entity - the object which collision is checked for against tiles.
+     */
+
     public void isCollison(Entity entity) {
 
         double doubleLeftSideX = entity.getPosition().getX();
@@ -90,7 +104,7 @@ public class CollisionCheck {
                 topY = (int) ((doubleTopY * 32 - 0.5) / 32);
                 tileNum1 = tileMap[leftSideX][topY];
                 tileNum2 = tileMap[rightSideX][topY];
-                rightSideX = (int) ((doubleRightSideX * 32 + 0.1) / 32);
+                rightSideX = (int) ((doubleRightSideX * 32 + 0.5) / 32);
                 topY = (int) doubleTopY;
                 tileNum3 = tileMap[rightSideX][botY];
                 tileNum4 = tileMap[rightSideX][topY];

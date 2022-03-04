@@ -14,6 +14,13 @@ public class Fog {
 
     }
 
+    /**
+     * Calculates the size of the Rectangles used to draw Fog of war surrounding the player.
+     * Does so by checking where the player is and where the end of the map is in respective direction.
+     *
+     * @return - returns an array of Rectangles.
+     * - Emil Berzelius
+     */
     public Rectangle[] getFogSquares() {
         Rectangle[] fogSquares = new Rectangle[5];
 

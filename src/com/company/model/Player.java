@@ -22,6 +22,11 @@ public class Player extends Entity {
         this.setDirection("south");
     }
 
+    /**
+     * Load and set PNG-file for player depending on direction. Sets a new image each update
+     * cycle creating a "walk looking" effect.
+     * - Emil berzelius
+     */
     public void setMovementImages() {
 
         if (dead) {
@@ -65,6 +70,12 @@ public class Player extends Entity {
         return (getPosition().getY() + Math.sin(getInputDirection()) * speed * deltaTime);
     }
 
+    /**
+     * Sets the sting direction associated with the angle in radians.
+     *
+     * @param inputDirection - The angle of the direction according to the unit circle.
+     * - Emil Berzelius
+     */
     public void setStringDirection(Double inputDirection) {
         if (!(inputDirection == null)) {
             if (this.inputDirection == -1.5707963267948966) {

@@ -7,7 +7,7 @@ import java.io.Serializable;
 
 
 public class Entity implements Serializable{
-    public Position position;
+    private Position position;
     public double size;
     public double speed;
     public boolean collisionOn = false;
@@ -52,6 +52,14 @@ public class Entity implements Serializable{
     public BufferedImage getUnitImage(){
         return this.unitImage;
     }
+
+    /**
+     * Updates the hitbox of the player.
+     *
+     * @param x - X-coordinate of top left corner of hitbox.
+     * @param y - Y-coordinate of top left corner of hitbox.
+     * @param size - the width and height of hitbox.
+     */
 
     public void updateHitBox(int x, int y, int size){
         this.hitBox.x = x;

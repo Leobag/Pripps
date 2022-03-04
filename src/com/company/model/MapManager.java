@@ -28,6 +28,9 @@ public class MapManager {
         return this.mapNames[mapCounter];
     }
 
+    /**
+     * Initializes the map according to map number.
+     */
     public void loadCurrentMap() {
         loadMap(mapNames[mapCounter]);
     }
@@ -64,6 +67,9 @@ public class MapManager {
         this.mapCounter = mapCounter;
     }
 
+    /**
+     * Incrementing map number by one and initializing the new map.
+     */
     public void nextMap() {
         this.incrementMap();
         this.loadMap(this.mapNames[this.getMapCounter()]);
@@ -78,6 +84,13 @@ public class MapManager {
         return this.mapTileMatrix;
     }
 
+    /**
+     * reads the .txt file containing the map information for mapMatrix.
+     * Reads the file line by line and at every " " it splits the array and puts the previous
+     * number in a variable and then into the appropriate position in the mapMatrix.
+     *
+     * @param mapName - current map.
+     */
     public void loadMap(String mapName) {
         try {
             InputStream is = getClass().getResourceAsStream(mapName);

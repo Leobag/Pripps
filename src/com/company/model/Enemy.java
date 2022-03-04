@@ -19,6 +19,12 @@ public class Enemy extends Entity {
         changeDirection();
     }
 
+    /**
+     * Load the PNG-file and set images for enemies.
+     *
+     * @param directory - the directory holding the png files.
+     */
+
     public void setEnemyImages(String directory) {
 
         String tempDir = this.direction;
@@ -39,15 +45,30 @@ public class Enemy extends Entity {
         }
     }
 
+    /**
+     * generates a random number used in switch case to change direction of enemies.
+     *
+     * @return - returns a random number between 1-8.
+     */
+
     private int randomNumberOneToEight() {
         return (int) ((Math.random() * (7) + 1));
     }
 
+    /**
+     * Changes the direction to a new random one.
+     *
+     */
     public void changeDirection(){
         this.movementDirection = setEnemyDirection(randomNumberOneToEight());
         setStringDirection(this.movementDirection);
     }
 
+    /**
+     * Translates the direction fron radians to strings used for switch case statements in
+     * CollisionCheck.
+     * @param movementDirection - the angle of the direction in radians.
+     */
     public void setStringDirection(Double movementDirection){
         if(!(movementDirection == null)) {
             if (this.movementDirection == -1.5707963267948966) {
@@ -70,6 +91,14 @@ public class Enemy extends Entity {
         }
     }
 
+    /**
+     * Sets radian angle of the enemy according to the random number generated.
+     *
+     * @param enemyDirectionNumber - A random number between 1-8 to decide the direction.
+     *
+     * @return - returns the angle in radians which the enemy is to move.
+     *
+     */
     public double setEnemyDirection(int enemyDirectionNumber){
         switch (enemyDirectionNumber) {
             case 1 -> {
@@ -95,15 +124,6 @@ public class Enemy extends Entity {
             }
             case 8 -> {
                 return 0.7853981633974483;
-
-//            case 1 -> enemyDirection = 0.0;
-//            case 2 -> enemyDirection = -0.7853981633974483;
-//            case 3 -> enemyDirection = -1.5707963267948966;
-//            case 4 -> enemyDirection = -2.356194490192345;
-//            case 5 -> enemyDirection = 3.141592653589793;
-//            case 6 -> enemyDirection = 2.356194490192345;
-//            case 7 -> enemyDirection = 1.5707963267948966;
-//            case 8 -> enemyDirection = 0.7853981633974483;
             }
         }
         throw new IllegalStateException();

@@ -15,7 +15,11 @@ public class TileManager {
         setTileImage();
     }
 
-    //TODO: kan sättas som enum i stället
+    /**
+     * Load the PNG-files of the tiles and associates them with their respective number.
+     * Set conditions for tiles i.e. collision and nextMap which is discovered by entities.
+     * - Emil Berzelius
+     */
     public void setTileImage() {
 
         setImage(tile, "/Images/Tiles/GrassTile.png", 0);
@@ -27,6 +31,14 @@ public class TileManager {
     }
 
 
+    /**
+     * Function to simplify adding new tiles.
+     *
+     * @param tile - The array of tiles.
+     * @param imgname - Source path to image.
+     * @param TileNumber - The tile number associated with the tile.
+     * - Emil Berzelius
+     */
 
     private void setImage(Tile[] tile, String imgname, int TileNumber) {
 
@@ -37,7 +49,7 @@ public class TileManager {
                 tile[TileNumber].setCollision(true);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println("Could not find tileImage" + e.getMessage());
         }
     }
 }

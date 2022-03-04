@@ -6,6 +6,11 @@ import java.util.Random;
 public class EnemyManager {
     Enemy[] enemyArray;
 
+    /**
+     * Creates enemy objects in array style and initializes positions.
+     *
+     * @param mapCounter - the current map.
+     */
     public void createEnemies(int mapCounter) {
 
         switch (mapCounter) {
@@ -54,6 +59,9 @@ public class EnemyManager {
         return enemyArray;
     }
 
+    /**
+     * Updates hitboxes used to detect collision with player.
+     */
     public void updateEnemyHitboxes() {
         for (Enemy enemy : enemyArray) {
             enemy.updateHitBox(
@@ -64,12 +72,12 @@ public class EnemyManager {
 
     }
 
+    /**
+     * Updates images of enemies.
+     */
     public void setPutinMovmentIMG() {
         for (int i = 0; i < enemyArray.length; i++) {
             enemyArray[i].setEnemyImages("putinFaces");
         }
-    }
-    public double randomDirection(){
-        return ((Math.random() * (Math.PI - -Math.PI) - Math.PI));
     }
 }

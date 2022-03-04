@@ -47,6 +47,12 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         setLayout();
     }
 
+    /**
+     * Sets the initial Layout of the game menu and sets listeners on all the buttons of the game.
+     * This is done through creating the JPanel mainPanel and attaching the buttons to it.
+     * The mainPanel is then reused if the player dies or completes the game.
+     * - Emil Berzelius
+     */
     private void setLayout() {
         super.setLayout(new GridLayout(1, 3, 10, 10));
 
@@ -138,6 +144,14 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     }
 
+    /**
+     * Listens for a key to be pressed and sets input variables to calculate
+     * movement directions with radians.
+     *
+     * Uses Key ESCAPE to pause game, K to save and L to load a saved game.
+     *
+     * @param e - the KeyEvent detected.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -153,6 +167,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
     }
 
+    /**
+     * Sets input variables again to calculate movement direction.
+     * @param e - KeyEvent detected.
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -164,8 +182,15 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     }
 
     /**
-     * Game loop after playbutton is pressed. Loop reads inputs, updates player and repaints
+     * Discovers if buttons in our starting menu are pressed.
+     * If the playButton is pressed the current JPanel is removed and our game View
+     * is added to the JFrame instead as well as starting the game loop.
+     *
+     * The submit JButton is used to submit a name when completing the game.
+     * When communicated to the server the mainPanel is placed upon the JFrame again.
+     *
      * - Max Yoorkevich
+     * - Emil Berzelius
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -193,6 +218,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
     }
 
+    /**
+     * Opens the starting panel, mainPanel.
+     */
     private void openStartPanel() {
         model.resetGame();
         getContentPane().removeAll();
@@ -202,6 +230,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     }
 
+    /**
+     * Sets the winning panel on the JFrame.
+     * @param panel
+     */
     private void openWinPanel(JPanel panel){
         getContentPane().removeAll();
         getContentPane().add(panel);
@@ -210,6 +242,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         setVisible(true);
     }
 
+    /**
+     * repaints the player a final time, setting the player image instead to an explosion.
+     * Then pauses the thread for one second so the user may see the high quality graphics.
+     */
     private void displayExplosion() {
         model.getPlayer().setMovementImages();
         repaint();

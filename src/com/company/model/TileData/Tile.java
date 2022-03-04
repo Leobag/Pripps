@@ -5,7 +5,9 @@ import java.awt.image.BufferedImage;
 
 
 public class Tile {
-
+    /**
+     * The tile class hold the tile image as well as conditions unique for the tile number.
+     */
     public BufferedImage image;
     private boolean collision = false;
     private boolean nextMap = false;
@@ -17,7 +19,6 @@ public class Tile {
     public void setCollision(boolean collision){
         this.collision = collision;
     }
-
 
     public void setNextMapBool(boolean nextMap){
         this.nextMap = nextMap;

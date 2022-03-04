@@ -7,7 +7,14 @@ import java.awt.image.BufferedImage;
 
 
 public class PrippsModel {
-
+    /**
+     * PrippsModel is a centralized model which facilitates communication
+     * with all other classes in the model packet.
+     *
+     * Prippsmodel mostly consist of getters and setters of key values and
+     * necessary objects.
+     *
+     */
 
     Game game;
     MapManager map;

@@ -9,10 +9,18 @@ public class WinManager {
 
     Entity prippsPack = new Entity();
 
+    /**
+     * initializes the winning condition object.
+     */
     public WinManager() {
         prippsPack.setPosition(3, 7);
     }
 
+    /**
+     * Load the PNG-file and it according to position.
+     * Updates hitbox used to detect collision with player.
+     * @param mapCounter - the current map used to decide if the PrippsPack should be spawned.
+     */
     public void winCondition(int mapCounter) {
         try {
             prippsPack.unitImage = ImageIO.read(Objects.requireNonNull(getClass().getResourceAsStream("/Entities/pripps6pack.png")));

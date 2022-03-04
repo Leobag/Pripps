@@ -18,6 +18,10 @@ public class Game {
 
     }
 
+    /**
+     * Creates the player and initializes its position, hitbox and image.
+     */
+
     public void spawnPlayer() {
 
         player = new Player();
@@ -36,7 +40,16 @@ public class Game {
     }
 
     /**
-     * Calculates and sets next position for player, returns if no inputDirection
+     * Calculates next position for player, returns if no inputDirection.
+     *
+     * Checks if collision is detected between a collision tile and the player
+     *
+     * Updates player hitbox which discovers collision with other objects i.e. enemies
+     * and winning condition-object PrippsPack.
+     *
+     * Updates player images depending on current direction
+     *
+     * Checks if collison is detected and if not it sets the player position
      *
      * @param deltaTime currentTimeMillis - previousTimeMillis in game loop in controller
      *                  - Max Yoorkevich
@@ -59,6 +72,19 @@ public class Game {
             }
         }
 
+    /**
+     * Updates the enemy hitbox used to detect collision with player.
+     *
+     * Calculates next position for each enemy currently spawned on the map.
+     *
+     * Update images for enemies.
+     *
+     * Sets new position if no collision is detected, otherwise sets a new random direction.
+     *
+     * Checks if collision is detected.
+     *
+     * @param deltaTime - currentTimeMillis - previousTimeMillis in game loop in controller
+     */
 
     public void moveEnemies(double deltaTime) {
         enemyManager.updateEnemyHitboxes();
@@ -72,7 +98,7 @@ public class Game {
             collisionCheck.isCollison(enemy);
             enemyManager.setPutinMovmentIMG();
 
-            if (!enemy.isCollisionOn()) {
+            if (!enemy.isCollisionOn() && !enemyCollision()) {
                 enemy.setPosition(x, y);
             } else {
                 enemy.changeDirection();
@@ -80,6 +106,13 @@ public class Game {
         }
     }
 
+    /**
+     * checks if player hitbox has intersected enemy hitbox.
+     *
+     * sets boolean variable in player @dead to true if collision is detected.
+     *
+     * @return - returns boolean true or false if player hitbox has intersected enemy hitbox.
+     */
     private boolean enemyCollision() {
         for (Enemy enemy : enemies) {
             if (player.getHitBox().intersects(enemy.getHitBox())) {
@@ -93,6 +126,8 @@ public class Game {
     /**
      * updates player position
      *
+     * updates enemy positions.
+     *
      * @param deltaTime difference in time every game-loop, for smoother fps and as much fps as possible
      *                  - Max Yoorkevich
      */
@@ -102,8 +137,9 @@ public class Game {
     }
 
     /**
-     * set direction for player using radians (movement is inverted compared to the standard unit circle)
+     * set direction for player using radians (movement is inverted compared to the standard unit circle).
      *
+     * set string direction, e.g. south for player used for switch case functions.
      * @param inputDirection
      * - Max Yoorkevich
      */
@@ -121,10 +157,18 @@ public class Game {
         this.player = null;
     }
 
+
+    /**
+     * Resets the winning condition to not be met.
+     */
     public void resetWin() {
         win = false;
     }
 
+    /**
+     * Sets all enemies to null that are no longer used.
+     * Questionable if this is needed
+     */
     public void deleteEnemies() {
         for (Enemy enemy : enemies) {
             enemy = null;

@@ -15,6 +15,11 @@ public class PrippsView extends JPanel {
     WinView winView = new WinView();
     int[][] mapMatrix;
 
+    /**
+     * Sets the screen size according to the map size.
+     * @param model- uses model to reach all components drawn.
+     * - Emil Berzelius
+     */
     public PrippsView(PrippsModel model) {
         this.model = model;
         t = model.getTile();
@@ -29,7 +34,12 @@ public class PrippsView extends JPanel {
         setBackground(Color.BLACK);
     }
 
-
+    /**
+     * The main paiting function used to draw all components of the game.
+     *
+     * @param g - Graphics object used by repaint.
+     * - Emil Berzelius
+     */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
 
@@ -42,13 +52,13 @@ public class PrippsView extends JPanel {
         drawPlayer(g);
         drawEnemies(g);
         drawPripps(g);
-        drawFog(g);
+        //drawFog(g);
 
     }
 
     /**
-     * draws player
-     * @param g
+     * Draws player according to position
+     * @param g - draw object used to draw player.
      * - Max Yoorkevich
      */
     void drawPlayer(Graphics g) {
@@ -59,6 +69,12 @@ public class PrippsView extends JPanel {
         g.drawImage(model.getPlayerImage(), x - 5, y - 5, size + 10, size + 10, null);
     }
 
+    /**
+     * Draws enemies according to position.
+     *
+     * @param g - draw object used to draw enemies.
+     * - Emil Berzelius
+     */
     void drawEnemies(Graphics g) {
 
         for (int i = 0; i < model.getEnemyArr().length; i++) {
@@ -70,6 +86,14 @@ public class PrippsView extends JPanel {
         }
     }
 
+    /**
+     * Fog object calculates 5 rectangles surrounding the player. 4 of them is always drawn as black rectangles
+     * the fifth one is drawn as a black arc surrounding the player making only a small triangle of the map
+     * visible to the player.
+     *
+     * @param g - draw object used to draw Fog of War.
+     * - Emil Berzelius
+     */
     void drawFog(Graphics g) {
 
         if (model.getPlayer() == null) return;
@@ -118,6 +142,12 @@ public class PrippsView extends JPanel {
 
     }
 
+    /**
+     * Draws PrippsPack if the final map is reached.
+     *
+     * @param g - draw object used to draw the winning condition PrippsPack
+     * - Emil Berzelius
+     */
     void drawPripps(Graphics g) {
         if (model.getMap().getMapCounter() == 2) {
             var x = (int) (model.getPrippsPack().getPosition().getX() * tileSize);
@@ -127,6 +157,12 @@ public class PrippsView extends JPanel {
             g.drawImage(model.getPrippsPack().unitImage, x - 15, y - 15, size + 64, size + 64, null);
         }
     }
+
+    /**
+     * Acquires the mapMatrix and paints it according to tile numbers.
+     * @param g2D - draw object used to paint the map.
+     * - Emil Berzelius
+     */
 
     public void drawMap(Graphics2D g2D) {
         int col = 0;

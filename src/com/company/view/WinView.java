@@ -9,6 +9,10 @@ public class WinView extends JPanel {
     JButton submit;
     JTextField name;
 
+    /**
+     * Creates the view, which is a JPanel displayed when the user has won the game.
+     * Used to acquire the name of the player, so it may be added to the server.
+     */
     public WinView() {
 
         setSize(900, 700);

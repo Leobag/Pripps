@@ -254,6 +254,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             model.getPlayer().setPosition(saveData.getPosition().getX(), saveData.getPosition().getY());
             model.getMap().setMapCounter(saveData.getMapCounter());
             model.getMap().loadMap(model.getCurrentMap());
+            model.getPlayer().updateHitBox((int)(saveData.getPosition().getX() * 32), (int)(saveData.getPosition().getY() * 32), 16);
             System.out.println("Game successfully loaded");
         } catch (IOException | ClassNotFoundException | NullPointerException loadException) {
             System.out.println("Couldn't load: " + loadException.getMessage());

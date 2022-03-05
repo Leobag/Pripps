@@ -28,6 +28,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     PrippsView view;
     PrippsModel model;
     SaveData saveData;
+    OptionsView optionsView;
 
 
     private double inputUp;
@@ -105,26 +106,14 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      * @author Sebastian Sela
      */
     public void musicPlayer() {
-        URL menuMusic = getClass().getResource("/Music/menumusic.wav");
 
         try {
             menuClip = AudioSystem.getClip();
-            menuClip.open(AudioSystem.getAudioInputStream(menuMusic));
+            menuClip.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/putin.wav"))));
             menuClip.start();
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
             audioException.printStackTrace();
-        }
-    }
-
-    public void musicPlayerGame(){
-        try {
-            gameClip = AudioSystem.getClip();
-            gameClip.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/putin.wav"))));
-            gameClip.start();
-
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException musicException) {
-            musicException.printStackTrace();
         }
     }
 
@@ -209,8 +198,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("playButton")) {
-            menuClip.stop();
-            musicPlayerGame();
             Container contentPane = getContentPane();
             contentPane.removeAll();
             contentPane.add(view);
@@ -229,7 +216,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             openStartPanel();
         }
         if (e.getActionCommand().equals("optionsButton")) {
-            new OptionsView(menuClip);
+            optionsView = new OptionsView(menuClip);
         }
     }
 

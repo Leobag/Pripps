@@ -60,5 +60,7 @@ public class OptionsView extends JFrame {
 
     }
 
-
+    public boolean isMuted() {
+        return isMuted;
+    }
 }

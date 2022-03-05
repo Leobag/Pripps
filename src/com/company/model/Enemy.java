@@ -37,7 +37,7 @@ public class Enemy extends Entity {
                 } else if (tempDir.equals("northWest") || tempDir.equals("southWest")) {
                     tempDir = "west";
                 }
-                this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/" + directory + "/" + "pxArt" + ".png"));
+                this.unitImage = ImageIO.read(getClass().getResourceAsStream("/Entities/" + directory + "/" + tempDir + ".png"));
 
             } catch (IOException e) {
                 System.out.println(e.getMessage());

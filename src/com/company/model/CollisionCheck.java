@@ -41,7 +41,7 @@ public class CollisionCheck {
 
         switch (entity.getDirection()) {
             case "north" -> {
-                topY = (int) ((doubleTopY * 32 - 0.5) / 32);
+                topY = (int) ((doubleTopY * 32 - 1) / 32);
                 tileNum1 = tileMap[leftSideX][topY];
                 tileNum2 = tileMap[rightSideX][topY];
 
@@ -57,7 +57,7 @@ public class CollisionCheck {
                 }
             }
             case "south" -> {
-                botY = (int) ((doubleBotY * 32 + 0.5) / 32);
+                botY = (int) ((doubleBotY * 32 + 1) / 32);
                 tileNum1 = tileMap[leftSideX][botY];
                 tileNum2 = tileMap[rightSideX][botY];
 
@@ -71,7 +71,7 @@ public class CollisionCheck {
                 }
             }
             case "west" -> {
-                leftSideX = (int) ((doubleLeftSideX * 32 - 0.5) / 32);
+                leftSideX = (int) ((doubleLeftSideX * 32 - 1) / 32);
                 tileNum1 = tileMap[leftSideX][botY];
                 tileNum2 = tileMap[leftSideX][topY];
 
@@ -86,7 +86,7 @@ public class CollisionCheck {
                 }
             }
             case "east" -> {
-                rightSideX = (int) ((doubleRightSideX * 32 + 0.5) / 32);
+                rightSideX = (int) ((doubleRightSideX * 32 + 1) / 32);
                 tileNum1 = tileMap[rightSideX][botY];
                 tileNum2 = tileMap[rightSideX][topY];
                 if (game.map.getTiles().tile[tileNum1].getCollision() || game.map.getTiles().tile[tileNum2].getCollision()) {
@@ -101,10 +101,10 @@ public class CollisionCheck {
             }
 
             case "northEast" -> {
-                topY = (int) ((doubleTopY * 32 - 0.5) / 32);
+                topY = (int) ((doubleTopY * 32 - 1) / 32);
                 tileNum1 = tileMap[leftSideX][topY];
                 tileNum2 = tileMap[rightSideX][topY];
-                rightSideX = (int) ((doubleRightSideX * 32 + 0.5) / 32);
+                rightSideX = (int) ((doubleRightSideX * 32 + 1) / 32);
                 topY = (int) doubleTopY;
                 tileNum3 = tileMap[rightSideX][botY];
                 tileNum4 = tileMap[rightSideX][topY];
@@ -120,10 +120,10 @@ public class CollisionCheck {
                 }
             }
             case "southEast" -> {
-                botY = (int) ((doubleBotY * 32 + 0.5) / 32);
+                botY = (int) ((doubleBotY * 32 + 1) / 32);
                 tileNum1 = tileMap[leftSideX][botY];
                 tileNum2 = tileMap[rightSideX][botY];
-                rightSideX = (int) ((doubleRightSideX * 32 + 0.5) / 32);
+                rightSideX = (int) ((doubleRightSideX * 32 + 1) / 32);
                 botY = (int) doubleBotY;
                 tileNum3 = tileMap[rightSideX][botY];
                 tileNum4 = tileMap[rightSideX][topY];
@@ -139,10 +139,10 @@ public class CollisionCheck {
                 }
             }
             case "northWest" -> {
-                topY = (int) ((doubleTopY * 32 - 0.5) / 32);
+                topY = (int) ((doubleTopY * 32 - 1) / 32);
                 tileNum1 = tileMap[leftSideX][topY];
                 tileNum2 = tileMap[rightSideX][topY];
-                leftSideX = (int) ((doubleLeftSideX * 32 - 0.5) / 32);
+                leftSideX = (int) ((doubleLeftSideX * 32 - 1) / 32);
                 topY = (int) doubleTopY;
                 tileNum3 = tileMap[leftSideX][botY];
                 tileNum4 = tileMap[leftSideX][topY];
@@ -158,10 +158,10 @@ public class CollisionCheck {
                 }
             }
             case "southWest" -> {
-                botY = (int) ((doubleBotY * 32 + 0.5) / 32);
+                botY = (int) ((doubleBotY * 32 + 1) / 32);
                 tileNum1 = tileMap[leftSideX][botY];
                 tileNum2 = tileMap[rightSideX][botY];
-                leftSideX = (int) ((doubleLeftSideX * 32 - 0.5) / 32);
+                leftSideX = (int) ((doubleLeftSideX * 32 - 1) / 32);
                 botY = (int) doubleBotY;
                 tileNum3 = tileMap[leftSideX][botY];
                 tileNum4 = tileMap[leftSideX][topY];

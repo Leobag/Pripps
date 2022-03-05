@@ -12,7 +12,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
 
@@ -36,8 +35,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private double inputLeft;
     private double inputRight;
     private boolean gamePaused = false;
-    private Clip menuClip;
-    private Clip gameClip;
+    private Clip clip;
+    private Clip deathSound;
     private long previousTimeMillis;
     private long currentTimeMillis;
 
@@ -106,11 +105,21 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      * @author Sebastian Sela
      */
     public void musicPlayer() {
-
         try {
-            menuClip = AudioSystem.getClip();
-            menuClip.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/putin.wav"))));
-            menuClip.start();
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/putin.wav"))));
+            clip.start();
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
+            audioException.printStackTrace();
+        }
+    }
+
+    public void deathSound(){
+        try {
+            deathSound = AudioSystem.getClip();
+            deathSound.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/deathsound.wav"))));
+            deathSound.start();
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
             audioException.printStackTrace();
@@ -217,7 +226,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             openStartPanel();
         }
         if (e.getActionCommand().equals("optionsButton")) {
-            optionsView = new OptionsView(menuClip);
+            optionsView = new OptionsView(clip);
         }
     }
 
@@ -325,6 +334,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                     openWinPanel(view.getWinView());
                     break;
                 } else if (model.getPlayer().getDead()) {
+                    deathSound();
                     displayExplosion();
                     openStartPanel();
                     break;

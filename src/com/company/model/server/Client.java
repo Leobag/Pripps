@@ -5,7 +5,6 @@ import java.net.*;
 
 import com.google.gson.*;
 
-
 public class Client {
 
     private Socket socket = null;
@@ -67,7 +66,6 @@ public class Client {
         } catch(IOException e){
             System.out.println("fail2");
         }
-
 
     }
 

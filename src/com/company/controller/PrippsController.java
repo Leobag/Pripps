@@ -204,6 +204,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             pack();
             setLocationRelativeTo(null);
             setVisible(true);
+            model.startGameTimer();
             model.startGame();
 
             startGameLoop();
@@ -212,7 +213,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             System.exit(0);
         }
         if (e.getActionCommand().equals("submit")) {
-            model.setSubmittedName(view.getWinView().getSubmittedName().getText());
+            model.enterHighScore(view.getWinView().getSubmittedName().getText());
             openStartPanel();
         }
         if (e.getActionCommand().equals("optionsButton")) {
@@ -320,6 +321,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 repaint();
                 previousTimeMillis = currentTimeMillis;
                 if (model.winCondition()) {
+                    model.stopGameTimer();
                     openWinPanel(view.getWinView());
                     break;
                 } else if (model.getPlayer().getDead()) {

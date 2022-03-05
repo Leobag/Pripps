@@ -18,7 +18,11 @@ public class Server{
     private InputStreamReader isr = null;
     private OutputStreamWriter osw = null;
     private String[][] serverScoreList = new String[1][2];
+/*
+   public void main(String[] args){
 
+   }
+*/
     public Server(){
 
         try{
@@ -30,7 +34,6 @@ public class Server{
         }
 
         this.runServer();
-
 
     }
 
@@ -51,7 +54,6 @@ public class Server{
                     this.receiveScore();
                     this.sendScore();
                     this.closeStream();
-                    System.out.println(g.toJson(serverScoreList));
 
                 }
             }

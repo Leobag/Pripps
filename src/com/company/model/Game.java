@@ -9,6 +9,7 @@ public class Game {
     WinManager winManager = new WinManager();
     Enemy[] enemies;
     MapManager map;
+    HighscoreTimer highscoreTimer;
     private Player player;
     private boolean win = false;
 

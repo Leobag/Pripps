@@ -83,6 +83,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
 
+
         playButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/PlayButton.png"))));
         playButton.setContentAreaFilled(false);
         playButton.setBorder(BorderFactory.createEmptyBorder());
@@ -235,6 +236,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
         if (e.getActionCommand().equals("optionsButton")) {
             optionsView = new OptionsView(clip);
+        }
+        if(e.getActionCommand().equals("returnButton")){
+            gamePaused = false;
         }
     }
 

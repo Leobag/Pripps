@@ -13,6 +13,7 @@ import java.awt.event.WindowEvent;
 public class OptionsView extends JFrame {
 
     JPanel optionsPanel;
+    JButton returnButton;
     private boolean isMuted = false;
 
 
@@ -31,7 +32,7 @@ public class OptionsView extends JFrame {
         optionsPanel = new JPanel();
 
         JButton muteButton = new JButton();
-        JButton returnButton = new JButton();
+        returnButton = new JButton();
         optionsPanel.setBackground(Color.BLACK);
         optionsPanel.add(muteButton);
         optionsPanel.add(returnButton);
@@ -50,7 +51,8 @@ public class OptionsView extends JFrame {
         muteButton.setActionCommand("muteButton");
         returnButton.addActionListener((event) -> dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING)));
 
-        returnButton.setActionCommand("optionsButton");
+
+        returnButton.setActionCommand("returnButton");
         muteButton.setIcon(new ImageIcon(getClass().getResource("/Images/Tiles/mute.png")));
         muteButton.setContentAreaFilled(false);
         muteButton.setBorder(BorderFactory.createEmptyBorder());
@@ -65,5 +67,9 @@ public class OptionsView extends JFrame {
 
     public boolean isMuted() {
         return isMuted;
+    }
+
+    public JButton getReturnButton() {
+        return returnButton;
     }
 }

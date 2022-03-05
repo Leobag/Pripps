@@ -188,6 +188,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             pack();
             setLocationRelativeTo(null);
             setVisible(true);
+            model.resetGameTimer();
             model.startGameTimer();
             model.startGame();
 

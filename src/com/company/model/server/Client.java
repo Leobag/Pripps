@@ -9,7 +9,6 @@ public class Client {
 
     private Socket socket = null;
     private String[][] scoreList;
-    private int arraySize;
     private Gson g = new Gson();
     private BufferedReader br = null;
     private BufferedWriter bw = null;
@@ -22,6 +21,17 @@ public class Client {
 
     }
 
+    /**
+     * updateServerScore creates a socket in port 8080, connects to the server for the current
+     * highscore list. The list is then updated with the new score, and the list is sorted according to best
+     * time first. The updated highscore list is then sent to the server, and the connection is closed.
+     *
+     * @param name - entered name of player
+     * @param s - the time of completion
+     *
+     * - Leonard Bagiu
+     */
+
     public void updateServerScore(String name, int s){
             this.startServer();
             this.getServerScore();
@@ -31,6 +41,15 @@ public class Client {
             this.closeStream();
 
     }
+
+    /**
+     * Returns the current highscore list from the server. First starts the socket in port 8080,
+     * receives the list, closes the stream and returns the current list.
+     *
+     * @return - returns the current highscore list on the server
+     *
+     * - Leonard Bagiu
+     */
 
     public String[][] getTotalHighscore(){
 
@@ -42,6 +61,12 @@ public class Client {
 
     }
 
+    /**
+     * Creates a socket in port 8080.
+     *
+     * - Leonard Bagiu
+     */
+
     private void startServer(){
         try{
             this.socket = new Socket("localhost", 8080);
@@ -50,6 +75,15 @@ public class Client {
             System.out.println("fail1");
         }
     }
+
+    /**
+     * Creates an output stream through a BufferedReader, allowing the String array
+     * (which is first converted to Json) to be sent in groups of packets rather than the data
+     * being transmitted packet by packet. The function then writes the data, finishing it with
+     * a new line and flushes the buffer, making sure it is empty.
+     *
+     * - Leonard Bagiu
+     */
 
     private void sendScore() {
         try{
@@ -69,6 +103,13 @@ public class Client {
 
     }
 
+    /**
+     * Reads the input port of the socket with the help of a BufferedReader, significantly
+     * speeding up the process. The read data is then converted from Json to a nested String array
+     * uúsing the GSON opensource library.
+     *
+     * - Leonard Bagiu
+     */
 
     private void getServerScore(){
 
@@ -85,6 +126,19 @@ public class Client {
 
 
     }
+
+    /**
+     * This function takes the new values and add them to the local String[][] scoreList.
+     * The integer value is first converted to String. If the scoreList array is empty, the
+     * first position is filled. Otherwise a new array with one extra spot is created, copying
+     * all values of scoreList before adding the last value, effectively incrementing the array size
+     * by one per function call.
+     *
+     * @param name - Name of player
+     * @param s - Integer value of player time
+     *
+     * - Leonard Bagiu
+     */
 
 
     public void setNewScore(String name, int s){
@@ -119,6 +173,14 @@ public class Client {
 
     }
 
+    /**
+     * If array length is more than one, a bubble sort is done for the array.
+     * Instead of running the length of the array multiple times, the for-loop index is reset every time
+     * two values are switched, reassuring that the entire array is sorted when i reaches its max value
+     *
+     * - Leonard Bagiu
+     */
+
     public void sortScores(){
 
         if(scoreList.length > 1){
@@ -142,6 +204,11 @@ public class Client {
         }
     }
 
+    /**
+     * Closes all open streams and closes the socket, allowing new values to be sent.
+     *
+     * - Leonard Bagiu
+     */
     private void closeStream(){
         try{
 

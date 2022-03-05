@@ -2,7 +2,6 @@ package com.company.model;
 
 import com.company.model.TileData.TileManager;
 import com.company.model.server.Client;
-import com.company.model.server.Server;
 
 import java.awt.image.BufferedImage;
 
@@ -20,10 +19,8 @@ public class PrippsModel {
     Game game;
     MapManager map;
     Fog fog;
-    String SubmittedName;
     HighscoreTimer highscoreTimer = new HighscoreTimer();
     Client client = new Client();
-    Server s = new Server();
 
 
 
@@ -75,13 +72,17 @@ public class PrippsModel {
         System.out.println(name);
         System.out.println(highscoreTimer.getHighscoreTime());
         client.updateServerScore(name, highscoreTimer.getHighscoreTime());
-        highscoreTimer.resetHighscoreTimer();
     }
     public void stopGameTimer(){
         highscoreTimer.stopTimer();
     }
+
     public void startGameTimer(){
         highscoreTimer.startTimer();
+    }
+
+    public void resetGameTimer(){
+        highscoreTimer.resetHighscoreTimer();
     }
 
     public Enemy[] getEnemyArr() {
@@ -116,13 +117,6 @@ public class PrippsModel {
         return this.map;
     }
 
-    public String getSubmittedName() {
-        return SubmittedName;
-    }
-
-    public void setSubmittedName(String submittedName) {
-        SubmittedName = submittedName;
-    }
 
     public void resetGame() {
         map.resetMap();

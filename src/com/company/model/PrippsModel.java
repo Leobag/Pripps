@@ -113,7 +113,7 @@ public class PrippsModel {
     public void resetGame() {
         map.resetMap();
         game.deletePlayer();
-        game.deleteEnemies();
+        //game.deleteEnemies();
         game.resetWin();
     }
 }

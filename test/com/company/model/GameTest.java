@@ -50,4 +50,26 @@ public class GameTest {
         game.setInputDirection(0.0);
         assertTrue(game.getPlayer().getHitBox().intersects(game.getPrippsPack().getHitBox()));
     }
+
+    @Test
+    public void deletePlayer(){
+        MapManager map = new MapManager();
+        Game game = new Game(map);
+        game.spawnPlayer();
+        game.deletePlayer();
+
+        assertNull(game.getPlayer());
+    }
+
+    @Test
+    public void resetWin(){
+        MapManager map = new MapManager();
+        Game game = new Game(map);
+        game.resetWin();
+
+        assertFalse(game.getWin());
+    }
+
+
+
 }

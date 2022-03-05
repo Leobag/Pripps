@@ -25,8 +25,7 @@ public class Game {
     public void spawnPlayer() {
 
         player = new Player();
-        player.setPosition(1,11);
-
+        player.setPosition(1, 11);
         player.updateHitBox((2 * 32), (11 * 32), player.hitBoxSize);
         player.setMovementImages();
     }
@@ -53,8 +52,6 @@ public class Game {
      * Checks if collison is detected and if not it sets the player position
      *
      * @param deltaTime currentTimeMillis - previousTimeMillis in game loop in controller
-     *                  - Max Yoorkevich
-     *                  - Emil Berzelius
      */
     public void movePlayer(double deltaTime) {
         if (player == null) return;
@@ -131,7 +128,6 @@ public class Game {
      * updates enemy positions.
      *
      * @param deltaTime difference in time every game-loop, for smoother fps and as much fps as possible
-     *                  - Max Yoorkevich
      */
     public void update(double deltaTime) {
         movePlayer(deltaTime);
@@ -143,7 +139,6 @@ public class Game {
      *
      * set string direction, e.g. south for player used for switch case functions.
      * @param inputDirection
-     * - Max Yoorkevich
      */
     public void setInputDirection(Double inputDirection) {
         player.setInputDirection(inputDirection);
@@ -165,16 +160,6 @@ public class Game {
      */
     public void resetWin() {
         win = false;
-    }
-
-    /**
-     * Sets all enemies to null that are no longer used.
-     * Questionable if this is needed
-     */
-    public void deleteEnemies() {
-        for (Enemy enemy : enemies) {
-            enemy = null;
-        }
     }
 
     public boolean getWin() {

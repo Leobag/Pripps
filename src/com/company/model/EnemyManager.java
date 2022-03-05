@@ -40,8 +40,8 @@ public class EnemyManager {
 
             }
             case 2 -> {
-                enemyArray = new Enemy[7];
-                for (int i = 0; i < 7; i++) {
+                enemyArray = new Enemy[10];
+                for (int i = 0; i < 10; i++) {
                     enemyArray[i] = new EnemyPutin();
                 }
                 enemyArray[0].setPosition(38, 7);
@@ -51,6 +51,9 @@ public class EnemyManager {
                 enemyArray[4].setPosition(19, 14);
                 enemyArray[5].setPosition(34, 10);
                 enemyArray[6].setPosition(29, 20);
+                enemyArray[7].setPosition(3, 7);
+                enemyArray[8].setPosition(3, 6);
+                enemyArray[9].setPosition(3, 5);
             }
         }
     }

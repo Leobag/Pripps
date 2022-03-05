@@ -25,7 +25,8 @@ public class Game {
     public void spawnPlayer() {
 
         player = new Player();
-        player.setPosition(1, 11);
+        player.setPosition(1,11);
+
         player.updateHitBox((2 * 32), (11 * 32), player.hitBoxSize);
         player.setMovementImages();
     }
@@ -53,6 +54,7 @@ public class Game {
      *
      * @param deltaTime currentTimeMillis - previousTimeMillis in game loop in controller
      *                  - Max Yoorkevich
+     *                  - Emil Berzelius
      */
     public void movePlayer(double deltaTime) {
         if (player == null) return;
@@ -113,7 +115,7 @@ public class Game {
      *
      * @return - returns boolean true or false if player hitbox has intersected enemy hitbox.
      */
-    private boolean enemyCollision() {
+    public boolean enemyCollision() {
         for (Enemy enemy : enemies) {
             if (player.getHitBox().intersects(enemy.getHitBox())) {
                 player.setDead(true);

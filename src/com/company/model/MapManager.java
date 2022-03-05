@@ -35,15 +35,6 @@ public class MapManager {
         loadMap(mapNames[mapCounter]);
     }
 
-    public void setStartingPositions(int x, int y) {
-        this.startingPositions[0] = x;
-        this.startingPositions[1] = y;
-    }
-
-    public int[] getStartingPositions() {
-        return this.startingPositions;
-    }
-
 
     public int getMaxCol() {
         return this.maxScreenCol;
@@ -128,5 +119,4 @@ public class MapManager {
     public void resetMap() {
         mapCounter = 0;
     }
-
 }

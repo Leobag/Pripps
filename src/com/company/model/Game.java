@@ -154,7 +154,6 @@ public class Game {
         this.player = null;
     }
 
-
     /**
      * Resets the winning condition to not be met.
      */

@@ -12,44 +12,41 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.Objects;
 
 
 public class PrippsController extends JFrame implements MouseListener, ActionListener, KeyListener {
 
-    private JPanel mainPanel;
     private final JButton playButton = new JButton();
     private final JButton optionsButton = new JButton();
     private final JButton quitButton = new JButton();
     private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
-
     PrippsView view;
     PrippsModel model;
     SaveData saveData;
     OptionsView optionsView;
-
-
+    private JPanel mainPanel;
     private double inputUp;
     private double inputDown;
     private double inputLeft;
     private double inputRight;
     private boolean gamePaused = false;
-    private Clip menuClip;
-    private Clip gameClip;
+    private Clip clip;
+    private long clipTime;
+    private Clip deathSound;
     private long previousTimeMillis;
     private long currentTimeMillis;
 
-
-    public static void main(String[] args) {
-        PrippsController f = new PrippsController();
-    }
 
     PrippsController() {
         model = new PrippsModel();
         view = new PrippsView(model);
         setLayout();
+    }
+
+    public static void main(String[] args) {
+        PrippsController f = new PrippsController();
     }
 
     /**
@@ -86,6 +83,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
 
+
         playButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/PlayButton.png"))));
         playButton.setContentAreaFilled(false);
         playButton.setBorder(BorderFactory.createEmptyBorder());
@@ -98,19 +96,29 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         view.getWinView().getSubmit().addActionListener(this);
 
         setVisible(true);
-        musicPlayer();
     }
 
-    /** A method for playing the game menu music, using URL and Clip.
+    /**
+     * A method for playing the game menu music, using URL and Clip.
      *
      * @author Sebastian Sela
      */
     public void musicPlayer() {
-
         try {
-            menuClip = AudioSystem.getClip();
-            menuClip.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/putin.wav"))));
-            menuClip.start();
+            clip = AudioSystem.getClip();
+            clip.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/putin.wav"))));
+            clip.start();
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
+            audioException.printStackTrace();
+        }
+    }
+
+    public void deathSound() {
+        try {
+            deathSound = AudioSystem.getClip();
+            deathSound.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/deathsound.wav"))));
+            deathSound.start();
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
             audioException.printStackTrace();
@@ -150,7 +158,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     /**
      * Listens for a key to be pressed and sets input variables to calculate
      * movement directions with radians.
-     *
+     * <p>
      * Uses Key ESCAPE to pause game, K to save and L to load a saved game.
      *
      * @param e - the KeyEvent detected.
@@ -164,7 +172,15 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             case KeyEvent.VK_A -> inputLeft = 1;
             case KeyEvent.VK_S -> inputDown = 1;
             case KeyEvent.VK_D -> inputRight = 1;
-            case KeyEvent.VK_ESCAPE -> gamePaused = !gamePaused;
+            case KeyEvent.VK_ESCAPE -> {
+                gamePaused = !gamePaused;
+                if (gamePaused) {
+                    optionsView = new OptionsView(clip);
+                    optionsView.getReturnButton().addActionListener(this);
+                    optionsView.getReturnButton().setActionCommand("returnButton");
+                }
+
+            }
             case KeyEvent.VK_K -> saveGame();
             case KeyEvent.VK_L -> loadGame();
         }
@@ -172,6 +188,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * Sets input variables again to calculate movement direction.
+     *
      * @param e - KeyEvent detected.
      */
     @Override
@@ -188,16 +205,17 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      * Discovers if buttons in our starting menu are pressed.
      * If the playButton is pressed the current JPanel is removed and our game View
      * is added to the JFrame instead as well as starting the game loop.
-     *
+     * <p>
      * The submit JButton is used to submit a name when completing the game.
      * When communicated to the server the mainPanel is placed upon the JFrame again.
-     *
+     * <p>
      * - Max Yoorkevich
      * - Emil Berzelius
      */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("playButton")) {
+            musicPlayer();
             Container contentPane = getContentPane();
             contentPane.removeAll();
             contentPane.add(view);
@@ -218,7 +236,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             openStartPanel();
         }
         if (e.getActionCommand().equals("optionsButton")) {
-            optionsView = new OptionsView(menuClip);
+            optionsView = new OptionsView(clip);
+        }
+        if(e.getActionCommand().equals("returnButton")){
+            gamePaused = false;
         }
     }
 
@@ -236,9 +257,10 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * Sets the winning panel on the JFrame.
+     *
      * @param panel
      */
-    private void openWinPanel(JPanel panel){
+    private void openWinPanel(JPanel panel) {
         getContentPane().removeAll();
         getContentPane().add(panel);
         pack();
@@ -281,7 +303,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     /**
      * Uses save method to store current information from the game.
      */
-    public void saveGame(){
+    public void saveGame() {
         saveData = new SaveData(model.getPlayer().getPosition(), model.getMap().getMapCounter(), model.getPosArray());
         try {
             ResourceManager.save(saveData, "data.txt");
@@ -295,13 +317,13 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     /**
      * Uses load method to get information from file and updates the game.
      */
-    public void loadGame(){
+    public void loadGame() {
         try {
             saveData = (SaveData) ResourceManager.load("data.txt");
             model.getPlayer().setPosition(saveData.getPosition().getX(), saveData.getPosition().getY());
             model.getMap().setMapCounter(saveData.getMapCounter());
             model.getMap().loadMap(model.getCurrentMap());
-            model.getPlayer().updateHitBox((int)(saveData.getPosition().getX() * 32), (int)(saveData.getPosition().getY() * 32), 16);
+            model.getPlayer().updateHitBox((int) (saveData.getPosition().getX() * 32), (int) (saveData.getPosition().getY() * 32), 16);
             model.setPosArray(saveData.getEnemyPosition());
             System.out.println("Game successfully loaded");
         } catch (IOException | ClassNotFoundException | NullPointerException loadException) {
@@ -314,18 +336,22 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             previousTimeMillis = System.currentTimeMillis();
             while (true) {
                 currentTimeMillis = System.currentTimeMillis();
-
                 handleInput();
                 if (!gamePaused) {
                     model.update((currentTimeMillis - previousTimeMillis) / 1000d);
+
                 }
+
                 repaint();
                 previousTimeMillis = currentTimeMillis;
                 if (model.winCondition()) {
+                    clip.stop();
                     model.stopGameTimer();
                     openWinPanel(view.getWinView());
                     break;
                 } else if (model.getPlayer().getDead()) {
+                    clip.stop();
+                    deathSound();
                     displayExplosion();
                     openStartPanel();
                     break;

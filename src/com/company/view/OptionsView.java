@@ -5,10 +5,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
 
-/** A class that creates a frame when "OPTIONS" is pressed on the starting menu.
+/**
+ * A class that creates a frame when "OPTIONS" is pressed on the starting menu.
  *
  * @author Sebastian Sela
- *
  */
 public class OptionsView extends JFrame {
 
@@ -16,7 +16,8 @@ public class OptionsView extends JFrame {
     private boolean isMuted = false;
 
 
-    /** Class constructor
+    /**
+     * Class constructor
      *
      * @param clip Taking in clip with a sound file for the game menu.
      */
@@ -32,7 +33,6 @@ public class OptionsView extends JFrame {
         JButton muteButton = new JButton();
         JButton returnButton = new JButton();
         optionsPanel.setBackground(Color.BLACK);
-        //optionsPanel.addMouseListener((MouseListener) this);
         optionsPanel.add(muteButton);
         optionsPanel.add(returnButton);
         muteButton.addActionListener((event) -> {
@@ -40,7 +40,10 @@ public class OptionsView extends JFrame {
                 clip.start();
                 isMuted = false;
             } else {
-                clip.stop();
+                if (clip != null) {
+                    clip.stop();
+
+                }
                 isMuted = true;
             }
         });

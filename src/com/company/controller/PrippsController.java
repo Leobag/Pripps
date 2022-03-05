@@ -6,6 +6,8 @@ import com.company.view.PrippsView;
 
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -33,7 +35,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private double inputLeft;
     private double inputRight;
     private boolean gamePaused = false;
-    private Clip clip;
+    private Clip menuClip;
+    private Clip gameClip;
     private long previousTimeMillis;
     private long currentTimeMillis;
 
@@ -102,17 +105,27 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      * @author Sebastian Sela
      */
     public void musicPlayer() {
-        URL lol = getClass().getResource("/Music/menumusic.wav");
+        URL menuMusic = getClass().getResource("/Music/menumusic.wav");
 
         try {
-            clip = AudioSystem.getClip();
-            clip.open(AudioSystem.getAudioInputStream(lol));
-            clip.start();
+            menuClip = AudioSystem.getClip();
+            menuClip.open(AudioSystem.getAudioInputStream(menuMusic));
+            menuClip.start();
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
+            audioException.printStackTrace();
         }
+    }
 
+    public void musicPlayerGame(){
+        try {
+            gameClip = AudioSystem.getClip();
+            gameClip.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/putin.wav"))));
+            gameClip.start();
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException musicException) {
+            musicException.printStackTrace();
+        }
     }
 
     @Override
@@ -196,7 +209,8 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("playButton")) {
-            clip.stop();
+            menuClip.stop();
+            musicPlayerGame();
             Container contentPane = getContentPane();
             contentPane.removeAll();
             contentPane.add(view);
@@ -215,7 +229,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             openStartPanel();
         }
         if (e.getActionCommand().equals("optionsButton")) {
-            new OptionsView(clip);
+            new OptionsView(menuClip);
         }
     }
 

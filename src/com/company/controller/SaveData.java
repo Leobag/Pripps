@@ -7,6 +7,7 @@ import java.io.Serializable;
 
 /**
  * A class with the purpose of storing necessary information required to save the game.
+ * @author Andy Alavinasab
  */
 public class SaveData implements Serializable {
     

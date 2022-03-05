@@ -16,7 +16,6 @@ public class Game {
     public Game(MapManager map) {
         this.map = map;
         collisionCheck = new CollisionCheck(this);
-
     }
 
     /**

@@ -116,4 +116,13 @@ public class PrippsModel {
         //game.deleteEnemies();
         game.resetWin();
     }
+
+    public Position[] getPosArray() {
+        return game.getPosArray();
+    }
+
+    public void setPosArray(Position[] posArray){
+        game.setPosArray(posArray);
+    }
+
 }

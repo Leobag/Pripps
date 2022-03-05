@@ -170,5 +170,13 @@ public class Game {
         return winManager.getPrippsPack();
     }
 
+    public Position[] getPosArray(){
+        return enemyManager.getPosArray();
+    }
+
+    public void setPosArray(Position[] posArray){
+        enemyManager.setPosArray(posArray);
+    }
+
 
 }

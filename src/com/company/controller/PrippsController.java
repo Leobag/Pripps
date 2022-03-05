@@ -11,6 +11,7 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.Objects;
 
 
@@ -41,7 +42,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         PrippsController f = new PrippsController();
     }
 
-    private PrippsController() {
+    PrippsController() {
         model = new PrippsModel();
         view = new PrippsView(model);
         setLayout();
@@ -274,23 +275,31 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
     }
 
-    private void saveGame(){
-        saveData = new SaveData(model.getPlayer().getPosition(), model.getMap().getMapCounter());
+    /**
+     * Uses save method to store current information from the game.
+     */
+    public void saveGame(){
+        saveData = new SaveData(model.getPlayer().getPosition(), model.getMap().getMapCounter(), model.getPosArray());
         try {
             ResourceManager.save(saveData, "data.txt");
             System.out.println("Game successfully saved");
+            System.out.println(Arrays.toString(saveData.getEnemyPosition()));
         } catch (IOException | NullPointerException saveException) {
             System.out.println("Couldn't save: " + saveException.getMessage());
         }
     }
 
-    private void loadGame(){
+    /**
+     * Uses load method to get information from file and updates the game.
+     */
+    public void loadGame(){
         try {
             saveData = (SaveData) ResourceManager.load("data.txt");
             model.getPlayer().setPosition(saveData.getPosition().getX(), saveData.getPosition().getY());
             model.getMap().setMapCounter(saveData.getMapCounter());
             model.getMap().loadMap(model.getCurrentMap());
             model.getPlayer().updateHitBox((int)(saveData.getPosition().getX() * 32), (int)(saveData.getPosition().getY() * 32), 16);
+            model.setPosArray(saveData.getEnemyPosition());
             System.out.println("Game successfully loaded");
         } catch (IOException | ClassNotFoundException | NullPointerException loadException) {
             System.out.println("Couldn't load: " + loadException.getMessage());

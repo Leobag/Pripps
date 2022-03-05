@@ -5,6 +5,9 @@ import com.company.model.*;
 import java.io.Serial;
 import java.io.Serializable;
 
+/**
+ * A class with the purpose of storing necessary information required to save the game.
+ */
 public class SaveData implements Serializable {
     
     @Serial
@@ -12,10 +15,12 @@ public class SaveData implements Serializable {
 
     private final Position position;
     private final int mapCounter;
+    private final Position[] enemyPosition;
 
-    public SaveData(Position position, int mapCounter){
+    public SaveData(Position position, int mapCounter, Position[] enemyPosition){
         this.position = position;
         this.mapCounter = mapCounter;
+        this.enemyPosition = enemyPosition;
     }
 
     public Position getPosition() {
@@ -24,5 +29,9 @@ public class SaveData implements Serializable {
 
     public int getMapCounter() {
         return mapCounter;
+    }
+
+    public Position[] getEnemyPosition() {
+        return enemyPosition;
     }
 }

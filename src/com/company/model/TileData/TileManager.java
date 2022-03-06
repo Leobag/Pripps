@@ -5,6 +5,8 @@ import java.io.*;
 import javax.imageio.ImageIO;
 
 /**
+ * Loads the image files for the tile and sets conditions such as collision.
+ *
  * @author - Emil Berzelius
  */
 public class TileManager {

@@ -4,12 +4,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 /**
+ * The tile class hold the tile image as well as conditions unique for the tile number.
  * @author - Emil Berzelius
+ * @version - 01-03-22
  */
 public class Tile {
-    /**
-     * The tile class hold the tile image as well as conditions unique for the tile number.
-     */
+
     public BufferedImage image;
     private boolean collision = false;
     private boolean nextMap = false;

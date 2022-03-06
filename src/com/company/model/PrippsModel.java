@@ -2,19 +2,18 @@ package com.company.model;
 
 import com.company.model.TileData.TileManager;
 import com.company.model.server.Client;
-
 import java.awt.image.BufferedImage;
 
+/**
+ * PrippsModel is a centralized model which facilitates communication
+ * with all other classes in the model packet.
+ *
+ * Prippsmodel mostly consist of getters and setters of key values and
+ * necessary objects.
+ *
+ */
 
 public class PrippsModel {
-    /**
-     * PrippsModel is a centralized model which facilitates communication
-     * with all other classes in the model packet.
-     *
-     * Prippsmodel mostly consist of getters and setters of key values and
-     * necessary objects.
-     *
-     */
 
     Game game;
     MapManager map;

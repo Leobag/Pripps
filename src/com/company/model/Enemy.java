@@ -2,7 +2,6 @@ package com.company.model;
 
 import javax.imageio.ImageIO;
 import java.io.IOException;
-import java.util.Objects;
 
 /**
  * Subclass to Entity. Keeps track of information about enemies and loads images for them.

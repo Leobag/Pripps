@@ -29,6 +29,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     PrippsModel model;
     SaveData saveData;
     OptionsView optionsView;
+    HighscoreView highscoreView;
 
     private final JButton playButton = new JButton();
     private final JButton optionsButton = new JButton();

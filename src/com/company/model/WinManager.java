@@ -4,8 +4,14 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
-
+/**
+ * Creates the winning condition for the game.
+ *
+ * @author Emil Berzelius
+ * @version 06-03-22
+ */
 public class WinManager {
+
 
     Entity prippsPack = new Entity();
 

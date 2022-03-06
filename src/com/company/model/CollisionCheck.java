@@ -1,7 +1,14 @@
 package com.company.model;
 
-
+/**
+ *  Checks if entities will collide with a tile and takes actions accordingly.
+ *  Changes map and stops entities from walking through walls.
+ *
+ * @author Emil Berzelius
+ * @version 06-03-22
+ */
 public class CollisionCheck {
+
     Game game;
 
     public CollisionCheck(Game game) {

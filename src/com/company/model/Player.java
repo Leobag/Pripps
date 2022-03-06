@@ -5,7 +5,11 @@ import java.io.IOException;
 import java.util.Objects;
 
 /**
- * @author - Emil Berzelius
+ * The player which user controls by keyboard.
+ * Keeps track of player information and loads the player images.
+ *
+ * @author Emil Berzelius
+ * @version 06-03-22
  */
 public class Player extends Entity {
 

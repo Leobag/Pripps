@@ -4,6 +4,14 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Subclass to Entity. Keeps track of information about enemies and loads images for them.
+ * Has methods that are called if enemies hits walls (which is called from game),
+ * and randomizes the future direction.
+ *
+ * @author Max Yoorkevich
+ * @version 03-03-22
+ */
 public class Enemy extends Entity {
 
     public final int hitBoxSize = 16;

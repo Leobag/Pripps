@@ -17,7 +17,7 @@ import java.util.EnumMap;
 import java.util.Objects;
 
 /**
- * Uses the model and view in accordance with user-input to create the game.
+ * Uses the model and view in accordance with user-input to create and run the game.
  *
  * @author Max Yoorkevich
  * @version 06-03-22

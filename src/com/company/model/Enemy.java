@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Subclass to Entity. Keeps track of information about enemies and loads images for them.
- * Has methods that are called if enemies hits walls (which is called from game),
+ * Contains methods that are called if enemies hits walls (which is called from game),
  * and randomizes the future direction.
  *
  * @author Max Yoorkevich

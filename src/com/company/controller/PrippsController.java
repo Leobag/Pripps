@@ -43,6 +43,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private long currentTimeMillis;
 
     private Clip gameMusic;
+    private Clip menuMusic;
 
 
     PrippsController() {
@@ -107,6 +108,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         view.getWinView().getSubmit().addActionListener(this);
 
         setVisible(true);
+        menuMusic();
     }
 
     @Override
@@ -189,6 +191,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("playButton")) {
+            menuMusic.stop();
             gameMusic();
             Container contentPane = getContentPane();
             contentPane.removeAll();
@@ -351,6 +354,23 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * A method for playing the game menu music, using URL and Clip.
+     * @author Sebastian Sela
+     */
+    private void menuMusic() {
+
+        try {
+            menuMusic = AudioSystem.getClip();
+            menuMusic.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/menumusic.wav"))));
+            menuMusic.start();
+
+
+        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
+            audioException.printStackTrace();
+        }
+    }
+
+    /**
+     * A method for playing the game game music, using URL and Clip.
      */
     private void gameMusic() {
 

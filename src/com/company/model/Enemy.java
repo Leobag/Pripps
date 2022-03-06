@@ -6,7 +6,7 @@ import java.util.Objects;
 
 public class Enemy extends Entity {
 
-    public final int hitBoxSize = 15;
+    public final int hitBoxSize = 16;
     public int unitCounter, unitNum;
     public String oldDir;
     public double movementDirection;

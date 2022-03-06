@@ -30,6 +30,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private final JButton playButton = new JButton();
     private final JButton optionsButton = new JButton();
     private final JButton quitButton = new JButton();
+    private final JButton highScoreButton = new JButton();
     private final JLabel header = new JLabel("Pripps Maze Game", SwingConstants.CENTER);
     private JPanel mainPanel;
 
@@ -70,7 +71,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
 
         //super.setPreferredSize(new java.awt.Dimension(600, 600));
-        mainPanel = new JPanel(new GridLayout(4, 1, 10, 10));
+        mainPanel = new JPanel(new GridLayout(5, 1, 10, 10));
         add(mainPanel);
         mainPanel.setBackground(Color.BLACK);
         mainPanel.addMouseListener(this);
@@ -80,12 +81,15 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         mainPanel.add(playButton);
         mainPanel.add(optionsButton);
         mainPanel.add(quitButton);
+        mainPanel.add(highScoreButton);
         playButton.addActionListener(this);
         playButton.setActionCommand("playButton");
         quitButton.addActionListener(this);
         quitButton.setActionCommand("quitButton");
         optionsButton.addActionListener(this);
         optionsButton.setActionCommand("optionsButton");
+        highScoreButton.addActionListener(this);
+        highScoreButton.setActionCommand("highScoreButton");
 
 
         playButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/PlayButton.png"))));
@@ -97,6 +101,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         quitButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/QuitButton.png"))));
         quitButton.setContentAreaFilled(false);
         quitButton.setBorder(BorderFactory.createEmptyBorder());
+        highScoreButton.setIcon(new ImageIcon(Objects.requireNonNull(getClass().getResource("/Images/Tiles/highScor.png"))));
+        highScoreButton.setContentAreaFilled(false);
+        highScoreButton.setBorder(BorderFactory.createEmptyBorder());
         view.getWinView().getSubmit().addActionListener(this);
 
         setVisible(true);
@@ -204,6 +211,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
         if (e.getActionCommand().equals("optionsButton")) {
             optionsView = new OptionsView(gameMusic);
+        }
+        if (e.getActionCommand().equals("highScoreButton")){
+
         }
         if(e.getActionCommand().equals("returnButton")){
             gamePaused = false;

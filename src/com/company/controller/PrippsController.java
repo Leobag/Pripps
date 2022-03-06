@@ -17,7 +17,7 @@ import java.util.Objects;
 
 /**
  *
- * @author
+ * @author Max Yoorkevich
  * @version 05-03-22
  */
 public class PrippsController extends JFrame implements MouseListener, ActionListener, KeyListener {

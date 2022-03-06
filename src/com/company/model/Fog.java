@@ -1,8 +1,13 @@
 package com.company.model;
 
-
 import java.awt.*;
 
+/**
+ * Calculations for fog of war.
+ *
+ * @author Emil Berzelius
+ * @version 06-03-22
+ */
 public class Fog {
 
     MapManager map;

@@ -5,7 +5,13 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
-
+/**
+ * Parent class to enemies, player and win condition object.
+ * Stores information which all of these object uses, for example unitImage and hitBox.
+ *
+ * @author Emil Berzelius
+ * @version 06-03-22
+ */
 public class Entity {
     private Position position;
     public double size;

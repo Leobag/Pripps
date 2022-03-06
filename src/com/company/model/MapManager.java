@@ -7,6 +7,13 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+/**
+ * Reads the map file and creates the mapMatrix used to paint the map.
+ * MapManager class gives information to game and collisionCheck.
+ *
+ * @author Leonard Bagiu
+ * @version 04-03-22
+ */
 public class MapManager {
 
     final private int maxScreenCol = 42;
@@ -15,7 +22,6 @@ public class MapManager {
     int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
     TileManager tile;
     private int mapCounter = 0;
-    private int[] startingPositions = new int[2];
 
     public MapManager() {
         tile = new TileManager();

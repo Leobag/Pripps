@@ -18,6 +18,12 @@ public class SaveData implements Serializable {
     private final int mapCounter;
     private final Position[] enemyPosition;
 
+    /**
+     * Constructor to create saveData.
+     * @param position the position of player.
+     * @param mapCounter which map the game is on.
+     * @param enemyPosition array for all enemy positions.
+     */
     public SaveData(Position position, int mapCounter, Position[] enemyPosition){
         this.position = position;
         this.mapCounter = mapCounter;

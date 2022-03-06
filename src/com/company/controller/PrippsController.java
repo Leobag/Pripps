@@ -15,7 +15,11 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.Objects;
 
-
+/**
+ *
+ * @author
+ * @version 05-03-22
+ */
 public class PrippsController extends JFrame implements MouseListener, ActionListener, KeyListener {
 
     PrippsView view;

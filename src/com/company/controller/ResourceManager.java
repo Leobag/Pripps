@@ -4,14 +4,14 @@ import java.io.*;
 
 /**
  * Save and load methods for the game.
+ * @author Andy Alavinasab
  */
 public class ResourceManager {
 
     /**
      * Stores the data from SaveData on a file
-     * @param data - information to be stored.
-     * @param file - filename
-     * @author Andy Alavinasab
+     * @param data - Information to be stored.
+     * @param file - The name for the created file
      */
     public static void save(Serializable data, String file) throws IOException, NullPointerException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(file))) {
@@ -22,8 +22,7 @@ public class ResourceManager {
 
     /**
      * Loads the file saved in above method.
-     * @param file - filename
-     * @author Andy Alavinasab
+     * @param file - The name of the file to be loaded
      */
     public static Object load(String file) throws IOException, ClassNotFoundException, NullPointerException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(file))) {

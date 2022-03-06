@@ -2,6 +2,18 @@ package com.company.model;
 
 import java.util.Random;
 
+/**
+ * Contains game-logic.
+ *
+ * Moves and spawns player and enemies.
+ * Dictates what happens if collision between tiles, player or enemy occurs
+ * for player and enemies.
+ *
+ * Updates the game each frame the game is running.
+ *
+ * @author Max Yoorkevich
+ * @version 05-03-2022
+ */
 public class Game {
 
     CollisionCheck collisionCheck;

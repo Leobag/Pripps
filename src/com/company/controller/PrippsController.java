@@ -1,6 +1,7 @@
 package com.company.controller;
 
 import com.company.model.PrippsModel;
+import com.company.view.HighscoreView;
 import com.company.view.OptionsView;
 import com.company.view.PrippsView;
 
@@ -119,6 +120,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         highScoreButton.setBorder(BorderFactory.createEmptyBorder());
         view.getWinView().getSubmit().addActionListener(this);
 
+
         setVisible(true);
         menuMusic();
     }
@@ -163,7 +165,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      */
     @Override
     public void keyPressed(KeyEvent e) {
-
         switch (e.getKeyCode()) {
 
             case KeyEvent.VK_W -> inputUp = 1;
@@ -233,13 +234,16 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 optionsView = new OptionsView(gameMusic);
             }
 
-
+            highscoreView = new HighscoreView(view);
         }
         if (e.getActionCommand().equals("highScoreButton")) {
 
         }
         if (e.getActionCommand().equals("returnButton")) {
             gamePaused = false;
+        }
+        if(e.getActionCommand().equals("returnButton2")){
+            openStartPanel();
         }
     }
 
@@ -292,8 +296,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         } catch (InterruptedException e) {
             System.out.println("i cant sleep");
         }
-
-
     }
 
     /**

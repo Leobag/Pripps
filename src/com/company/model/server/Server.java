@@ -5,9 +5,12 @@ import java.net.*;
 
 import com.google.gson.*;
 
-
 /**
- * @author - Leonard Bagiu
+ * Server keeps a list of high-scores used in the program. It is designed to run
+ * remotely on a cloud-based service, and wait for a connection from the client side
+ * residing in the PrippsMaze model.
+ *
+ * @author Leonard Bagiu
  */
 public class Server{
 
@@ -20,7 +23,8 @@ public class Server{
     private BufferedWriter bw = null;
     private InputStreamReader isr = null;
     private OutputStreamWriter osw = null;
-    private String[][] serverScoreList = new String[1][2];
+    private String[][] serverScoreList;
+    private String[][] dummy = new String[1][2];
 
    public static void main(String[] args){
         Server s = new Server();
@@ -67,15 +71,17 @@ public class Server{
 
                 if(socket.isConnected()){
 
-                    this.sendScore();
-                    this.receiveScore();
-                    this.sendScore();
-                    this.closeStream();
+                        this.sendScore();
+
+                        this.receiveScore();
+
+                        this.closeStream();
 
                 }
             }
 
     }
+
 
     /**
      * receiveScore checks the socket input stream. The function takes the stream and reads it with
@@ -91,7 +97,7 @@ public class Server{
 
             isr = new InputStreamReader(socket.getInputStream());
             br = new BufferedReader(isr);
-            this.serverScoreList = g.fromJson(br.readLine(), serverScoreList.getClass());
+            this.serverScoreList = g.fromJson(br.readLine(), dummy.getClass());
 
 
         } catch(IOException e){
@@ -120,19 +126,19 @@ public class Server{
             bw.newLine();
             bw.flush();
 
+
         } catch(IOException e){
             System.out.println(e.getMessage());
         }
     }
 
     /**
-     * closeStream closes all open streams, allowing new data to be channeled through sendScore and
-     * receiveScore.
+     * Closes all open streams, allowing new values to be sent.
      *
      */
-
     private void closeStream(){
         try{
+
             if(isr != null){
                 isr.close();
             }
@@ -150,7 +156,8 @@ public class Server{
             }
 
         }catch(IOException e){
-            System.out.println(e.getMessage());
+
+            System.out.println("fail4");
         }
     }
 

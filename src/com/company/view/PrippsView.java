@@ -76,6 +76,7 @@ public class PrippsView extends JPanel {
      *
      * @param g - draw object used to draw enemies.
      */
+
     void drawEnemies(Graphics g) {
 
         for (int i = 0; i < model.getEnemyArr().length; i++) {

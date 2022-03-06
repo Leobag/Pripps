@@ -2,6 +2,12 @@ package com.company.model;
 
 import java.util.*;
 
+/**
+ * HighscoreTimer is a class designed to take the time of completion for the player.
+ *
+ * @author Leonard Bagiu
+ */
+
 public class HighscoreTimer {
 
     private Timer timer;

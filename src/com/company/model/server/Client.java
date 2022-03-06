@@ -5,14 +5,17 @@ import java.net.*;
 
 import com.google.gson.*;
 
-
 /**
- * @author - Leonard Bagiu
+ * Client communicates with a cloud-based server to update high-scores.
+ * Client manages the expansion of the current list of high-scores.
+ *
+ * @author Leonard Bagiu
  */
 public class Client {
 
     private Socket socket = null;
     private String[][] scoreList;
+    private String[][] dummy = new String[1][2];
     private Gson g = new Gson();
     private BufferedReader br = null;
     private BufferedWriter bw = null;
@@ -21,17 +24,16 @@ public class Client {
 
     public Client(){
 
-        scoreList = new String[0][2];
-
     }
 
     /**
-     * updateServerScore creates a socket in port 8080, connects to the server for the current
+     * updateServerScore creates a socket, connects to the server for the current
      * highscore list. The list is then updated with the new score, and the list is sorted according to best
      * time first. The updated highscore list is then sent to the server, and the connection is closed.
      *
      * @param name - entered name of player
      * @param s - the time of completion
+     *
      */
 
     public void updateServerScore(String name, int s){
@@ -56,7 +58,9 @@ public class Client {
 
         this.startServer();
         this.getServerScore();
+        this.sendScore();
         this.closeStream();
+
 
         return this.scoreList;
 
@@ -68,13 +72,17 @@ public class Client {
      */
 
     private void startServer(){
-        try{
-            this.socket = new Socket("142.93.106.21", 6000);
 
-        } catch(IOException e){
-            System.out.println("fail1");
+        try{
+            //  this.socket = new Socket("142.93.106.21", 6000);
+            this.socket = new Socket("localhost", 8080);
+        }catch(IOException e){
+            System.out.println("Socket connection failed");
         }
+            scoreList = new String[1][2];
+
     }
+
 
     /**
      * Creates an output stream through a BufferedReader, allowing the String array
@@ -86,14 +94,15 @@ public class Client {
 
     private void sendScore() {
         try{
-
             String currentList = g.toJson(scoreList);
 
             osw = new OutputStreamWriter(socket.getOutputStream());
             bw = new BufferedWriter(osw);
+
             bw.write(currentList);
             bw.newLine();
             bw.flush();
+
 
 
         } catch(IOException e){
@@ -114,14 +123,12 @@ public class Client {
         try{
             isr = new InputStreamReader(socket.getInputStream());
             br = new BufferedReader(isr);
-
-            this.scoreList = g.fromJson(br.readLine(), scoreList.getClass());
+            this.scoreList = g.fromJson(br.readLine(), dummy.getClass());
 
 
         } catch(IOException e){
             System.out.println("fail3");
         }
-
 
     }
 
@@ -142,7 +149,7 @@ public class Client {
         String score = Integer.toString(s);
         String[][] tempArray;
 
-        if(scoreList[0][0] != null){
+        if(scoreList != null){
 
             tempArray = new String[scoreList.length + 1][2];
 
@@ -162,7 +169,6 @@ public class Client {
             tempArray = new String[1][2];
             tempArray[0][0] = name;
             tempArray[0][1] = score;
-
         }
 
         scoreList = tempArray;
@@ -201,7 +207,7 @@ public class Client {
     }
 
     /**
-     * Closes all open streams and closes the socket, allowing new values to be sent.
+     * Closes all open streams, allowing new values to be sent.
      *
      */
     private void closeStream(){
@@ -224,10 +230,9 @@ public class Client {
             }
 
         }catch(IOException e){
+
             System.out.println("fail4");
         }
     }
-
-
 
 }

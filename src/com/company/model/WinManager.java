@@ -33,6 +33,7 @@ public class WinManager {
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
+        /*
         switch (mapCounter){
 
             case 0, 1 -> prippsPack.updateHitBox(0,0,0);
@@ -41,6 +42,9 @@ public class WinManager {
 
 
         }
+
+         */
+        prippsPack.updateHitBox(3 * 32, 7 * 32, 32);
     }
 
     public Entity getPrippsPack() {

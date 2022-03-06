@@ -14,17 +14,16 @@ import java.awt.image.BufferedImage;
  */
 
 public class PrippsModel {
-
+    Client client = new Client();
     Game game;
     MapManager map;
     Fog fog;
     HighscoreTimer highscoreTimer = new HighscoreTimer();
-    Client client = new Client();
+
 
 
 
     public PrippsModel() {
-
         map = new MapManager();
         game = new Game(map);
         map.loadCurrentMap();
@@ -37,6 +36,7 @@ public class PrippsModel {
     public int[][] getMatrix() {
         return map.getMapMatrix();
     }
+
 
     public String getCurrentMap() {
         return map.getCurrentMap();
@@ -83,6 +83,10 @@ public class PrippsModel {
     public void resetGameTimer(){
         highscoreTimer.resetHighscoreTimer();
     }
+    public String[][] getHighScoreList(){
+        return client.getTotalHighscore();
+    }
+
 
     public Enemy[] getEnemyArr() {
         return game.enemyManager.getEnemyArray();

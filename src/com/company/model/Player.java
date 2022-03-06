@@ -19,7 +19,9 @@ public class Player extends Entity {
     private Double inputDirection;
     private boolean dead = false;
 
-
+    /**
+     * Constructs player object.
+     */
     public Player() {
         this.speed = 4;
         this.size = 0.5;

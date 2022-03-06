@@ -4,7 +4,9 @@ import java.io.Serializable;
 
 /**
  * Creates a position object containing a 2D-position on the map.
+ * Used to store position for other objects.
  * @author - Andy Alavinasab
+ * @version - 03-03-22
  */
 public class Position implements Serializable {
 

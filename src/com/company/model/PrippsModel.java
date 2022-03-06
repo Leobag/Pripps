@@ -2,28 +2,31 @@ package com.company.model;
 
 import com.company.model.TileData.TileManager;
 import com.company.model.server.Client;
+
 import java.awt.image.BufferedImage;
+
 
 /**
  * PrippsModel is a centralized model which facilitates communication
  * with all other classes in the model packet.
- *
+ * <p>
  * Prippsmodel mostly consist of getters and setters of key values and
  * necessary objects.
  *
+ * @author - Emil Berzelius
+ * @version - 05-03-22
  */
-
 public class PrippsModel {
-    Client client = new Client();
+
     Game game;
     MapManager map;
     Fog fog;
     HighscoreTimer highscoreTimer = new HighscoreTimer();
-
-
+    Client client = new Client();
 
 
     public PrippsModel() {
+
         map = new MapManager();
         game = new Game(map);
         map.loadCurrentMap();
@@ -36,7 +39,6 @@ public class PrippsModel {
     public int[][] getMatrix() {
         return map.getMapMatrix();
     }
-
 
     public String getCurrentMap() {
         return map.getCurrentMap();
@@ -72,18 +74,20 @@ public class PrippsModel {
         System.out.println(highscoreTimer.getHighscoreTime());
         client.updateServerScore(name, highscoreTimer.getHighscoreTime());
     }
-    public void stopGameTimer(){
+
+    public void stopGameTimer() {
         highscoreTimer.stopTimer();
     }
 
-    public void startGameTimer(){
+    public void startGameTimer() {
         highscoreTimer.startTimer();
     }
 
-    public void resetGameTimer(){
+    public void resetGameTimer() {
         highscoreTimer.resetHighscoreTimer();
     }
-    public String[][] getHighScoreList(){
+
+    public String[][] getHighScoreList() {
         return client.getTotalHighscore();
     }
 
@@ -131,7 +135,7 @@ public class PrippsModel {
         return game.getPosArray();
     }
 
-    public void setPosArray(Position[] posArray){
+    public void setPosArray(Position[] posArray) {
         game.setPosArray(posArray);
     }
 

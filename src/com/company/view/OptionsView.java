@@ -6,7 +6,7 @@ import java.awt.*;
 import java.awt.event.WindowEvent;
 
 /**
- * A class that creates a frame when "OPTIONS" is pressed on the starting menu.
+ * A class that creates a frame when "OPTIONS" is pressed.
  *
  * @author Sebastian Sela
  * @version 05-03-22

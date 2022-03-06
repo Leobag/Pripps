@@ -22,6 +22,7 @@ public class MapManager {
     int[][] mapTileMatrix = new int[maxScreenCol][maxScreenRow];
     TileManager tile;
     private int mapCounter = 0;
+    private int[] startingPositions = new int[2];
 
     public MapManager() {
         tile = new TileManager();
@@ -41,20 +42,13 @@ public class MapManager {
         loadMap(mapNames[mapCounter]);
     }
 
-
-    public int getMaxCol() {
-        return this.maxScreenCol;
-    }
-
-    public int getMaxRow() {
-        return this.maxScreenRow;
-    }
-
+    /**
+     * Increments map counter by one.
+     */
     public void incrementMap() {
-
         mapCounter++;
-
     }
+
 
     public int getMapCounter() {
         return this.mapCounter;
@@ -124,5 +118,13 @@ public class MapManager {
 
     public void resetMap() {
         mapCounter = 0;
+    }
+
+    public int getMaxCol() {
+        return maxScreenCol;
+    }
+
+    public int getMaxRow() {
+        return maxScreenRow;
     }
 }

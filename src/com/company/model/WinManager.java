@@ -12,7 +12,12 @@ import java.util.Objects;
  */
 public class WinManager {
 
-
+/**
+ * Uses an entity to check for the completion of the game.
+ *
+ * @author - Leonard Bagiu
+ * @version - 01-03-22
+ */
     Entity prippsPack = new Entity();
 
     /**

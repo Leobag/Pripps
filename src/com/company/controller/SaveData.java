@@ -6,7 +6,8 @@ import java.io.Serial;
 import java.io.Serializable;
 
 /**
- * A class with the purpose of storing necessary information required to save the game.
+ * Stores necessary information from the game to create a new SaveData object.
+ * The object is used to create a savefile in ResourceManager.
  * @author Andy Alavinasab
  * @version 05-03-22
  */
@@ -20,7 +21,7 @@ public class SaveData implements Serializable {
     private final Position[] enemyPosition;
 
     /**
-     * Constructor to create saveData.
+     * Constructor to create SaveData object.
      * @param position the position of the player.
      * @param mapCounter which map the game is currently on.
      * @param enemyPosition array for all enemy positions.

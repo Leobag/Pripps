@@ -16,7 +16,6 @@ public class HighscoreTimer {
      * Calls for the incremented value of the timer,
      * also resets the timer
      *
-     * - Leonard Bagiu
      * */
     public int getHighscoreTime(){
         return this.timeCount;
@@ -26,7 +25,6 @@ public class HighscoreTimer {
     /**
      * Resets the current highscore.
      *
-     * - Leonard Bagiu
      */
 
     public void resetHighscoreTimer(){
@@ -36,7 +34,6 @@ public class HighscoreTimer {
     /**
      * Stops the timer
      *
-     * - Leonard Bagiu
      */
 
     public void stopTimer(){
@@ -46,7 +43,6 @@ public class HighscoreTimer {
     /**
      * Starts the timer at a rate of updating once per second.
      *
-     *  - Leonard Bagiu
      */
 
     public void startTimer(){

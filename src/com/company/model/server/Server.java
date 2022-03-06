@@ -5,6 +5,10 @@ import java.net.*;
 
 import com.google.gson.*;
 
+
+/**
+ * @author - Leonard Bagiu
+ */
 public class Server{
 
     private ServerSocket ss;
@@ -26,7 +30,6 @@ public class Server{
      * Creating a server makes a ServerSocket connecting to port 8080 and starts a loop
      * waiting for a connection from a client.
      *
-     * - Leonard Bagiu
      */
 
     public Server(){
@@ -50,7 +53,6 @@ public class Server{
      * would be desired. The streams are then closed, and the socket is put on hold until another
      * connection is made.
      *
-     * - Leonard Bagiu
      */
 
     private void runServer(){
@@ -81,7 +83,6 @@ public class Server{
      * The data is then converted to JSON using the GSON open source library and stored in the
      * local variable "serverScoreList"
      *
-     * - Leonard Bagiu
      */
 
     private void receiveScore(){
@@ -107,7 +108,6 @@ public class Server{
      * and writes it with help of the GSON opensource library. The writer then adds a new line
      * to help the reader from another socket to know when to stop reading.
      *
-     * - Leonard Bagiu
      */
 
     private void sendScore(){
@@ -129,7 +129,6 @@ public class Server{
      * closeStream closes all open streams, allowing new data to be channeled through sendScore and
      * receiveScore.
      *
-     * - Leonard Bagiu
      */
 
     private void closeStream(){

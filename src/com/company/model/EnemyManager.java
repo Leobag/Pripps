@@ -1,5 +1,12 @@
 package com.company.model;
 
+
+/**
+ * Creates and manages enemies by saving their position and hitbox.
+ *
+ * @author - Emil Berzelius
+ * @version 05-03-22
+ */
 public class EnemyManager {
     Enemy[] enemyArray;
     Position[] posArray;

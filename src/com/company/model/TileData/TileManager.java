@@ -4,7 +4,9 @@ import java.io.*;
 
 import javax.imageio.ImageIO;
 
-
+/**
+ * @author - Emil Berzelius
+ */
 public class TileManager {
 
     public Tile[] tile;
@@ -37,7 +39,6 @@ public class TileManager {
      * @param tile - The array of tiles.
      * @param imgname - Source path to image.
      * @param TileNumber - The tile number associated with the tile.
-     * - Emil Berzelius
      */
 
     private void setImage(Tile[] tile, String imgname, int TileNumber) {

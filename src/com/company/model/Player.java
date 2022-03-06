@@ -4,7 +4,9 @@ import javax.imageio.ImageIO;
 import java.io.IOException;
 import java.util.Objects;
 
-
+/**
+ * @author - Emil Berzelius
+ */
 public class Player extends Entity {
 
 
@@ -25,7 +27,6 @@ public class Player extends Entity {
     /**
      * Load and set PNG-file for player depending on direction. Sets a new image each update
      * cycle creating a "walk looking" effect.
-     * - Emil berzelius
      */
     public void setMovementImages() {
 
@@ -74,7 +75,6 @@ public class Player extends Entity {
      * Sets the sting direction associated with the angle in radians.
      *
      * @param inputDirection - The angle of the direction according to the unit circle.
-     * - Emil Berzelius
      */
     public void setStringDirection(Double inputDirection) {
         if (!(inputDirection == null)) {

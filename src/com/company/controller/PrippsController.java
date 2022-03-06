@@ -16,9 +16,9 @@ import java.util.Arrays;
 import java.util.Objects;
 
 /**
- *
+ * Uses the model and view in accordance with user-input to create the game.
  * @author Max Yoorkevich
- * @version 05-03-22
+ * @version 06-03-22
  */
 public class PrippsController extends JFrame implements MouseListener, ActionListener, KeyListener {
 
@@ -58,7 +58,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      * Sets the initial Layout of the game menu and sets listeners on all the buttons of the game.
      * This is done through creating the JPanel mainPanel and attaching the buttons to it.
      * The mainPanel is then reused if the player dies or completes the game.
-     * - Emil Berzelius
      */
     private void setLayout() {
         super.setLayout(new GridLayout(1, 3, 10, 10));
@@ -179,8 +178,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      * The submit JButton is used to submit a name when completing the game.
      * When communicated to the server the mainPanel is placed upon the JFrame again.
      * <p>
-     * - Max Yoorkevich
-     * - Emil Berzelius
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -215,7 +212,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * Pauses the game and sets the return button to continue.
-     * @author Emil Berzelius, Andy Alavinasab
      */
     private void gamePaused(){
         gamePaused = !gamePaused;
@@ -270,7 +266,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      * sets direction for player.
      * the direction angle is calculated for degrees in Game (movePlayer). New thread had to be made
      * since main thread used all resources for loop, thus blocking draw functionality
-     * - Max Yoorkevich
      */
     private void handleInput() {
         var inputX = inputRight - inputLeft;
@@ -284,14 +279,12 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * Uses save method to store current information from the game.
-     * @author Andy Alavinasab
      */
     public void saveGame() {
         saveData = new SaveData(model.getPlayer().getPosition(), model.getMap().getMapCounter(), model.getPosArray());
         try {
             ResourceManager.save(saveData, "data.txt");
             System.out.println("Game successfully saved");
-            System.out.println(Arrays.toString(saveData.getEnemyPosition()));
         } catch (IOException | NullPointerException saveException) {
             System.out.println("Couldn't save: " + saveException.getMessage());
         }
@@ -299,7 +292,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * Uses load method to get information from file and updates the game.
-     * @author Andy Alavinasab
      */
     public void loadGame() {
         try {
@@ -315,6 +307,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
         }
     }
 
+    /**
+     * Starts a thread with a timer used to update the game.
+     */
     private void startGameLoop() {
         new Thread(() -> {
             previousTimeMillis = System.currentTimeMillis();
@@ -346,8 +341,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * A method for playing the game menu music, using URL and Clip.
-     *
-     * @author Sebastian Sela
      */
     private void gameMusic() {
 
@@ -363,7 +356,6 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * Two methods that use the implemented Clip method to play a sound in certain parts of the game.
-     * @author Andy Alavinasab
      */
     private void deathSound() {
         try {

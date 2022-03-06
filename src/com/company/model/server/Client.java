@@ -5,6 +5,10 @@ import java.net.*;
 
 import com.google.gson.*;
 
+
+/**
+ * @author - Leonard Bagiu
+ */
 public class Client {
 
     private Socket socket = null;
@@ -28,8 +32,6 @@ public class Client {
      *
      * @param name - entered name of player
      * @param s - the time of completion
-     *
-     * - Leonard Bagiu
      */
 
     public void updateServerScore(String name, int s){
@@ -48,7 +50,6 @@ public class Client {
      *
      * @return - returns the current highscore list on the server
      *
-     * - Leonard Bagiu
      */
 
     public String[][] getTotalHighscore(){
@@ -64,7 +65,6 @@ public class Client {
     /**
      * Creates a socket in port 8080.
      *
-     * - Leonard Bagiu
      */
 
     private void startServer(){
@@ -82,7 +82,6 @@ public class Client {
      * being transmitted packet by packet. The function then writes the data, finishing it with
      * a new line and flushes the buffer, making sure it is empty.
      *
-     * - Leonard Bagiu
      */
 
     private void sendScore() {
@@ -108,7 +107,6 @@ public class Client {
      * speeding up the process. The read data is then converted from Json to a nested String array
      * uúsing the GSON opensource library.
      *
-     * - Leonard Bagiu
      */
 
     private void getServerScore(){
@@ -137,7 +135,6 @@ public class Client {
      * @param name - Name of player
      * @param s - Integer value of player time
      *
-     * - Leonard Bagiu
      */
 
 
@@ -178,7 +175,6 @@ public class Client {
      * Instead of running the length of the array multiple times, the for-loop index is reset every time
      * two values are switched, reassuring that the entire array is sorted when i reaches its max value
      *
-     * - Leonard Bagiu
      */
 
     public void sortScores(){
@@ -207,7 +203,6 @@ public class Client {
     /**
      * Closes all open streams and closes the socket, allowing new values to be sent.
      *
-     * - Leonard Bagiu
      */
     private void closeStream(){
         try{

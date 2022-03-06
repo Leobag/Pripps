@@ -6,7 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.Serializable;
 
 
-public class Entity implements Serializable{
+public class Entity {
     private Position position;
     public double size;
     public double speed;

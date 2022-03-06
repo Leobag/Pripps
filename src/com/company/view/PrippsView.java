@@ -6,6 +6,11 @@ import com.company.model.TileData.TileManager;
 import javax.swing.*;
 import java.awt.*;
 
+
+/**
+ * The purpose of the PrippsView class is to handle graphics for the objects in the program.
+ * @author - Emil Berzelius
+ */
 public class PrippsView extends JPanel {
 
     final private int tileSize = 32;
@@ -18,7 +23,6 @@ public class PrippsView extends JPanel {
     /**
      * Sets the screen size according to the map size.
      * @param model- uses model to reach all components drawn.
-     * - Emil Berzelius
      */
     public PrippsView(PrippsModel model) {
         this.model = model;
@@ -38,7 +42,6 @@ public class PrippsView extends JPanel {
      * The main paiting function used to draw all components of the game.
      *
      * @param g - Graphics object used by repaint.
-     * - Emil Berzelius
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -59,7 +62,6 @@ public class PrippsView extends JPanel {
     /**
      * Draws player according to position
      * @param g - draw object used to draw player.
-     * - Max Yoorkevich
      */
     void drawPlayer(Graphics g) {
         var x = (int) (model.getPlayer().getPosition().getX() * tileSize);
@@ -73,7 +75,6 @@ public class PrippsView extends JPanel {
      * Draws enemies according to position.
      *
      * @param g - draw object used to draw enemies.
-     * - Emil Berzelius
      */
     void drawEnemies(Graphics g) {
 
@@ -92,7 +93,6 @@ public class PrippsView extends JPanel {
      * visible to the player.
      *
      * @param g - draw object used to draw Fog of War.
-     * - Emil Berzelius
      */
     void drawFog(Graphics g) {
 
@@ -146,7 +146,6 @@ public class PrippsView extends JPanel {
      * Draws PrippsPack if the final map is reached.
      *
      * @param g - draw object used to draw the winning condition PrippsPack
-     * - Emil Berzelius
      */
     void drawPripps(Graphics g) {
         if (model.getMap().getMapCounter() == 2) {
@@ -161,7 +160,6 @@ public class PrippsView extends JPanel {
     /**
      * Acquires the mapMatrix and paints it according to tile numbers.
      * @param g2D - draw object used to paint the map.
-     * - Emil Berzelius
      */
 
     public void drawMap(Graphics2D g2D) {

@@ -3,7 +3,9 @@ package com.company.model.TileData;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
-
+/**
+ * @author - Emil Berzelius
+ */
 public class Tile {
     /**
      * The tile class hold the tile image as well as conditions unique for the tile number.

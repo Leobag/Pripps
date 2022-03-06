@@ -13,10 +13,12 @@ import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.EnumMap;
 import java.util.Objects;
 
 /**
  * Uses the model and view in accordance with user-input to create the game.
+ *
  * @author Max Yoorkevich
  * @version 06-03-22
  */
@@ -45,11 +47,21 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private Clip gameMusic;
     private Clip menuMusic;
 
+    private State state = State.MENU;
+
+    private static enum State{
+        MENU,
+        PLAY
+    }
 
     PrippsController() {
         model = new PrippsModel();
         view = new PrippsView(model);
         setLayout();
+        gameMusic();
+        gameMusic.stop();
+
+
     }
 
     public static void main(String[] args) {
@@ -191,6 +203,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("playButton")) {
+            state = State.PLAY;
             menuMusic.stop();
             gameMusic();
             Container contentPane = getContentPane();
@@ -209,16 +222,23 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             System.exit(0);
         }
         if (e.getActionCommand().equals("submit")) {
+            state = State.MENU;
             model.enterHighScore(view.getWinView().getSubmittedName().getText());
             openStartPanel();
         }
         if (e.getActionCommand().equals("optionsButton")) {
-            optionsView = new OptionsView(gameMusic);
-        }
-        if (e.getActionCommand().equals("highScoreButton")){
+            if (state == State.MENU) {
+                optionsView = new OptionsView(menuMusic);
+            } else {
+                optionsView = new OptionsView(gameMusic);
+            }
+
 
         }
-        if(e.getActionCommand().equals("returnButton")){
+        if (e.getActionCommand().equals("highScoreButton")) {
+
+        }
+        if (e.getActionCommand().equals("returnButton")) {
             gamePaused = false;
         }
     }
@@ -226,7 +246,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     /**
      * Pauses the game and sets the return button to continue.
      */
-    private void gamePaused(){
+    private void gamePaused() {
         gamePaused = !gamePaused;
         if (gamePaused) {
             optionsView = new OptionsView(gameMusic);
@@ -234,6 +254,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             optionsView.getReturnButton().setActionCommand("returnButton");
         }
     }
+
     /**
      * Opens the starting panel, mainPanel.
      */
@@ -335,16 +356,21 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 repaint();
                 previousTimeMillis = currentTimeMillis;
                 if (model.winCondition()) {
-                    gameMusic.stop();
+                    if(gameMusic != null){
+                        gameMusic.stop();
+                    }
                     winSound();
                     model.stopGameTimer();
                     openWinPanel(view.getWinView());
                     break;
                 } else if (model.getPlayer().getDead()) {
-                    gameMusic.stop();
+                    if(gameMusic != null){
+                        gameMusic.stop();
+                    }
                     deathSound();
                     displayExplosion();
                     openStartPanel();
+                    state = State.MENU;
                     break;
                 }
 
@@ -354,14 +380,15 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
     /**
      * A method for playing the game menu music, using URL and Clip.
-     * @author Sebastian Sela
      */
     private void menuMusic() {
 
         try {
-            menuMusic = AudioSystem.getClip();
-            menuMusic.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/menumusic.wav"))));
-            menuMusic.start();
+            if (optionsView == null || !optionsView.isMuted()) {
+                menuMusic = AudioSystem.getClip();
+                menuMusic.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/menumusic.wav"))));
+                menuMusic.start();
+            }
 
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
@@ -370,14 +397,16 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     }
 
     /**
-     * A method for playing the game game music, using URL and Clip.
+     * A method for playing the game music, using URL and Clip.
      */
     private void gameMusic() {
 
         try {
-            gameMusic = AudioSystem.getClip();
-            gameMusic.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/wputin.wav"))));
-            gameMusic.start();
+            if (optionsView == null || !optionsView.isMuted()) {
+                gameMusic = AudioSystem.getClip();
+                gameMusic.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/wputin.wav"))));
+                gameMusic.start();
+            }
 
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
@@ -390,9 +419,11 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
      */
     private void deathSound() {
         try {
+
             Clip deathSound = AudioSystem.getClip();
             deathSound.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/deathsound.wav"))));
             deathSound.start();
+
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
             audioException.printStackTrace();
@@ -402,9 +433,11 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
     private void winSound() {
 
         try {
+
             Clip winSound = AudioSystem.getClip();
-            winSound.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/winsound.wav"))));
+            winSound.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/swinsound.wav"))));
             winSound.start();
+
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {
             audioException.printStackTrace();

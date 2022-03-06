@@ -66,10 +66,18 @@ public class OptionsView extends JFrame {
 
     }
 
+    /** A method that checks the value if the music is muted or not with boolean
+     *
+     * @return returns the boolean value of isMuted
+     */
     public boolean isMuted() {
         return isMuted;
     }
 
+    /** Get method for the return button
+     *
+     * @return
+     */
     public JButton getReturnButton() {
         return returnButton;
     }

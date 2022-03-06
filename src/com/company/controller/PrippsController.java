@@ -235,10 +235,9 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
                 optionsView = new OptionsView(gameMusic);
             }
 
-            highscoreView = new HighscoreView(view);
         }
         if (e.getActionCommand().equals("highScoreButton")) {
-
+            highscoreView = new HighscoreView(view);
         }
         if (e.getActionCommand().equals("returnButton")) {
             gamePaused = false;

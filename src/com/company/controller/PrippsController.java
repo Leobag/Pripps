@@ -380,7 +380,7 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
 
         try {
             Clip winSound = AudioSystem.getClip();
-            winSound.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/deathsound.wav"))));
+            winSound.open(AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource("/Music/winsound.wav"))));
             winSound.start();
 
         } catch (UnsupportedAudioFileException | IOException | LineUnavailableException audioException) {

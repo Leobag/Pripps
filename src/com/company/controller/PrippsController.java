@@ -13,8 +13,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.EnumMap;
 import java.util.Objects;
 
 /**
@@ -234,16 +232,12 @@ public class PrippsController extends JFrame implements MouseListener, ActionLis
             } else {
                 optionsView = new OptionsView(gameMusic);
             }
-
         }
         if (e.getActionCommand().equals("highScoreButton")) {
             highscoreView = new HighscoreView(view);
         }
         if (e.getActionCommand().equals("returnButton")) {
             gamePaused = false;
-        }
-        if(e.getActionCommand().equals("returnButton2")){
-            openStartPanel();
         }
     }
 

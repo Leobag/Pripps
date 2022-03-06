@@ -18,7 +18,6 @@ public class PrippsView extends JPanel {
     String mapName;
     TileManager t;
     WinView winView = new WinView();
-    HighscoreView highscoreView;
     int[][] mapMatrix;
 
     /**
@@ -31,7 +30,6 @@ public class PrippsView extends JPanel {
         mapName = model.getCurrentMap();
 
         mapMatrix = model.getMatrix();
-
 
         final int screenWidth = tileSize * model.getMaxCol();
         final int screenHeight = tileSize * model.getMaxRow();
@@ -57,7 +55,7 @@ public class PrippsView extends JPanel {
         drawPlayer(g);
         drawEnemies(g);
         drawPripps(g);
-        //drawFog(g);
+        drawFog(g);
 
     }
 
@@ -190,13 +188,5 @@ public class PrippsView extends JPanel {
 
     public WinView getWinView() {
         return this.winView;
-    }
-
-    public HighscoreView getHighscoreView(){
-        return highscoreView;
-    }
-
-    public void createHighScoreView(){
-        highscoreView = new HighscoreView(this);
     }
 }

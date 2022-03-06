@@ -74,8 +74,8 @@ public class Client {
     private void startServer(){
 
         try{
-            //  this.socket = new Socket("142.93.106.21", 6000);
-            this.socket = new Socket("localhost", 8080);
+            this.socket = new Socket("142.93.106.21", 6000);
+            //this.socket = new Socket("localhost", 8080); //for debugging and running on localhost
         }catch(IOException e){
             System.out.println("Socket connection failed");
         }
